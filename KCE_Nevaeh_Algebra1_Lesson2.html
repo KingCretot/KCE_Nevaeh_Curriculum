@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nevaeh's Algebra I — Writing Linear Equations</title>
+<style>
+  :root{
+    --navy:#0A1F3D; --navy2:#0f2a52; --gold:#C9A84C; --blue:#3E6FD9; --red:#E0554F;
+    --cream:#FAF7EF; --ink:#1a1a1a; --green:#2E8B4F; --line:#E3DDC9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);background:var(--navy);font-size:16px;display:flex;flex-direction:column;}
+  h1,h2,h3,.serif{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;}
+
+  .masthead{background:var(--navy);color:#fff;padding:14px 6vw 12px;flex:none;}
+  .masthead .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;font-size:0.8125rem;color:#9fb3d6;}
+  .masthead h1{font-size:clamp(1.3rem,2.6vw,1.7rem);margin:6px 0 0;font-weight:400;color:#fff;}
+
+  .formula-bar{background:#0d2447;border-top:1px solid rgba(255,255,255,.1);border-bottom:2px solid var(--gold);padding:10px 6vw;display:flex;gap:8px 26px;flex-wrap:wrap;align-items:baseline;flex:none;}
+  .fb-item{color:#EFEAE0;font-size:0.84375rem;}
+  .fb-item b{color:#fff;}
+  .fb-item .arrow{color:var(--gold);}
+  .fb-when{color:#93a3c4;font-size:0.75rem;}
+
+  .progress-track{background:rgba(255,255,255,.1);height:3px;flex:none;}
+  .progress-fill{height:100%;background:var(--gold);width:9%;transition:width .3s ease;}
+
+  .app{flex:1;overflow-y:auto;background:var(--cream);}
+  .stage{max-width:900px;margin:0 auto;padding:36px 6vw 48px;}
+  .slide{display:none;}
+  .slide.active{display:block;animation:fadeIn .25s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  h2.slide-title{font-size:1.55rem;font-weight:400;color:var(--navy);margin:0 0 16px;}
+  .lede{font-size:1.09375rem;line-height:1.65;color:#333;margin:0 0 10px;}
+  p{font-size:1.03125rem;line-height:1.7;margin:0 0 16px;color:#2a2a2a;}
+
+  .def{border-left:2px solid var(--gold);padding:2px 0 2px 18px;margin:0 0 18px;}
+  .def .term{font-family:Georgia,serif;font-size:1.15rem;margin:0 0 4px;color:var(--navy);}
+  .def .body{font-size:0.96875rem;color:#444;margin:0;line-height:1.55;}
+
+  .scenario{background:var(--navy2);color:#EFEAE0;border-radius:2px;padding:24px 28px;margin:0 0 16px;}
+  .scenario p{color:#D7DEEA;margin:0 0 6px;font-size:0.96875rem;}
+  .scenario p:last-child{margin-bottom:0;}
+  .scenario .q{color:#fff;font-family:Georgia,serif;font-size:1.0625rem;}
+
+  .worked{border:1px solid var(--line);border-radius:2px;padding:22px 26px;margin:0 0 14px;background:#fff;}
+  .worked .setup{font-family:Georgia,serif;font-size:1rem;color:var(--navy);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;}
+  @media(max-width:480px){.wgrid{grid-template-columns:1fr;}}
+  .wstep{padding:5px 0;}
+  .wstep .l{color:var(--blue);font-weight:600;font-size:0.8125rem;}
+  .wstep .m{font-family:Georgia,serif;font-size:1.0625rem;color:var(--ink);}
+  .result{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:0.96875rem;color:var(--green);font-weight:600;line-height:1.5;}
+
+  .diagram-box{background:#fff;border:1px solid var(--line);border-radius:2px;padding:22px;margin:0 0 14px;}
+  .diagram-box svg{max-width:340px;width:100%;height:auto;display:block;margin:0 auto;}
+  .diagram-cap{font-size:0.8125rem;color:#666;margin-top:6px;text-align:center;}
+
+  .ask{margin:0 0 16px;}
+  .ask-q{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .ask-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .opt{background:transparent;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;padding:9px 15px;font-size:0.875rem;font-family:inherit;cursor:pointer;min-height:42px;color:var(--ink);}
+  .opt:hover{border-color:var(--navy);}
+  .opt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .opt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .ask-fb{font-size:0.8125rem;font-weight:600;min-height:16px;margin-top:8px;}
+  .ask-fb.ok{color:var(--green);} .ask-fb.bad{color:var(--red);}
+
+  .glossary{border:1px solid var(--line);border-radius:2px;background:#fff;padding:4px 20px;}
+  .glossary .row{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--line);}
+  .glossary .row:first-child{border-top:none;}
+  @media(max-width:480px){.glossary .row{grid-template-columns:1fr;gap:2px;}}
+  .glossary dt{font-family:Georgia,serif;font-size:0.9375rem;color:var(--navy);}
+  .glossary dd{margin:0;font-size:0.84375rem;color:#444;}
+
+  .icon-row{display:flex;gap:28px;flex-wrap:wrap;margin:10px 0 6px;}
+  .icon-item{text-align:center;width:150px;}
+  .icon-item svg{width:96px;height:96px;display:block;margin:0 auto 10px;}
+  .icon-item .cap{font-size:0.84375rem;color:#444;line-height:1.35;}
+
+  .visual-row{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;margin-bottom:10px;}
+  @media(min-width:560px){.visual-row{grid-template-columns:1.05fr 1fr;}}
+  .mini-visual{background:#fff;border:1px solid var(--line);border-radius:2px;padding:22px;text-align:center;}
+  .mini-visual svg{width:100%;max-width:280px;height:auto;display:block;margin:0 auto;}
+  .mini-visual .cap{font-size:0.8125rem;color:#666;margin-top:10px;}
+
+  .teaser{text-align:center;margin-top:10px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:2px;max-width:340px;margin-left:auto;margin-right:auto;}
+  .teaser svg{width:100%;max-width:260px;height:auto;display:block;margin:0 auto;}
+  .teaser .cap{font-size:0.90625rem;color:var(--navy);margin-top:10px;font-family:Georgia,serif;}
+
+  .quiz-item{border-top:1px solid var(--line);padding:16px 0;}
+  .quiz-item:last-of-type{border-bottom:1px solid var(--line);}
+  .qnum-inline{font-size:0.75rem;color:var(--blue);font-weight:600;margin-bottom:5px;}
+  .qtext{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .qopts{display:flex;flex-direction:column;gap:6px;max-width:460px;}
+  .qopt{text-align:left;background:transparent;border:1.5px solid rgba(10,31,61,.22);border-radius:2px;padding:10px 14px;font-size:0.875rem;cursor:pointer;font-family:inherit;min-height:42px;}
+  .qopt:hover:not(:disabled){border-color:var(--navy);}
+  .qopt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .qopt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .qnote{font-size:0.8125rem;color:#444;margin-top:8px;padding-left:12px;border-left:2px solid var(--blue);display:none;}
+  .qnote.show{display:block;}
+  .qtries{font-size:0.71875rem;color:#999;margin-top:5px;}
+  .quiz-final{margin-top:18px;padding:16px 0;border-top:2px solid var(--gold);display:none;}
+  .quiz-final.show{display:block;}
+  .quiz-final .score{font-family:Georgia,serif;font-size:1.4rem;color:var(--navy);}
+  .submit-status{font-size:0.75rem;color:#888;margin-top:6px;display:none;}
+  .submit-status.show{display:block;}
+
+  .nav{flex:none;display:flex;align-items:center;justify-content:space-between;padding:12px 6vw;background:#fff;border-top:1px solid var(--line);}
+  .nav button{font-family:inherit;font-size:0.875rem;font-weight:700;padding:11px 22px;border-radius:2px;border:none;background:var(--navy);color:#fff;cursor:pointer;min-height:44px;}
+  .nav button:hover{background:var(--navy2);}
+  .nav button.ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(10,31,61,.25);}
+  .nav button:disabled{opacity:.3;cursor:default;}
+  .nav .step-of{font-size:0.75rem;color:#999;}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="top"><span>Nevaeh's Algebra I</span><span>Lesson 2</span></div>
+  <h1>Writing Linear Equations</h1>
+</div>
+
+<div class="formula-bar">
+  <div class="fb-item"><b>Slope-Intercept</b> <span class="arrow">&rarr;</span> y = mx + b <span class="fb-when">(you have slope AND the y-intercept)</span></div>
+  <div class="fb-item"><b>Point-Slope</b> <span class="arrow">&rarr;</span> y &minus; y&#8321; = m(x &minus; x&#8321;) <span class="fb-when">(slope + one point, not the y-intercept)</span></div>
+</div>
+
+<div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+
+<div class="app"><div class="stage">
+
+  <section class="slide active" data-slide="1">
+    <h2 class="slide-title">From slope to a full equation</h2>
+    <p class="lede">Lesson 1 covered finding the slope of a line. This lesson uses that same slope to write the full equation — meaning you can predict any point on the line without ever needing to see the graph. The bar above stays pinned the whole lesson.</p>
+    <div class="mini-visual" style="max-width:180px;">
+      <svg viewBox="0 0 160 110">
+        <line x1="15" y1="95" x2="15" y2="10" stroke="#ccc" stroke-width="1"/>
+        <line x1="15" y1="95" x2="150" y2="95" stroke="#ccc" stroke-width="1"/>
+        <line x1="15" y1="70" x2="140" y2="20" stroke="#0A1F3D" stroke-width="2.5"/>
+        <circle cx="15" cy="70" r="4" fill="#C9A84C"/>
+      </svg>
+      <div class="cap">slope + a starting point = the whole line</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <h2 class="slide-title">Slope-intercept form</h2>
+    <div class="visual-row">
+      <div class="def" style="margin-bottom:0;">
+        <p class="term">y = mx + b</p>
+        <p class="body">m is the slope. b is the y-intercept — the exact point where the line crosses the y-axis, where x = 0. Once you know both, you can write the whole equation in seconds.</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 150 130">
+          <line x1="20" y1="115" x2="140" y2="115" stroke="#ccc" stroke-width="1"/>
+          <line x1="20" y1="115" x2="20" y2="10" stroke="#ccc" stroke-width="1"/>
+          <line x1="20" y1="65" x2="60" y2="15" stroke="#0A1F3D" stroke-width="2.5"/>
+          <circle cx="20" cy="65" r="5" fill="#C9A84C"/>
+          <text x="24" y="86" font-size="11" fill="#8A6A1E">b = 7</text>
+        </svg>
+        <div class="cap">crosses at 7, climbs steeply (m = 4)</div>
+      </div>
+    </div>
+    <div class="worked">
+      <div class="setup">A line has slope 4 and crosses the y-axis at 7.</div>
+      <div class="wgrid">
+        <div class="wstep"><div class="l">m</div><div class="m">4</div></div>
+        <div class="wstep"><div class="l">b</div><div class="m">7</div></div>
+      </div>
+      <div class="result">y = 4x + 7. Done — the hard part is usually that you're NOT handed both pieces this cleanly.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <h2 class="slide-title">When you only have one point</h2>
+    <div class="scenario">
+      <p>James's girlfriend Lucy does freelance graphic design on weekends. She charged a client $130 for 4 hours of work, and her rate is $20 per hour — but you don't know her flat setup fee.</p>
+      <p class="q">How do you write an equation for her total charge?</p>
+    </div>
+    <div class="visual-row">
+      <div class="def" style="margin-bottom:0;">
+        <p class="term">y &minus; y&#8321; = m(x &minus; x&#8321;)</p>
+        <p class="body">(x&#8321;, y&#8321;) is whatever point you were given. Use this when you have the slope and ONE point, but not the y-intercept — then rearrange into y = mx + b.</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 140 110">
+          <circle cx="70" cy="60" r="5" fill="#E0554F"/>
+          <line x1="70" y1="60" x2="120" y2="25" stroke="#0A1F3D" stroke-width="2" stroke-dasharray="3,3"/>
+          <line x1="70" y1="60" x2="20" y2="95" stroke="#0A1F3D" stroke-width="2" stroke-dasharray="3,3"/>
+        </svg>
+        <div class="cap">one known point + a slope</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <h2 class="slide-title">Solving Lucy's rate problem</h2>
+    <div class="mini-visual" style="max-width:280px;margin:0 0 16px;">
+      <svg viewBox="0 0 150 130">
+        <line x1="20" y1="115" x2="140" y2="115" stroke="#ccc" stroke-width="1"/>
+        <line x1="20" y1="115" x2="20" y2="10" stroke="#ccc" stroke-width="1"/>
+        <line x1="20" y1="95" x2="130" y2="20" stroke="#3E6FD9" stroke-width="2.5"/>
+        <circle cx="20" cy="95" r="5" fill="#C9A84C"/>
+        <circle cx="90" cy="47" r="4" fill="#E0554F"/>
+        <text x="24" y="110" font-size="10" fill="#8A6A1E">$50 fee</text>
+        <text x="97" y="45" font-size="10" fill="#c0453f">(4, 130)</text>
+      </svg>
+      <div class="cap">total charge, starting fee plus hourly rate</div>
+    </div>
+    <div class="worked">
+      <div class="setup">m = 20, point = (4, 130)</div>
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Plug in</div><div class="m">y &minus; 130 = 20(x &minus; 4)</div></div>
+        <div class="wstep"><div class="l">Distribute</div><div class="m">y &minus; 130 = 20x &minus; 80</div></div>
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Add 130</div><div class="m">y = 20x + 50</div></div>
+      </div>
+      <div class="result">y = 20x + 50. That "50" is her flat setup fee — information you never would've known just from the hourly rate.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <h2 class="slide-title">Try it yourself</h2>
+    <div class="ask">
+      <p class="ask-q">A line has slope 3 and passes through (2, 11). What's the y-intercept?</p>
+      <div class="ask-opts" data-q="gp1">
+        <button class="opt" data-correct="false">b = 8</button>
+        <button class="opt" data-correct="true">b = 5</button>
+        <button class="opt" data-correct="false">b = 14</button>
+      </div>
+      <p class="ask-fb" id="fb-gp1"></p>
+    </div>
+    <div class="ask">
+      <p class="ask-q">You're given two points and no slope at all. What's the correct first move?</p>
+      <div class="ask-opts" data-q="gp2">
+        <button class="opt" data-correct="false">Assume the slope is 1</button>
+        <button class="opt" data-correct="true">Find slope first, then use point-slope form</button>
+        <button class="opt" data-correct="false">You can't solve this without more info</button>
+      </div>
+      <p class="ask-fb" id="fb-gp2"></p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <h2 class="slide-title">Combining skills: two points, no slope given</h2>
+    <div class="mini-visual" style="max-width:280px;margin:0 0 16px;">
+      <svg viewBox="0 0 150 130">
+        <line x1="20" y1="115" x2="140" y2="115" stroke="#ccc" stroke-width="1"/>
+        <line x1="20" y1="115" x2="20" y2="10" stroke="#ccc" stroke-width="1"/>
+        <line x1="40" y1="95" x2="120" y2="30" stroke="#0A1F3D" stroke-width="2.5"/>
+        <circle cx="40" cy="95" r="5" fill="#E0554F"/><text x="22" y="107" font-size="10" fill="#555">(1, 5)</text>
+        <circle cx="120" cy="30" r="5" fill="#E0554F"/><text x="100" y="22" font-size="10" fill="#555">(3, 13)</text>
+      </svg>
+      <div class="cap">only two points to start — slope isn't given</div>
+    </div>
+    <div class="worked">
+      <div class="setup">Points: (1, 5) and (3, 13)</div>
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Find slope first (Lesson 1)</div><div class="m">m = (13&minus;5)&divide;(3&minus;1) = 4</div></div>
+        <div class="wstep"><div class="l">Plug into point-slope</div><div class="m">y &minus; 5 = 4(x &minus; 1)</div></div>
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Simplify</div><div class="m">y &minus; 5 = 4x &minus; 4 &rarr; y = 4x + 1</div></div>
+      </div>
+      <div class="result">This exact combination — find the slope yourself, then write the equation — is what test questions love. Two formulas working together.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <h2 class="slide-title">Reading a graph straight into an equation</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 260 200">
+        <line x1="20" y1="180" x2="240" y2="180" stroke="#ccc" stroke-width="1"/>
+        <line x1="20" y1="180" x2="20" y2="20" stroke="#ccc" stroke-width="1"/>
+        <line x1="20" y1="140" x2="220" y2="40" stroke="#0A1F3D" stroke-width="2.5"/>
+        <circle cx="20" cy="140" r="4" fill="#E0554F"/><text x="4" y="158" font-size="12">b = 2</text>
+      </svg>
+      <div class="diagram-cap">Crosses the y-axis at 2, rises 1 for every 2 it runs right.</div>
+    </div>
+    <div class="worked">
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Read b off the graph</div><div class="m">b = 2</div></div>
+        <div class="wstep"><div class="l">Read slope (rise/run)</div><div class="m">m = 1/2</div></div>
+      </div>
+      <div class="result">y = (1/2)x + 2</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="8">
+    <h2 class="slide-title">Every word from today</h2>
+    <dl class="glossary">
+      <div class="row"><dt>Slope-intercept form</dt><dd>y = mx + b — the standard, most useful way to write a linear equation.</dd></div>
+      <div class="row"><dt>y-intercept (b)</dt><dd>Where the line crosses the y-axis, where x = 0.</dd></div>
+      <div class="row"><dt>Point-slope form</dt><dd>y &minus; y&#8321; = m(x &minus; x&#8321;) — used when you have slope + one point, not the y-intercept.</dd></div>
+      <div class="row"><dt>Linear equation</dt><dd>Any equation whose graph is a straight line.</dd></div>
+    </dl>
+  </section>
+
+  <section class="slide" data-slide="9">
+    <h2 class="slide-title">Quiz — show what you know</h2>
+
+    <div class="quiz-item" data-quiz="q1" data-answer="a">
+      <div class="qnum-inline">1 of 5</div>
+      <div class="qtext">A line has slope 5 and y-intercept 3. What's its equation?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">y = 5x + 3</button>
+        <button class="qopt" data-opt="b">y = 3x + 5</button>
+        <button class="qopt" data-opt="c">y = 5x &minus; 3</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">y = mx + b. m = 5, b = 3, so y = 5x + 3.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q2" data-answer="b">
+      <div class="qnum-inline">2 of 5</div>
+      <div class="qtext">You know a slope and ONE point, but not the y-intercept. Which formula first?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">y = mx + b</button>
+        <button class="qopt" data-opt="b">y &minus; y&#8321; = m(x &minus; x&#8321;)</button>
+        <button class="qopt" data-opt="c">Rate of change = output &divide; input</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Point-slope form is built exactly for this — slope plus one point, no y-intercept given.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q3" data-answer="c">
+      <div class="qnum-inline">3 of 5</div>
+      <div class="qtext">A line has slope 2 and passes through (3, 10). What's the y-intercept?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">b = 8</button>
+        <button class="qopt" data-opt="b">b = 12</button>
+        <button class="qopt" data-opt="c">b = 4</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">y &minus; 10 = 2(x &minus; 3) &rarr; y &minus; 10 = 2x &minus; 6 &rarr; y = 2x + 4. b = 4.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q4" data-answer="a">
+      <div class="qnum-inline">4 of 5</div>
+      <div class="qtext">You're given two points and no slope. What's the correct first step?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Find the slope using the two points, then write the equation</button>
+        <button class="qopt" data-opt="b">Assume the slope is 1</button>
+        <button class="qopt" data-opt="c">It can't be solved without being told the slope</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Slope comes first from the two points, then plug it into point-slope form.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q5" data-answer="b">
+      <div class="qnum-inline">5 of 5</div>
+      <div class="qtext">On a graph, the line crosses the y-axis at 6 and rises 3 for every 1 it runs right. Equation?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">y = 6x + 3</button>
+        <button class="qopt" data-opt="b">y = 3x + 6</button>
+        <button class="qopt" data-opt="c">y = x + 9</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">b = 6, m = 3 (rise 3, run 1). y = mx + b gives y = 3x + 6.</p>
+    </div>
+
+    <div class="quiz-final" id="quizFinal"><span class="score" id="scoreText">0 / 5</span></div>
+    <div class="submit-status" id="submitStatus"></div>
+  </section>
+
+  <section class="slide" data-slide="10">
+    <h2 class="slide-title">Nice work</h2>
+    <p>Slope-intercept when you have it easy, point-slope when you don't — and you can always find slope from two points first if you need to. Next lesson puts two of these equations in the same problem and asks where they agree.</p>
+    <div class="teaser">
+      <svg viewBox="0 0 150 110">
+        <line x1="20" y1="90" x2="130" y2="20" stroke="#3E6FD9" stroke-width="2.5"/>
+        <line x1="20" y1="20" x2="130" y2="90" stroke="#E0554F" stroke-width="2.5"/>
+        <circle cx="75" cy="55" r="4" fill="#C9A84C"/>
+      </svg>
+      <div class="cap">where do two lines agree? — next lesson</div>
+    </div>
+  </section>
+
+</div></div>
+
+<div class="nav">
+  <button class="ghost" id="prevBtn">Back</button>
+  <span class="step-of" id="stepOf">1 / 10</span>
+  <button id="nextBtn">Continue</button>
+</div>
+
+<script>
+(function(){
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjgzkeb";
+  var NEXT_LESSON_URL = "KCE_Nevaeh_Algebra1_Lesson3.html";
+  var NEXT_LESSON_LABEL = "Next Lesson: Systems of Equations \u2192";
+
+  function fireConfetti(x, y){
+    var canvas = document.getElementById('confettiCanvas');
+    if (!canvas){
+      canvas = document.createElement('canvas');
+      canvas.id = 'confettiCanvas';
+      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:200;';
+      document.body.appendChild(canvas);
+    }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var ctx = canvas.getContext('2d');
+    var colors = ['#C9A84C','#3E6FD9','#2E8B4F','#E0554F','#ffffff'];
+    var particles = [];
+    for (var i=0;i<50;i++){
+      particles.push({
+        x:x, y:y,
+        vx:(Math.random()-0.5)*7,
+        vy:Math.random()*-7-3,
+        size:Math.random()*5+4,
+        color:colors[Math.floor(Math.random()*colors.length)],
+        rot:Math.random()*360,
+        vr:(Math.random()-0.5)*9,
+        life:1
+      });
+    }
+    var start = null;
+    function frame(ts){
+      if (!start) start = ts;
+      var elapsed = ts - start;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      var alive = false;
+      particles.forEach(function(p){
+        p.vy += 0.25;
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        p.life -= 0.014;
+        if (p.life > 0){
+          alive = true;
+          ctx.save();
+          ctx.globalAlpha = Math.max(p.life,0);
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.rot*Math.PI/180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+          ctx.restore();
+        }
+      });
+      if (alive && elapsed < 2600){ requestAnimationFrame(frame); }
+      else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var total = document.querySelectorAll('.slide').length;
+  var current = 1;
+  var appEl = document.querySelector('.app');
+  var nextBtn = document.getElementById('nextBtn');
+
+  function goTo(n){
+    if (n < 1 || n > total) return;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.remove('active');
+    current = n;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.add('active');
+    document.getElementById('fill').style.width = Math.round(current/total*100)+'%';
+    document.getElementById('stepOf').textContent = current + ' / ' + total;
+    document.getElementById('prevBtn').disabled = current === 1;
+    if (current === total){
+      nextBtn.textContent = NEXT_LESSON_LABEL;
+    } else {
+      nextBtn.textContent = 'Continue';
+    }
+    appEl.scrollTop = 0;
+  }
+  document.getElementById('prevBtn').disabled = true;
+  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current-1); });
+  nextBtn.addEventListener('click', function(){
+    if (current === total){
+      window.location.href = NEXT_LESSON_URL;
+    } else {
+      goTo(current+1);
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') nextBtn.click();
+    else if (e.key === 'ArrowLeft') goTo(current-1);
+  });
+
+  document.querySelectorAll('.ask-opts').forEach(function(row){
+    var fb = document.getElementById('fb-' + row.dataset.q);
+    row.querySelectorAll('.opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        row.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('correct','incorrect'); b.disabled = true; });
+        if (btn.dataset.correct === 'true'){
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          if (fb){ fb.textContent = 'Correct.'; fb.className = 'ask-fb ok'; }
+        } else {
+          btn.classList.add('incorrect');
+          row.querySelectorAll('.opt').forEach(function(b){ if (b.dataset.correct === 'true') b.classList.add('correct'); });
+          if (fb){ fb.textContent = 'Not quite — correct answer highlighted.'; fb.className = 'ask-fb bad'; }
+        }
+      });
+    });
+  });
+
+  var quizState = {};
+  var quizTotal = document.querySelectorAll('.quiz-item').length;
+  document.querySelectorAll('.quiz-item').forEach(function(q){
+    var qid = q.dataset.quiz, answer = q.dataset.answer;
+    quizState[qid] = { attempts:0, correct:false, done:false };
+    var tries = q.querySelector('.qtries');
+    q.querySelectorAll('.qopt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var st = quizState[qid];
+        if (st.done) return;
+        st.attempts++;
+        if (btn.dataset.opt === answer){
+          st.correct = true; st.done = true;
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; });
+          q.querySelector('.qnote').classList.add('show');
+          updateScore();
+        } else {
+          btn.classList.add('incorrect'); btn.disabled = true;
+          if (st.attempts >= 2){
+            st.done = true;
+            q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; if (b.dataset.opt === answer) b.classList.add('correct'); });
+            q.querySelector('.qnote').classList.add('show');
+            updateScore();
+          } else if (tries) { tries.textContent = 'One more try.'; }
+        }
+      });
+    });
+  });
+
+  function updateScore(){
+    var done = 0, score = 0;
+    for (var k in quizState){ if (quizState[k].done) done++; if (quizState[k].correct) score++; }
+    if (done < quizTotal) return;
+    document.getElementById('scoreText').textContent = score + ' / ' + quizTotal;
+    document.getElementById('quizFinal').classList.add('show');
+    submitScore(score);
+  }
+  function submitScore(score){
+    var statusEl = document.getElementById('submitStatus');
+    var payload = { student:"Nevaeh Arndts", program:"Nevaeh Algebra I", lesson:"Lesson 2: Writing Linear Equations", score: score+" / "+quizTotal, timestamp: new Date().toISOString() };
+    fetch(FORMSPREE_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload) })
+      .then(function(r){ statusEl.textContent = r.ok ? 'Score sent to your tutor.' : 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); })
+      .catch(function(){ statusEl.textContent = 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); });
+  }
+})();
+</script>
+</body>
+</html>
