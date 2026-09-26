@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nevaeh's English I — Animal Farm, Chapter 1</title>
+<style>
+  :root{
+    --navy:#0A1F3D; --navy2:#0f2a52; --gold:#C9A84C; --blue:#3E6FD9; --red:#E0554F;
+    --cream:#FAF7EF; --ink:#1a1a1a; --green:#2E8B4F; --line:#E3DDC9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);background:var(--navy);font-size:16px;display:flex;flex-direction:column;}
+  h1,h2,h3,.serif{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;}
+
+  .masthead{background:var(--navy);color:#fff;padding:14px 6vw 12px;flex:none;}
+  .masthead .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;font-size:0.8125rem;color:#9fb3d6;}
+  .masthead h1{font-size:clamp(1.3rem,2.6vw,1.7rem);margin:6px 0 0;font-weight:400;color:#fff;}
+
+  .formula-bar{background:#0d2447;border-top:1px solid rgba(255,255,255,.1);border-bottom:2px solid var(--gold);padding:10px 6vw;display:flex;gap:8px 26px;flex-wrap:wrap;align-items:baseline;flex:none;}
+  .fb-item{color:#EFEAE0;font-size:0.84375rem;}
+  .fb-item b{color:#fff;}
+  .fb-item .arrow{color:var(--gold);}
+  .fb-when{color:#93a3c4;font-size:0.75rem;}
+
+  .progress-track{background:rgba(255,255,255,.1);height:3px;flex:none;}
+  .progress-fill{height:100%;background:var(--gold);width:8%;transition:width .3s ease;}
+
+  .app{flex:1;overflow-y:auto;background:var(--cream);}
+  .stage{max-width:900px;margin:0 auto;padding:36px 6vw 48px;}
+  .slide{display:none;}
+  .slide.active{display:block;animation:fadeIn .25s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  h2.slide-title{font-size:1.55rem;font-weight:400;color:var(--navy);margin:0 0 16px;}
+  .lede{font-size:1.09375rem;line-height:1.65;color:#333;margin:0 0 10px;}
+  p{font-size:1.03125rem;line-height:1.7;margin:0 0 16px;color:#2a2a2a;}
+
+  .def{border-left:2px solid var(--gold);padding:2px 0 2px 18px;margin:0 0 18px;}
+  .def .term{font-family:Georgia,serif;font-size:1.15rem;margin:0 0 4px;color:var(--navy);}
+  .def .body{font-size:0.96875rem;color:#444;margin:0;line-height:1.55;}
+
+  .scenario{background:var(--navy2);color:#EFEAE0;border-radius:2px;padding:24px 28px;margin:0 0 16px;}
+  .scenario p{color:#D7DEEA;margin:0 0 6px;font-size:0.96875rem;}
+  .scenario p:last-child{margin-bottom:0;}
+  .scenario .q{color:#fff;font-family:Georgia,serif;font-size:1.0625rem;}
+
+  .worked{border:1px solid var(--line);border-radius:2px;padding:22px 26px;margin:0 0 14px;background:#fff;}
+  .worked .setup{font-family:Georgia,serif;font-size:1rem;color:var(--navy);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;}
+  @media(max-width:480px){.wgrid{grid-template-columns:1fr;}}
+  .wstep{padding:5px 0;}
+  .wstep .l{color:var(--blue);font-weight:600;font-size:0.8125rem;}
+  .wstep .m{font-size:0.9375rem;color:var(--ink);line-height:1.5;}
+  .result{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:0.96875rem;color:var(--green);font-weight:600;line-height:1.5;}
+
+  .cases{display:grid;grid-template-columns:1fr;border:1px solid var(--line);border-radius:2px;overflow:hidden;margin:0 0 14px;background:#fff;}
+  @media(min-width:520px){.cases{grid-template-columns:repeat(3,1fr);}}
+  .case{padding:18px 18px;border-bottom:1px solid var(--line);}
+  @media(min-width:520px){.case{border-right:1px solid var(--line);border-bottom:none;} .case:last-child{border-right:none;}}
+  .case h3{font-size:0.875rem;margin:0 0 8px;font-weight:600;color:var(--navy);}
+  .case p{font-size:0.84375rem;margin:0;color:#555;line-height:1.5;}
+
+  .reflect{border:1.5px dashed var(--gold);border-radius:2px;padding:22px 24px;margin:0 0 14px;background:#fff;}
+  .reflect textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:2px;padding:10px;font-family:inherit;font-size:0.9375rem;resize:vertical;margin-top:10px;}
+  .reflect-note{font-size:0.8125rem;color:#888;margin-top:8px;}
+
+  .ask{margin:0 0 16px;}
+  .ask-q{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .ask-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .opt{background:transparent;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;padding:9px 15px;font-size:0.875rem;font-family:inherit;cursor:pointer;min-height:42px;color:var(--ink);}
+  .opt:hover{border-color:var(--navy);}
+  .opt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .opt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .ask-fb{font-size:0.8125rem;font-weight:600;min-height:16px;margin-top:8px;}
+  .ask-fb.ok{color:var(--green);} .ask-fb.bad{color:var(--red);}
+
+  .glossary{border:1px solid var(--line);border-radius:2px;background:#fff;padding:4px 20px;}
+  .glossary .row{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--line);}
+  .glossary .row:first-child{border-top:none;}
+  @media(max-width:480px){.glossary .row{grid-template-columns:1fr;gap:2px;}}
+  .glossary dt{font-family:Georgia,serif;font-size:0.9375rem;color:var(--navy);}
+  .glossary dd{margin:0;font-size:0.84375rem;color:#444;}
+
+  .visual-row{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;margin-bottom:10px;}
+  @media(min-width:560px){.visual-row{grid-template-columns:1.05fr 1fr;}}
+  .mini-visual{background:#fff;border:1px solid var(--line);border-radius:2px;padding:22px;text-align:center;}
+  .mini-visual svg{width:100%;max-width:200px;height:auto;display:block;margin:0 auto;}
+  .mini-visual .cap{font-size:0.8125rem;color:#666;margin-top:10px;}
+
+  .teaser{text-align:center;margin-top:10px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:2px;max-width:340px;margin-left:auto;margin-right:auto;}
+  .teaser svg{width:100%;max-width:200px;height:auto;display:block;margin:0 auto;}
+  .teaser .cap{font-size:0.90625rem;color:var(--navy);margin-top:10px;font-family:Georgia,serif;}
+
+  .quiz-item{border-top:1px solid var(--line);padding:16px 0;}
+  .quiz-item:last-of-type{border-bottom:1px solid var(--line);}
+  .qnum-inline{font-size:0.75rem;color:var(--blue);font-weight:600;margin-bottom:5px;}
+  .qtext{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .qopts{display:flex;flex-direction:column;gap:6px;max-width:460px;}
+  .qopt{text-align:left;background:transparent;border:1.5px solid rgba(10,31,61,.22);border-radius:2px;padding:10px 14px;font-size:0.875rem;cursor:pointer;font-family:inherit;min-height:42px;}
+  .qopt:hover:not(:disabled){border-color:var(--navy);}
+  .qopt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .qopt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .qnote{font-size:0.8125rem;color:#444;margin-top:8px;padding-left:12px;border-left:2px solid var(--blue);display:none;}
+  .qnote.show{display:block;}
+  .qtries{font-size:0.71875rem;color:#999;margin-top:5px;}
+  .quiz-final{margin-top:18px;padding:16px 0;border-top:2px solid var(--gold);display:none;}
+  .quiz-final.show{display:block;}
+  .quiz-final .score{font-family:Georgia,serif;font-size:1.4rem;color:var(--navy);}
+  .submit-status{font-size:0.75rem;color:#888;margin-top:6px;display:none;}
+  .submit-status.show{display:block;}
+
+  .nav{flex:none;display:flex;align-items:center;justify-content:space-between;padding:12px 6vw;background:#fff;border-top:1px solid var(--line);}
+  .nav button{font-family:inherit;font-size:0.875rem;font-weight:700;padding:11px 22px;border-radius:2px;border:none;background:var(--navy);color:#fff;cursor:pointer;min-height:44px;}
+  .nav button:hover{background:var(--navy2);}
+  .nav button.ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(10,31,61,.25);}
+  .nav button:disabled{opacity:.3;cursor:default;}
+  .nav button.pending{background:#8a95a8;cursor:default;}
+  .nav button.pending:hover{background:#8a95a8;}
+  .nav .step-of{font-size:0.75rem;color:#999;}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="top"><span>Nevaeh's English I</span><span>Lesson 2</span></div>
+  <h1>Animal Farm, Chapter 1</h1>
+</div>
+
+<div class="formula-bar">
+  <div class="fb-item"><b>Allegory</b> <span class="arrow">&rarr;</span> characters &amp; events stand for real history <span class="fb-when">(the lens for the whole book)</span></div>
+  <div class="fb-item"><b>Reading toolkit</b> <span class="arrow">&rarr;</span> who does this remind me of? what event? what's the author really saying? <span class="fb-when">(ask every chapter)</span></div>
+</div>
+
+<div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+
+<div class="app"><div class="stage">
+
+  <section class="slide active" data-slide="1">
+    <h2 class="slide-title">Back to Chapter 1 — on purpose</h2>
+    <p class="lede">You've already read past this chapter in class — that's fine. This isn't about re-reading the plot. It's about learning to see what's actually going on underneath it, which is a different skill from just following the story. The bar above stays pinned the whole lesson.</p>
+    <p>By the end of today, you'll know what an allegory actually is, how to spot one, and exactly what Chapter 1 is quietly setting up for everything that happens later.</p>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <h2 class="slide-title">What is an "allegory," really?</h2>
+    <div class="visual-row">
+      <div class="def" style="margin-bottom:0;">
+        <p class="term">Allegory</p>
+        <p class="body">A story where the characters and events stand for something else entirely — usually a real historical event or a big idea — so the reader can see that thing more clearly than if it were just explained directly.</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="34" ry="22" fill="none" stroke="#0A1F3D" stroke-width="2.5"/><circle cx="38" cy="50" r="3" fill="#0A1F3D"/><circle cx="62" cy="50" r="3" fill="#0A1F3D"/><path d="M 35 65 Q 50 72 65 65" fill="none" stroke="#0A1F3D" stroke-width="2"/><path d="M 50 30 L 50 14" stroke="#C9A84C" stroke-width="2" stroke-dasharray="3,2"/><text x="50" y="10" font-size="11" text-anchor="middle" fill="#8A6A1E">stands for &hellip;</text></svg>
+        <div class="cap">a farm animal, standing in for something real</div>
+      </div>
+    </div>
+    <p>Think about it like this: if a story wants to make a point about a real dictator, it's often more powerful to show a different kind of ruler doing the exact same things — because you're not distracted by what you already think about the real person. That's exactly what George Orwell is doing with farm animals. Animal Farm isn't really about a farm. It's about the Russian Revolution and what happened to it afterward.</p>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <h2 class="slide-title">How to actually read an allegory</h2>
+    <div class="cases">
+      <div class="case">
+        <h3>1. Who does this remind me of?</h3>
+        <p>In real life or history — which figure does this character map onto?</p>
+      </div>
+      <div class="case">
+        <h3>2. What real event is this?</h3>
+        <p>What moment in the story could represent something that actually happened?</p>
+      </div>
+      <div class="case">
+        <h3>3. What's the author really saying?</h3>
+        <p>Why tell it this way instead of just saying it directly?</p>
+      </div>
+    </div>
+    <p>Use this on literally every chapter from here on. It's the lens for the entire book.</p>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <h2 class="slide-title">What Orwell was actually writing about</h2>
+    <p>In the early 1900s, Russia was ruled by a Tsar — an unelected king with total power. In 1917, a revolution overthrew him, promising a fairer system where power belonged to the workers. Instead, over the next few decades, the country ended up under Joseph Stalin, a dictator arguably just as controlling as the Tsar — just with different propaganda.</p>
+    <div class="scenario">
+      <p class="q">That's the real story Animal Farm is retelling with animals: a group overthrows an unfair ruler in the name of equality for everyone — and slowly, quietly, ends up right back under a different kind of unfair rule.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <h2 class="slide-title">Chapter 1: what happens</h2>
+    <p>An old, well-respected pig calls the other animals together late one night. He tells them their lives are miserable and short because they're being used by the farm's human owner — and lays out a vision of what life could look like if the animals ran the farm themselves, with no humans involved at all. He teaches them a song about that future. Then, not long after, he dies — before any of it actually happens.</p>
+    <div class="def">
+      <p class="term">Notice what's missing</p>
+      <p class="body">This chapter never shows the idea actually being put into practice. It's pure vision, no reality check yet. That matters a lot for later.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <h2 class="slide-title">Who is Old Major, really?</h2>
+    <div class="worked">
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Old Major</div><div class="m">The founding revolutionary IDEA itself — echoes of thinkers like Karl Marx and Vladimir Lenin, who imagined and helped launch the real revolution.</div></div>
+      </div>
+      <div class="result">Old Major isn't a villain, and he's not really a full "character" who does things later — he's the ideal itself, the pure vision before anyone has to actually run anything. Orwell keeps him spotless, because the whole point of the book is watching what happens to a good idea once real people start putting it into practice.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <h2 class="slide-title">Two words you'll need constantly</h2>
+    <div class="def">
+      <p class="term">Tyranny</p>
+      <p class="body">Unfair, cruel rule by someone with way more power than everyone else, and no real way to stop them.</p>
+    </div>
+    <div class="def" style="margin-bottom:0;">
+      <p class="term">Propaganda</p>
+      <p class="body">Information — sometimes true, often twisted or false — designed to make you FEEL a certain way about something, so you believe it without really questioning it. Think of an ad that skips the facts and just makes you feel excited or scared.</p>
+    </div>
+    <p style="margin-top:16px;">Old Major's speech isn't propaganda yet — it's genuinely his honest belief. Watch for the moment later when other characters use the SAME emotional techniques to make animals believe things that aren't actually true. That's the shift from vision to manipulation.</p>
+  </section>
+
+  <section class="slide" data-slide="8">
+    <h2 class="slide-title">Try it yourself</h2>
+    <div class="ask">
+      <p class="ask-q">What makes Animal Farm an allegory rather than just a story about talking animals?</p>
+      <div class="ask-opts" data-q="gp1">
+        <button class="opt" data-correct="false">It has a happy ending</button>
+        <button class="opt" data-correct="true">The characters and events represent real historical people and events</button>
+        <button class="opt" data-correct="false">It's written in simple language for kids</button>
+      </div>
+      <p class="ask-fb" id="fb-gp1"></p>
+    </div>
+    <div class="ask">
+      <p class="ask-q">Why might Orwell keep Old Major "pure" — never showing him actually having to run anything?</p>
+      <div class="ask-opts" data-q="gp2">
+        <button class="opt" data-correct="false">He forgot to write more scenes for him</button>
+        <button class="opt" data-correct="true">So the ORIGINAL idea stays separate from what happens once real leaders take over</button>
+        <button class="opt" data-correct="false">Old Major isn't actually important to the story</button>
+      </div>
+      <p class="ask-fb" id="fb-gp2"></p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="9">
+    <h2 class="slide-title">One question worth sitting with</h2>
+    <div class="reflect">
+      <p style="margin-bottom:0;font-weight:600;color:var(--navy);">Old Major names the animals' hard, short, exhausting lives as the reason change is needed. Why do you think naming a problem out loud — even before anyone has a real plan to fix it — has that much power over a group of people?</p>
+      <textarea placeholder="Jot down your thoughts here, or just talk it through with your tutor..."></textarea>
+      <p class="reflect-note">This one doesn't have a single right answer — it's meant to be talked through live, not graded.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="10">
+    <h2 class="slide-title">Every word from today</h2>
+    <dl class="glossary">
+      <div class="row"><dt>Allegory</dt><dd>A story where characters/events stand for something else — usually a real historical event or idea.</dd></div>
+      <div class="row"><dt>Tyranny</dt><dd>Unfair, cruel rule with no real way to stop it.</dd></div>
+      <div class="row"><dt>Propaganda</dt><dd>Information designed to make you feel a certain way, so you believe it without questioning it.</dd></div>
+    </dl>
+    <div class="def" style="margin-top:16px;margin-bottom:0;">
+      <p class="term">Reading toolkit, again</p>
+      <p class="body">Who does this remind me of? What real event could this represent? What is the author really trying to say?</p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="11">
+    <h2 class="slide-title">Quiz — show what you know</h2>
+
+    <div class="quiz-item" data-quiz="q1" data-answer="b">
+      <div class="qnum-inline">1 of 5</div>
+      <div class="qtext">What is an allegory?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">A story with a moral lesson at the end</button>
+        <button class="qopt" data-opt="b">A story where characters and events represent something else, usually real history or ideas</button>
+        <button class="qopt" data-opt="c">A story told entirely through animal characters</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Talking animals alone don't make something an allegory — it's specifically that the story stands in for something real.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q2" data-answer="c">
+      <div class="qnum-inline">2 of 5</div>
+      <div class="qtext">Animal Farm is generally understood as an allegory for what real historical event?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">World War II battles</button>
+        <button class="qopt" data-opt="b">The American Revolution</button>
+        <button class="qopt" data-opt="c">The Russian Revolution and its aftermath under Stalin</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Orwell was writing about the 1917 Russian Revolution and how it eventually led to Stalin's dictatorship.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q3" data-answer="a">
+      <div class="qnum-inline">3 of 5</div>
+      <div class="qtext">Old Major is generally understood to represent...</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">The founding revolutionary idea itself, echoing thinkers like Marx and Lenin</button>
+        <button class="qopt" data-opt="b">A cruel dictator</button>
+        <button class="qopt" data-opt="c">An ordinary farm worker with no larger meaning</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Old Major is the pure vision before anyone has to actually run anything — that's why Orwell keeps him separate from what comes later.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q4" data-answer="b">
+      <div class="qnum-inline">4 of 5</div>
+      <div class="qtext">Which of these is the best definition of propaganda?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Any speech given to a large group</button>
+        <button class="qopt" data-opt="b">Information designed to make you feel a certain way so you believe it without questioning it</button>
+        <button class="qopt" data-opt="c">A song that becomes popular</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">The key is that it targets feelings over facts, so people accept it without examining it closely.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q5" data-answer="a">
+      <div class="qnum-inline">5 of 5</div>
+      <div class="qtext">When reading any chapter of Animal Farm through the "allegory lens," which question should you NOT be asking?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Is this a realistic thing for a farm animal to actually do?</button>
+        <button class="qopt" data-opt="b">Who does this character remind me of in real history?</button>
+        <button class="qopt" data-opt="c">What is the author really trying to say here?</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Realism isn't the point of an allegory — the animals are stand-ins, so "would a real pig do this" misses what the story's actually doing.</p>
+    </div>
+
+    <div class="quiz-final" id="quizFinal"><span class="score" id="scoreText">0 / 5</span></div>
+    <div class="submit-status" id="submitStatus"></div>
+  </section>
+
+  <section class="slide" data-slide="12">
+    <h2 class="slide-title">The vision is set</h2>
+    <p>You now have the exact lens the rest of this book needs: who's who, what's really being said, and the three questions to ask every chapter. That's the foundation everything else builds on. Chapter 2 is where the rebellion actually happens and the animals write down their first set of rules — we'll watch closely for the very first crack in the ideal. It hasn't been built yet, so this lesson ends here for now.</p>
+    <div class="teaser">
+      <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="30" fill="none" stroke="#2E8B4F" stroke-width="3"/><path d="M 25 40 L 35 52 L 58 26" fill="none" stroke="#2E8B4F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="cap">Lessons 1&ndash;2 complete</div>
+    </div>
+  </section>
+
+</div></div>
+
+<div class="nav">
+  <button class="ghost" id="prevBtn">Back</button>
+  <span class="step-of" id="stepOf">1 / 12</span>
+  <button id="nextBtn">Continue</button>
+</div>
+
+<script>
+(function(){
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/mvkgqdyq";
+
+  function fireConfetti(x, y){
+    var canvas = document.getElementById('confettiCanvas');
+    if (!canvas){
+      canvas = document.createElement('canvas');
+      canvas.id = 'confettiCanvas';
+      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:200;';
+      document.body.appendChild(canvas);
+    }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var ctx = canvas.getContext('2d');
+    var colors = ['#C9A84C','#3E6FD9','#2E8B4F','#E0554F','#ffffff'];
+    var particles = [];
+    for (var i=0;i<50;i++){
+      particles.push({
+        x:x, y:y,
+        vx:(Math.random()-0.5)*7,
+        vy:Math.random()*-7-3,
+        size:Math.random()*5+4,
+        color:colors[Math.floor(Math.random()*colors.length)],
+        rot:Math.random()*360,
+        vr:(Math.random()-0.5)*9,
+        life:1
+      });
+    }
+    var start = null;
+    function frame(ts){
+      if (!start) start = ts;
+      var elapsed = ts - start;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      var alive = false;
+      particles.forEach(function(p){
+        p.vy += 0.25;
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        p.life -= 0.014;
+        if (p.life > 0){
+          alive = true;
+          ctx.save();
+          ctx.globalAlpha = Math.max(p.life,0);
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.rot*Math.PI/180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+          ctx.restore();
+        }
+      });
+      if (alive && elapsed < 2600){ requestAnimationFrame(frame); }
+      else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var total = document.querySelectorAll('.slide').length;
+  var current = 1;
+  var appEl = document.querySelector('.app');
+  var nextBtn = document.getElementById('nextBtn');
+
+  function goTo(n){
+    if (n < 1 || n > total) return;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.remove('active');
+    current = n;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.add('active');
+    document.getElementById('fill').style.width = Math.round(current/total*100)+'%';
+    document.getElementById('stepOf').textContent = current + ' / ' + total;
+    document.getElementById('prevBtn').disabled = current === 1;
+    if (current === total){
+      nextBtn.textContent = 'Lesson 3 not built yet';
+      nextBtn.classList.add('pending');
+    } else {
+      nextBtn.textContent = 'Continue';
+      nextBtn.classList.remove('pending');
+    }
+    appEl.scrollTop = 0;
+  }
+  document.getElementById('prevBtn').disabled = true;
+  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current-1); });
+  nextBtn.addEventListener('click', function(){
+    if (current === total) return;
+    goTo(current+1);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') { if (current < total) goTo(current+1); }
+    else if (e.key === 'ArrowLeft') goTo(current-1);
+  });
+
+  document.querySelectorAll('.ask-opts').forEach(function(row){
+    var fb = document.getElementById('fb-' + row.dataset.q);
+    row.querySelectorAll('.opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        row.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('correct','incorrect'); b.disabled = true; });
+        if (btn.dataset.correct === 'true'){
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          if (fb){ fb.textContent = 'Correct.'; fb.className = 'ask-fb ok'; }
+        } else {
+          btn.classList.add('incorrect');
+          row.querySelectorAll('.opt').forEach(function(b){ if (b.dataset.correct === 'true') b.classList.add('correct'); });
+          if (fb){ fb.textContent = 'Not quite — correct answer highlighted.'; fb.className = 'ask-fb bad'; }
+        }
+      });
+    });
+  });
+
+  var quizState = {};
+  var quizTotal = document.querySelectorAll('.quiz-item').length;
+  document.querySelectorAll('.quiz-item').forEach(function(q){
+    var qid = q.dataset.quiz, answer = q.dataset.answer;
+    quizState[qid] = { attempts:0, correct:false, done:false };
+    var tries = q.querySelector('.qtries');
+    q.querySelectorAll('.qopt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var st = quizState[qid];
+        if (st.done) return;
+        st.attempts++;
+        if (btn.dataset.opt === answer){
+          st.correct = true; st.done = true;
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; });
+          q.querySelector('.qnote').classList.add('show');
+          updateScore();
+        } else {
+          btn.classList.add('incorrect'); btn.disabled = true;
+          if (st.attempts >= 2){
+            st.done = true;
+            q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; if (b.dataset.opt === answer) b.classList.add('correct'); });
+            q.querySelector('.qnote').classList.add('show');
+            updateScore();
+          } else if (tries) { tries.textContent = 'One more try.'; }
+        }
+      });
+    });
+  });
+
+  function updateScore(){
+    var done = 0, score = 0;
+    for (var k in quizState){ if (quizState[k].done) done++; if (quizState[k].correct) score++; }
+    if (done < quizTotal) return;
+    document.getElementById('scoreText').textContent = score + ' / ' + quizTotal;
+    document.getElementById('quizFinal').classList.add('show');
+    submitScore(score);
+  }
+  function submitScore(score){
+    var statusEl = document.getElementById('submitStatus');
+    var payload = { student:"Nevaeh Arndts", program:"Nevaeh English I", lesson:"Lesson 2: Animal Farm, Chapter 1", score: score+" / "+quizTotal, timestamp: new Date().toISOString() };
+    fetch(FORMSPREE_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload) })
+      .then(function(r){ statusEl.textContent = r.ok ? 'Score sent to your tutor.' : 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); })
+      .catch(function(){ statusEl.textContent = 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); });
+  }
+})();
+</script>
+</body>
+</html>
