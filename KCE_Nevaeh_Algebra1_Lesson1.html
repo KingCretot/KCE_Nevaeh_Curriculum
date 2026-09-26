@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nevaeh's Algebra I — Rate of Change &amp; Slope</title>
+<style>
+  :root{
+    --navy:#0A1F3D; --navy2:#0f2a52; --gold:#C9A84C; --blue:#3E6FD9; --red:#E0554F;
+    --cream:#FAF7EF; --ink:#1a1a1a; --green:#2E8B4F; --line:#E3DDC9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);background:var(--navy);font-size:16px;display:flex;flex-direction:column;}
+  h1,h2,h3,.serif{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;}
+
+  .masthead{background:var(--navy);color:#fff;padding:14px 6vw 12px;flex:none;}
+  .masthead .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;font-size:0.8125rem;color:#9fb3d6;}
+  .masthead h1{font-size:clamp(1.3rem,2.6vw,1.7rem);margin:6px 0 0;font-weight:400;color:#fff;}
+
+  .formula-bar{background:#0d2447;border-top:1px solid rgba(255,255,255,.1);border-bottom:2px solid var(--gold);padding:10px 6vw;display:flex;gap:8px 26px;flex-wrap:wrap;align-items:baseline;flex:none;}
+  .fb-item{color:#EFEAE0;font-size:0.84375rem;}
+  .fb-item b{color:#fff;}
+  .fb-item .arrow{color:var(--gold);}
+  .fb-when{color:#93a3c4;font-size:0.75rem;}
+
+  .progress-track{background:rgba(255,255,255,.1);height:3px;flex:none;}
+  .progress-fill{height:100%;background:var(--gold);width:9%;transition:width .3s ease;}
+
+  .app{flex:1;overflow-y:auto;background:var(--cream);}
+  .stage{max-width:900px;margin:0 auto;padding:36px 6vw 48px;}
+  .slide{display:none;}
+  .slide.active{display:block;animation:fadeIn .25s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  h2.slide-title{font-size:1.55rem;font-weight:400;color:var(--navy);margin:0 0 16px;}
+  .lede{font-size:1.09375rem;line-height:1.65;color:#333;margin:0 0 10px;}
+  p{font-size:1.03125rem;line-height:1.7;margin:0 0 16px;color:#2a2a2a;}
+
+  .def{border-left:2px solid var(--gold);padding:2px 0 2px 18px;margin:0 0 18px;}
+  .def .term{font-family:Georgia,serif;font-size:1.15rem;margin:0 0 4px;color:var(--navy);}
+  .def .body{font-size:0.96875rem;color:#444;margin:0;line-height:1.55;}
+
+  .scenario{background:var(--navy2);color:#EFEAE0;border-radius:2px;padding:24px 28px;margin:0 0 16px;}
+  .scenario p{color:#D7DEEA;margin:0 0 6px;font-size:0.90625rem;}
+  .scenario p:last-child{margin-bottom:0;}
+  .scenario .q{color:#fff;font-family:Georgia,serif;font-size:1rem;}
+
+  .worked{border:1px solid var(--line);border-radius:2px;padding:22px 26px;margin:0 0 14px;background:#fff;}
+  .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;}
+  @media(max-width:480px){.wgrid{grid-template-columns:1fr;}}
+  .wstep{padding:5px 0;}
+  .wstep .l{color:var(--blue);font-weight:600;font-size:0.8125rem;}
+  .wstep .m{font-family:Georgia,serif;font-size:1.0625rem;color:var(--ink);}
+  .result{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:0.96875rem;color:var(--green);font-weight:600;line-height:1.5;}
+
+  .diagram-box{background:#fff;border:1px solid var(--line);border-radius:2px;padding:22px;margin:0 0 14px;}
+  .diagram-box svg{max-width:340px;width:100%;height:auto;display:block;margin:0 auto;}
+  .diagram-cap{font-size:0.8125rem;color:#666;margin-top:6px;text-align:center;}
+
+  .cases{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line);border-radius:2px;overflow:hidden;margin:0 0 14px;background:#fff;}
+  @media(min-width:520px){.cases{grid-template-columns:repeat(4,1fr);}}
+  .case{padding:20px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .case svg{width:74px;height:48px;display:block;margin-bottom:9px;}
+  .case h3{font-size:0.9375rem;margin:0 0 4px;font-weight:600;color:var(--navy);}
+  .case p{font-size:0.8125rem;margin:0;color:#555;line-height:1.4;}
+
+  .ask{margin:0 0 16px;}
+  .ask-q{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .ask-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .opt{background:transparent;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;padding:9px 15px;font-size:0.875rem;font-family:inherit;cursor:pointer;min-height:42px;color:var(--ink);}
+  .opt:hover{border-color:var(--navy);}
+  .opt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .opt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .ask-fb{font-size:0.8125rem;font-weight:600;min-height:16px;margin-top:8px;}
+  .ask-fb.ok{color:var(--green);} .ask-fb.bad{color:var(--red);}
+
+  .glossary{border:1px solid var(--line);border-radius:2px;background:#fff;padding:4px 20px;}
+  .glossary .row{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--line);}
+  .glossary .row:first-child{border-top:none;}
+  @media(max-width:480px){.glossary .row{grid-template-columns:1fr;gap:2px;}}
+  .glossary dt{font-family:Georgia,serif;font-size:0.9375rem;color:var(--navy);}
+  .glossary dd{margin:0;font-size:0.84375rem;color:#444;}
+
+  .icon-row{display:flex;gap:28px;flex-wrap:wrap;margin:10px 0 6px;}
+  .icon-item{text-align:center;width:150px;}
+  .icon-item svg{width:96px;height:96px;display:block;margin:0 auto 10px;}
+  .icon-item .cap{font-size:0.84375rem;color:#444;line-height:1.35;}
+
+  .visual-row{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;margin-bottom:10px;}
+  @media(min-width:560px){.visual-row{grid-template-columns:1.05fr 1fr;}}
+  .mini-visual{background:#fff;border:1px solid var(--line);border-radius:2px;padding:22px;text-align:center;}
+  .mini-visual svg{width:100%;max-width:280px;height:auto;display:block;margin:0 auto;}
+  .mini-visual .cap{font-size:0.8125rem;color:#666;margin-top:10px;}
+
+  .teaser{text-align:center;margin-top:10px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:2px;max-width:340px;margin-left:auto;margin-right:auto;}
+  .teaser svg{width:100%;max-width:260px;height:auto;display:block;margin:0 auto;}
+  .teaser .cap{font-size:0.90625rem;color:var(--navy);margin-top:10px;font-family:Georgia,serif;}
+
+  .quiz-item{border-top:1px solid var(--line);padding:16px 0;}
+  .quiz-item:last-of-type{border-bottom:1px solid var(--line);}
+  .qnum-inline{font-size:0.75rem;color:var(--blue);font-weight:600;margin-bottom:5px;}
+  .qtext{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .qopts{display:flex;flex-direction:column;gap:6px;max-width:460px;}
+  .qopt{text-align:left;background:transparent;border:1.5px solid rgba(10,31,61,.22);border-radius:2px;padding:10px 14px;font-size:0.875rem;cursor:pointer;font-family:inherit;min-height:42px;}
+  .qopt:hover:not(:disabled){border-color:var(--navy);}
+  .qopt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .qopt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .qnote{font-size:0.8125rem;color:#444;margin-top:8px;padding-left:12px;border-left:2px solid var(--blue);display:none;}
+  .qnote.show{display:block;}
+  .qtries{font-size:0.71875rem;color:#999;margin-top:5px;}
+  .quiz-final{margin-top:18px;padding:16px 0;border-top:2px solid var(--gold);display:none;}
+  .quiz-final.show{display:block;}
+  .quiz-final .score{font-family:Georgia,serif;font-size:1.4rem;color:var(--navy);}
+  .submit-status{font-size:0.75rem;color:#888;margin-top:6px;display:none;}
+  .submit-status.show{display:block;}
+
+  .nav{flex:none;display:flex;align-items:center;justify-content:space-between;padding:12px 6vw;background:#fff;border-top:1px solid var(--line);}
+  .nav button{font-family:inherit;font-size:0.875rem;font-weight:700;padding:11px 22px;border-radius:2px;border:none;background:var(--navy);color:#fff;cursor:pointer;min-height:44px;}
+  .nav button:hover{background:var(--navy2);}
+  .nav button.ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(10,31,61,.25);}
+  .nav button:disabled{opacity:.3;cursor:default;}
+  .nav .step-of{font-size:0.75rem;color:#999;}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="top"><span>Nevaeh's Algebra I</span><span>Lesson 1</span></div>
+  <h1>Rate of Change &amp; Slope</h1>
+</div>
+
+<div class="formula-bar">
+  <div class="fb-item"><b>Rate of change</b> <span class="arrow">&rarr;</span> change in output &divide; change in input <span class="fb-when">(word problems, money, distance)</span></div>
+  <div class="fb-item"><b>Slope</b> <span class="arrow">&rarr;</span> m = rise &divide; run = (y&#8322;&minus;y&#8321;)&divide;(x&#8322;&minus;x&#8321;) <span class="fb-when">(graphs or two points)</span></div>
+</div>
+
+<div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+
+<div class="app"><div class="stage">
+
+  <section class="slide active" data-slide="1">
+    <h2 class="slide-title">Things that change</h2>
+    <p class="lede">Every day you're surrounded by things that go up, go down, or stay flat — your phone battery, your paycheck, the temperature outside. This lesson puts a name and a number on exactly how fast those things change: <b>rate of change</b>, and its graph version, <b>slope</b>. The bar above stays pinned the whole lesson — glance up any time.</p>
+    <div class="icon-row">
+      <div class="icon-item">
+        <svg viewBox="0 0 60 60"><rect x="10" y="20" width="34" height="20" rx="2" fill="none" stroke="#0A1F3D" stroke-width="2"/><rect x="44" y="26" width="5" height="8" rx="1" fill="#0A1F3D"/><rect x="13" y="23" width="12" height="14" fill="#E0554F"/></svg>
+        <div class="cap">Battery draining</div>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="20" fill="none" stroke="#0A1F3D" stroke-width="2"/><text x="30" y="38" font-family="Georgia,serif" font-size="22" text-anchor="middle" fill="#2E8B4F">$</text></svg>
+        <div class="cap">Paycheck growing</div>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 60 60"><path d="M 12 40 A 20 20 0 0 1 48 40" fill="none" stroke="#0A1F3D" stroke-width="2"/><line x1="30" y1="40" x2="40" y2="26" stroke="#3E6FD9" stroke-width="2.5"/><circle cx="30" cy="40" r="3" fill="#0A1F3D"/></svg>
+        <div class="cap">Speed holding steady</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <h2 class="slide-title">What "rate of change" means</h2>
+    <div class="visual-row">
+      <div class="def" style="margin-bottom:0;">
+        <p class="term">Rate of change</p>
+        <p class="body">How much one thing changes for every one unit that something else changes — usually written as a ratio: change in the thing you're tracking, divided by change in time.</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 140 110">
+          <line x1="70" y1="95" x2="70" y2="15" stroke="#3E6FD9" stroke-width="2.5"/>
+          <polygon points="70,10 65,20 75,20" fill="#3E6FD9"/>
+          <line x1="15" y1="55" x2="115" y2="55" stroke="#C9A84C" stroke-width="2.5"/>
+          <polygon points="120,55 110,50 110,60" fill="#C9A84C"/>
+          <text x="76" y="35" font-size="12" fill="#3E6FD9" font-family="Georgia,serif">change</text>
+          <text x="35" y="105" font-size="12" fill="#8A6A1E" font-family="Georgia,serif">over time</text>
+        </svg>
+        <div class="cap">the ratio, pictured</div>
+      </div>
+    </div>
+    <p>You already think this way constantly. "My phone loses 5% battery an hour." "I make $12 an hour." "The team scored 3 points a minute." Math just wants it precise, with a formula behind it.</p>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <h2 class="slide-title">Worked example — the drive to grandma's</h2>
+    <div class="visual-row">
+      <div class="scenario" style="margin-bottom:0;">
+        <p>James is driving you and Lucy out to grandma's, a 180-mile trip. Once you hit the highway the GPS says 150 miles to go. Forty-five minutes later, it says 105 miles to go.</p>
+        <p class="q">What's the rate of change of the distance remaining?</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 150 110">
+          <line x1="15" y1="95" x2="15" y2="10" stroke="#ccc" stroke-width="1"/>
+          <line x1="15" y1="95" x2="140" y2="95" stroke="#ccc" stroke-width="1"/>
+          <line x1="15" y1="25" x2="130" y2="80" stroke="#E0554F" stroke-width="2.5"/>
+          <circle cx="15" cy="25" r="4" fill="#0A1F3D"/><circle cx="130" cy="80" r="4" fill="#0A1F3D"/>
+        </svg>
+        <div class="cap">miles left to go, ticking down</div>
+      </div>
+    </div>
+    <div class="worked">
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Change in distance</div><div class="m">105 &minus; 150 = &minus;45 miles</div></div>
+        <div class="wstep"><div class="l">Change in time</div><div class="m">45 min = 0.75 hr</div></div>
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Rate of change</div><div class="m">&minus;45 &divide; 0.75 = &minus;60 mph</div></div>
+      </div>
+      <div class="result">That negative sign isn't a mistake — it means the distance is going DOWN. A negative rate of change always means something is decreasing.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <h2 class="slide-title">Same idea, new name: slope</h2>
+    <div class="visual-row">
+      <div class="def" style="margin-bottom:0;">
+        <p class="term">Slope</p>
+        <p class="body">The rate of change of a straight line, specifically once you can see it on a graph. Same math as before — slope is just what rate of change is called once there's a line in front of you. Symbol: m.</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 150 110">
+          <line x1="20" y1="90" x2="130" y2="20" stroke="#0A1F3D" stroke-width="2.5"/>
+          <line x1="45" y1="74" x2="45" y2="40" stroke="#E0554F" stroke-width="2" stroke-dasharray="3,3"/>
+          <line x1="45" y1="40" x2="100" y2="40" stroke="#3E6FD9" stroke-width="2" stroke-dasharray="3,3"/>
+          <text x="14" y="58" font-size="11" fill="#E0554F">rise</text>
+          <text x="60" y="53" font-size="11" fill="#3E6FD9">run</text>
+        </svg>
+        <div class="cap">steepness = rise / run</div>
+      </div>
+    </div>
+    <p>Plot the road trip on a graph — hours across the bottom, miles-remaining up the side — and you'd get a line heading downward. Its steepness IS the &minus;60 you just calculated.</p>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <h2 class="slide-title">Four types of slope</h2>
+    <div class="cases">
+      <div class="case">
+        <svg viewBox="0 0 60 40"><line x1="8" y1="34" x2="52" y2="8" stroke="#2E8B4F" stroke-width="2.5"/></svg>
+        <h3>Positive</h3>
+        <p>Up left-to-right. A paycheck growing with more hours.</p>
+      </div>
+      <div class="case">
+        <svg viewBox="0 0 60 40"><line x1="8" y1="8" x2="52" y2="34" stroke="#E0554F" stroke-width="2.5"/></svg>
+        <h3>Negative</h3>
+        <p>Down left-to-right. A phone battery on a long drive.</p>
+      </div>
+      <div class="case">
+        <svg viewBox="0 0 60 40"><line x1="8" y1="20" x2="52" y2="20" stroke="#3E6FD9" stroke-width="2.5"/></svg>
+        <h3>Zero</h3>
+        <p>Flat. Cruise control holding a steady 60 mph.</p>
+      </div>
+      <div class="case" style="border-right:none;">
+        <svg viewBox="0 0 60 40"><line x1="30" y1="4" x2="30" y2="36" stroke="#8A6A1E" stroke-width="2.5"/></svg>
+        <h3>Undefined</h3>
+        <p>Vertical. A flagpole — no sideways distance to divide by.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <h2 class="slide-title">Finding slope from a graph</h2>
+    <div class="diagram-box">
+      <svg viewBox="0 0 260 200">
+        <line x1="20" y1="180" x2="240" y2="180" stroke="#ccc" stroke-width="1"/>
+        <line x1="20" y1="180" x2="20" y2="20" stroke="#ccc" stroke-width="1"/>
+        <line x1="60" y1="150" x2="200" y2="50" stroke="#0A1F3D" stroke-width="2.5"/>
+        <circle cx="60" cy="150" r="4" fill="#E0554F"/><text x="40" y="168" font-size="12">(1, 2)</text>
+        <circle cx="200" cy="50" r="4" fill="#E0554F"/><text x="188" y="42" font-size="12">(5, 6)</text>
+      </svg>
+      <div class="diagram-cap">Two points on the line: (1, 2) and (5, 6)</div>
+    </div>
+    <div class="worked">
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Run (x-change)</div><div class="m">5 &minus; 1 = 4</div></div>
+        <div class="wstep"><div class="l">Rise (y-change)</div><div class="m">6 &minus; 2 = 4</div></div>
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Slope</div><div class="m">m = 4 &divide; 4 = 1</div></div>
+      </div>
+      <div class="result">Shortcut for next time: m = (y&#8322; &minus; y&#8321;) &divide; (x&#8322; &minus; x&#8321;) — rise over run, written with coordinates instead of a picture.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <h2 class="slide-title">Try it yourself</h2>
+    <div class="ask">
+      <p class="ask-q">A line passes through (2, 3) and (6, 11). What's the slope?</p>
+      <div class="ask-opts" data-q="gp1">
+        <button class="opt" data-correct="false">m = 1</button>
+        <button class="opt" data-correct="true">m = 2</button>
+        <button class="opt" data-correct="false">m = 4</button>
+      </div>
+      <p class="ask-fb" id="fb-gp1"></p>
+    </div>
+    <div class="ask">
+      <p class="ask-q">Lucy tracks the road-trip snacks: 12 left at the start, 4 left two hours later. What type of rate of change is this?</p>
+      <div class="ask-opts" data-q="gp2">
+        <button class="opt" data-correct="false">Positive</button>
+        <button class="opt" data-correct="true">Negative</button>
+        <button class="opt" data-correct="false">Zero</button>
+      </div>
+      <p class="ask-fb" id="fb-gp2"></p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="8">
+    <h2 class="slide-title">One more — no family in this one</h2>
+    <p>A part-time job: after 3 hours you've earned $36. After 7 hours, $84.</p>
+    <div class="mini-visual" style="max-width:180px;margin:0 0 14px;">
+      <svg viewBox="0 0 140 90">
+        <rect x="12" y="60" width="20" height="24" fill="#3E6FD9"/>
+        <rect x="42" y="46" width="20" height="38" fill="#3E6FD9"/>
+        <rect x="72" y="30" width="20" height="54" fill="#3E6FD9"/>
+        <rect x="102" y="14" width="20" height="70" fill="#2E8B4F"/>
+        <line x1="6" y1="84" x2="130" y2="84" stroke="#ccc" stroke-width="1"/>
+      </svg>
+      <div class="cap">earnings, hour by hour</div>
+    </div>
+    <div class="worked">
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Change in earnings</div><div class="m">$84 &minus; $36 = $48</div></div>
+        <div class="wstep"><div class="l">Change in hours</div><div class="m">7 &minus; 3 = 4</div></div>
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Rate of change</div><div class="m">$48 &divide; 4 = $12/hr</div></div>
+      </div>
+      <div class="result">That's the hourly wage — positive slope, because total earnings only ever go up the longer you work. Same math as the road trip, opposite direction.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="9">
+    <h2 class="slide-title">Every word from today</h2>
+    <dl class="glossary">
+      <div class="row"><dt>Rate of change</dt><dd>How fast something changes compared to something else, usually time.</dd></div>
+      <div class="row"><dt>Slope</dt><dd>Rate of change, specifically on a graph. Symbol: m.</dd></div>
+      <div class="row"><dt>Rise / Run</dt><dd>Vertical change / horizontal change between two points.</dd></div>
+      <div class="row"><dt>Positive / Negative slope</dt><dd>Line rises / falls left to right — something increasing / decreasing.</dd></div>
+      <div class="row"><dt>Zero / Undefined slope</dt><dd>Flat line, nothing changing / vertical line, can't be calculated.</dd></div>
+    </dl>
+  </section>
+
+  <section class="slide" data-slide="10">
+    <h2 class="slide-title">Quiz — show what you know</h2>
+
+    <div class="quiz-item" data-quiz="q1" data-answer="b">
+      <div class="qnum-inline">1 of 5</div>
+      <div class="qtext">A line passes through (0, 4) and (2, 10). What's the slope?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">m = 2</button>
+        <button class="qopt" data-opt="b">m = 3</button>
+        <button class="qopt" data-opt="c">m = 6</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Rise = 10 &minus; 4 = 6. Run = 2 &minus; 0 = 2. m = 6 &divide; 2 = 3.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q2" data-answer="a">
+      <div class="qnum-inline">2 of 5</div>
+      <div class="qtext">Your phone goes from 80% to 40% over two hours. This is an example of...</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Negative rate of change</button>
+        <button class="qopt" data-opt="b">Positive rate of change</button>
+        <button class="qopt" data-opt="c">Zero rate of change</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">The battery went down, so the rate of change is negative — same pattern as the distance-remaining example.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q3" data-answer="c">
+      <div class="qnum-inline">3 of 5</div>
+      <div class="qtext">A perfectly vertical line (like a flagpole) has what kind of slope?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Zero</button>
+        <button class="qopt" data-opt="b">Negative</button>
+        <button class="qopt" data-opt="c">Undefined</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Zero run means dividing by zero — the slope is undefined, not zero.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q4" data-answer="b">
+      <div class="qnum-inline">4 of 5</div>
+      <div class="qtext">Which formula do you use when you're given two (x, y) points?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Rate of change = output &divide; input</button>
+        <button class="qopt" data-opt="b">m = (y&#8322; &minus; y&#8321;) &divide; (x&#8322; &minus; x&#8321;)</button>
+        <button class="qopt" data-opt="c">Area = length &times; width</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">That's rise over run, written with point coordinates instead of a picture.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q5" data-answer="a">
+      <div class="qnum-inline">5 of 5</div>
+      <div class="qtext">You earn $15/hour. What type of slope does your total-earnings graph have?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Positive</button>
+        <button class="qopt" data-opt="b">Negative</button>
+        <button class="qopt" data-opt="c">Undefined</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Total earnings only go up the longer you work — positive slope, like the paycheck example.</p>
+    </div>
+
+    <div class="quiz-final" id="quizFinal"><span class="score" id="scoreText">0 / 5</span></div>
+    <div class="submit-status" id="submitStatus"></div>
+  </section>
+
+  <section class="slide" data-slide="11">
+    <h2 class="slide-title">Nice work</h2>
+    <p>You now have both formulas, all four slope types, and you can pull a slope straight off a graph. Next lesson uses this to write the full equation of a line — not just describe how steep it is, but predict any point on it.</p>
+    <div class="teaser">
+      <svg viewBox="0 0 160 110">
+        <line x1="15" y1="95" x2="15" y2="10" stroke="#ccc" stroke-width="1"/>
+        <line x1="15" y1="95" x2="150" y2="95" stroke="#ccc" stroke-width="1"/>
+        <line x1="15" y1="70" x2="140" y2="20" stroke="#0A1F3D" stroke-width="2.5"/>
+        <circle cx="15" cy="70" r="4" fill="#C9A84C"/>
+      </svg>
+      <div class="cap">y = mx + b — next lesson</div>
+    </div>
+  </section>
+
+</div></div>
+
+<div class="nav">
+  <button class="ghost" id="prevBtn">Back</button>
+  <span class="step-of" id="stepOf">1 / 11</span>
+  <button id="nextBtn">Continue</button>
+</div>
+
+<script>
+(function(){
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjgzkeb";
+  var NEXT_LESSON_URL = "KCE_Nevaeh_Algebra1_Lesson2.html";
+  var NEXT_LESSON_LABEL = "Next Lesson: Writing Linear Equations \u2192";
+
+  function fireConfetti(x, y){
+    var canvas = document.getElementById('confettiCanvas');
+    if (!canvas){
+      canvas = document.createElement('canvas');
+      canvas.id = 'confettiCanvas';
+      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:200;';
+      document.body.appendChild(canvas);
+    }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var ctx = canvas.getContext('2d');
+    var colors = ['#C9A84C','#3E6FD9','#2E8B4F','#E0554F','#ffffff'];
+    var particles = [];
+    for (var i=0;i<50;i++){
+      particles.push({
+        x:x, y:y,
+        vx:(Math.random()-0.5)*7,
+        vy:Math.random()*-7-3,
+        size:Math.random()*5+4,
+        color:colors[Math.floor(Math.random()*colors.length)],
+        rot:Math.random()*360,
+        vr:(Math.random()-0.5)*9,
+        life:1
+      });
+    }
+    var start = null;
+    function frame(ts){
+      if (!start) start = ts;
+      var elapsed = ts - start;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      var alive = false;
+      particles.forEach(function(p){
+        p.vy += 0.25;
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        p.life -= 0.014;
+        if (p.life > 0){
+          alive = true;
+          ctx.save();
+          ctx.globalAlpha = Math.max(p.life,0);
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.rot*Math.PI/180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+          ctx.restore();
+        }
+      });
+      if (alive && elapsed < 2600){ requestAnimationFrame(frame); }
+      else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var total = document.querySelectorAll('.slide').length;
+  var current = 1;
+  var appEl = document.querySelector('.app');
+  var nextBtn = document.getElementById('nextBtn');
+
+  function goTo(n){
+    if (n < 1 || n > total) return;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.remove('active');
+    current = n;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.add('active');
+    document.getElementById('fill').style.width = Math.round(current/total*100)+'%';
+    document.getElementById('stepOf').textContent = current + ' / ' + total;
+    document.getElementById('prevBtn').disabled = current === 1;
+    if (current === total){
+      nextBtn.textContent = NEXT_LESSON_LABEL;
+    } else {
+      nextBtn.textContent = 'Continue';
+    }
+    appEl.scrollTop = 0;
+  }
+  document.getElementById('prevBtn').disabled = true;
+  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current-1); });
+  nextBtn.addEventListener('click', function(){
+    if (current === total){
+      window.location.href = NEXT_LESSON_URL;
+    } else {
+      goTo(current+1);
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') nextBtn.click();
+    else if (e.key === 'ArrowLeft') goTo(current-1);
+  });
+
+  document.querySelectorAll('.ask-opts').forEach(function(row){
+    var fb = document.getElementById('fb-' + row.dataset.q);
+    row.querySelectorAll('.opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        row.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('correct','incorrect'); b.disabled = true; });
+        if (btn.dataset.correct === 'true'){
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          if (fb){ fb.textContent = 'Correct.'; fb.className = 'ask-fb ok'; }
+        } else {
+          btn.classList.add('incorrect');
+          row.querySelectorAll('.opt').forEach(function(b){ if (b.dataset.correct === 'true') b.classList.add('correct'); });
+          if (fb){ fb.textContent = 'Not quite — correct answer highlighted.'; fb.className = 'ask-fb bad'; }
+        }
+      });
+    });
+  });
+
+  var quizState = {};
+  var quizTotal = document.querySelectorAll('.quiz-item').length;
+  document.querySelectorAll('.quiz-item').forEach(function(q){
+    var qid = q.dataset.quiz, answer = q.dataset.answer;
+    quizState[qid] = { attempts:0, correct:false, done:false };
+    var tries = q.querySelector('.qtries');
+    q.querySelectorAll('.qopt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var st = quizState[qid];
+        if (st.done) return;
+        st.attempts++;
+        if (btn.dataset.opt === answer){
+          st.correct = true; st.done = true;
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; });
+          q.querySelector('.qnote').classList.add('show');
+          updateScore();
+        } else {
+          btn.classList.add('incorrect'); btn.disabled = true;
+          if (st.attempts >= 2){
+            st.done = true;
+            q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; if (b.dataset.opt === answer) b.classList.add('correct'); });
+            q.querySelector('.qnote').classList.add('show');
+            updateScore();
+          } else if (tries) { tries.textContent = 'One more try.'; }
+        }
+      });
+    });
+  });
+
+  function updateScore(){
+    var done = 0, score = 0;
+    for (var k in quizState){ if (quizState[k].done) done++; if (quizState[k].correct) score++; }
+    if (done < quizTotal) return;
+    document.getElementById('scoreText').textContent = score + ' / ' + quizTotal;
+    document.getElementById('quizFinal').classList.add('show');
+    submitScore(score);
+  }
+  function submitScore(score){
+    var statusEl = document.getElementById('submitStatus');
+    var payload = { student:"Nevaeh Arndts", program:"Nevaeh Algebra I", lesson:"Lesson 1: Rate of Change & Slope", score: score+" / "+quizTotal, timestamp: new Date().toISOString() };
+    fetch(FORMSPREE_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload) })
+      .then(function(r){ statusEl.textContent = r.ok ? 'Score sent to your tutor.' : 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); })
+      .catch(function(){ statusEl.textContent = 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); });
+  }
+})();
+</script>
+</body>
+</html>
