@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nevaeh's Algebra I — Systems of Equations</title>
+<style>
+  :root{
+    --navy:#0A1F3D; --navy2:#0f2a52; --gold:#C9A84C; --blue:#3E6FD9; --red:#E0554F;
+    --cream:#FAF7EF; --ink:#1a1a1a; --green:#2E8B4F; --line:#E3DDC9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);background:var(--navy);font-size:16px;display:flex;flex-direction:column;}
+  h1,h2,h3,.serif{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;}
+
+  .masthead{background:var(--navy);color:#fff;padding:14px 6vw 12px;flex:none;}
+  .masthead .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;font-size:0.8125rem;color:#9fb3d6;}
+  .masthead h1{font-size:clamp(1.3rem,2.6vw,1.7rem);margin:6px 0 0;font-weight:400;color:#fff;}
+
+  .formula-bar{background:#0d2447;border-top:1px solid rgba(255,255,255,.1);border-bottom:2px solid var(--gold);padding:10px 6vw;display:flex;gap:8px 26px;flex-wrap:wrap;align-items:baseline;flex:none;}
+  .fb-item{color:#EFEAE0;font-size:0.84375rem;}
+  .fb-item b{color:#fff;}
+  .fb-item .arrow{color:var(--gold);}
+  .fb-when{color:#93a3c4;font-size:0.75rem;}
+
+  .progress-track{background:rgba(255,255,255,.1);height:3px;flex:none;}
+  .progress-fill{height:100%;background:var(--gold);width:8%;transition:width .3s ease;}
+
+  .app{flex:1;overflow-y:auto;background:var(--cream);}
+  .stage{max-width:900px;margin:0 auto;padding:36px 6vw 48px;}
+  .slide{display:none;}
+  .slide.active{display:block;animation:fadeIn .25s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  h2.slide-title{font-size:1.55rem;font-weight:400;color:var(--navy);margin:0 0 16px;}
+  .lede{font-size:1.09375rem;line-height:1.65;color:#333;margin:0 0 10px;}
+  p{font-size:1.03125rem;line-height:1.7;margin:0 0 16px;color:#2a2a2a;}
+
+  .def{border-left:2px solid var(--gold);padding:2px 0 2px 18px;margin:0 0 18px;}
+  .def .term{font-family:Georgia,serif;font-size:1.15rem;margin:0 0 4px;color:var(--navy);}
+  .def .body{font-size:0.96875rem;color:#444;margin:0;line-height:1.55;}
+
+  .scenario{background:var(--navy2);color:#EFEAE0;border-radius:2px;padding:24px 28px;margin:0 0 16px;}
+  .scenario p{color:#D7DEEA;margin:0 0 6px;font-size:0.96875rem;}
+  .scenario p:last-child{margin-bottom:0;}
+  .scenario .q{color:#fff;font-family:Georgia,serif;font-size:1.0625rem;}
+
+  .worked{border:1px solid var(--line);border-radius:2px;padding:22px 26px;margin:0 0 14px;background:#fff;}
+  .worked .setup{font-family:Georgia,serif;font-size:1rem;color:var(--navy);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;}
+  @media(max-width:480px){.wgrid{grid-template-columns:1fr;}}
+  .wstep{padding:5px 0;}
+  .wstep .l{color:var(--blue);font-weight:600;font-size:0.8125rem;}
+  .wstep .m{font-family:Georgia,serif;font-size:1.0625rem;color:var(--ink);}
+  .result{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:0.96875rem;color:var(--green);font-weight:600;line-height:1.5;}
+
+  .cases{display:grid;grid-template-columns:1fr;border:1px solid var(--line);border-radius:2px;overflow:hidden;margin:0 0 14px;background:#fff;}
+  @media(min-width:520px){.cases{grid-template-columns:repeat(3,1fr);}}
+  .case{padding:20px 18px;border-bottom:1px solid var(--line);}
+  @media(min-width:520px){.case{border-right:1px solid var(--line);border-bottom:none;} .case:last-child{border-right:none;}}
+  .case svg{width:78px;height:52px;display:block;margin-bottom:9px;}
+  .case h3{font-size:0.9375rem;margin:0 0 4px;font-weight:600;color:var(--navy);}
+  .case p{font-size:0.8125rem;margin:0;color:#555;line-height:1.4;}
+
+  .lab{background:var(--navy);border-radius:2px;padding:26px 28px;margin:0 0 16px;}
+  .lab-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .lab-title{color:#fff;font-family:Georgia,serif;font-size:1.15rem;margin:0;}
+  .lab-hint{color:#93a3c4;font-size:0.75rem;}
+  .lab-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+  @media(min-width:560px){.lab-grid{grid-template-columns:1.1fr 1fr;align-items:center;}}
+  .lab-svg-wrap{background:#0a1a38;border-radius:2px;padding:14px;touch-action:none;}
+  .lab-eq{font-family:Georgia,serif;font-size:1.03125rem;color:#EFEAE0;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .swatchA{color:#7fa4ff;} .swatchB{color:#ff9e97;}
+  .lab-solution{font-size:0.875rem;color:#93a3c4;margin-top:12px;}
+  .lab-solution .val{font-family:Georgia,serif;color:#fff;font-size:1.1rem;}
+  .lab-target{margin-top:12px;padding:12px 14px;border-radius:2px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35);font-size:0.875rem;color:#f0e2ba;}
+  .lab-target.hit{background:rgba(46,139,79,.22);border-color:var(--green);color:#bfe8cc;}
+  .drag-dot{cursor:grab;} .drag-dot:active{cursor:grabbing;}
+
+  .ask{margin:0 0 16px;}
+  .ask-q{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .ask-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .opt{background:transparent;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;padding:9px 15px;font-size:0.875rem;font-family:inherit;cursor:pointer;min-height:42px;color:var(--ink);}
+  .opt:hover{border-color:var(--navy);}
+  .opt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .opt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .ask-fb{font-size:0.8125rem;font-weight:600;min-height:16px;margin-top:8px;}
+  .ask-fb.ok{color:var(--green);} .ask-fb.bad{color:var(--red);}
+
+  .entry{display:flex;align-items:center;gap:10px;margin-top:4px;flex-wrap:wrap;}
+  .entry input{font-family:Georgia,serif;font-size:1.0625rem;border:none;border-bottom:2px solid var(--navy);padding:5px 4px;width:80px;background:transparent;}
+  .entry input:focus{outline:none;border-color:var(--gold);}
+  .entry button{background:var(--navy);color:#fff;border:none;border-radius:2px;padding:9px 18px;font-family:inherit;font-size:0.84375rem;font-weight:600;cursor:pointer;min-height:42px;}
+  .entry button:hover{background:var(--navy2);}
+
+  .glossary{border:1px solid var(--line);border-radius:2px;background:#fff;padding:4px 20px;}
+  .glossary .row{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--line);}
+  .glossary .row:first-child{border-top:none;}
+  @media(max-width:480px){.glossary .row{grid-template-columns:1fr;gap:2px;}}
+  .glossary dt{font-family:Georgia,serif;font-size:0.9375rem;color:var(--navy);}
+  .glossary dd{margin:0;font-size:0.84375rem;color:#444;}
+
+  .icon-row{display:flex;gap:28px;flex-wrap:wrap;margin:10px 0 6px;}
+  .icon-item{text-align:center;width:150px;}
+  .icon-item svg{width:96px;height:96px;display:block;margin:0 auto 10px;}
+  .icon-item .cap{font-size:0.84375rem;color:#444;line-height:1.35;}
+
+  .visual-row{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;margin-bottom:10px;}
+  @media(min-width:560px){.visual-row{grid-template-columns:1.05fr 1fr;}}
+  .mini-visual{background:#fff;border:1px solid var(--line);border-radius:2px;padding:22px;text-align:center;}
+  .mini-visual svg{width:100%;max-width:280px;height:auto;display:block;margin:0 auto;}
+  .mini-visual .cap{font-size:0.8125rem;color:#666;margin-top:10px;}
+
+  .teaser{text-align:center;margin-top:10px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:2px;max-width:340px;margin-left:auto;margin-right:auto;}
+  .teaser svg{width:100%;max-width:260px;height:auto;display:block;margin:0 auto;}
+  .teaser .cap{font-size:0.90625rem;color:var(--navy);margin-top:10px;font-family:Georgia,serif;}
+
+  .quiz-item{border-top:1px solid var(--line);padding:16px 0;}
+  .quiz-item:last-of-type{border-bottom:1px solid var(--line);}
+  .qnum-inline{font-size:0.75rem;color:var(--blue);font-weight:600;margin-bottom:5px;}
+  .qtext{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .qopts{display:flex;flex-direction:column;gap:6px;max-width:460px;}
+  .qopt{text-align:left;background:transparent;border:1.5px solid rgba(10,31,61,.22);border-radius:2px;padding:10px 14px;font-size:0.875rem;cursor:pointer;font-family:inherit;min-height:42px;}
+  .qopt:hover:not(:disabled){border-color:var(--navy);}
+  .qopt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .qopt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .qnote{font-size:0.8125rem;color:#444;margin-top:8px;padding-left:12px;border-left:2px solid var(--blue);display:none;}
+  .qnote.show{display:block;}
+  .qtries{font-size:0.71875rem;color:#999;margin-top:5px;}
+  .quiz-final{margin-top:18px;padding:16px 0;border-top:2px solid var(--gold);display:none;}
+  .quiz-final.show{display:block;}
+  .quiz-final .score{font-family:Georgia,serif;font-size:1.4rem;color:var(--navy);}
+  .submit-status{font-size:0.75rem;color:#888;margin-top:6px;display:none;}
+  .submit-status.show{display:block;}
+
+  .nav{flex:none;display:flex;align-items:center;justify-content:space-between;padding:12px 6vw;background:#fff;border-top:1px solid var(--line);}
+  .nav button{font-family:inherit;font-size:0.875rem;font-weight:700;padding:11px 22px;border-radius:2px;border:none;background:var(--navy);color:#fff;cursor:pointer;min-height:44px;}
+  .nav button:hover{background:var(--navy2);}
+  .nav button.ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(10,31,61,.25);}
+  .nav button:disabled{opacity:.3;cursor:default;}
+  .nav button.pending{background:#8a95a8;cursor:default;}
+  .nav button.pending:hover{background:#8a95a8;}
+  .nav .step-of{font-size:0.75rem;color:#999;}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="top"><span>Nevaeh's Algebra I</span><span>Lesson 3</span></div>
+  <h1>Systems of Equations</h1>
+</div>
+
+<div class="formula-bar">
+  <div class="fb-item"><b>Graphing</b> <span class="arrow">&rarr;</span> find where the lines cross <span class="fb-when">(see the shape / check an answer)</span></div>
+  <div class="fb-item"><b>Substitution</b> <span class="arrow">&rarr;</span> set the y's equal, solve x, then y <span class="fb-when">(need the exact number)</span></div>
+</div>
+
+<div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+
+<div class="app"><div class="stage">
+
+  <section class="slide active" data-slide="1">
+    <h2 class="slide-title">Two equations, one question</h2>
+    <p class="lede">Lessons 1 and 2 covered finding slope and writing a full linear equation. This lesson puts two of those equations in the same problem and asks a new question: where do they agree? That's a system of equations.</p>
+    <div class="mini-visual" style="max-width:180px;">
+      <svg viewBox="0 0 150 110">
+        <line x1="20" y1="90" x2="130" y2="20" stroke="#3E6FD9" stroke-width="2.5"/>
+        <line x1="20" y1="20" x2="130" y2="90" stroke="#E0554F" stroke-width="2.5"/>
+        <circle cx="75" cy="55" r="4" fill="#C9A84C"/>
+      </svg>
+      <div class="cap">two lines, one crossing point</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <h2 class="slide-title">What a system is</h2>
+    <div class="visual-row">
+      <div class="def" style="margin-bottom:0;">
+        <p class="term">System of equations</p>
+        <p class="body">Two or more equations, considered together, where you're hunting for the one (x, y) pair that makes all of them true at once.</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 140 110">
+          <line x1="15" y1="20" x2="125" y2="90" stroke="#3E6FD9" stroke-width="2"/>
+          <line x1="15" y1="90" x2="125" y2="20" stroke="#E0554F" stroke-width="2"/>
+          <circle cx="70" cy="55" r="6" fill="#C9A84C" stroke="#0A1F3D" stroke-width="1.5"/>
+        </svg>
+        <div class="cap">the one point both agree on</div>
+      </div>
+    </div>
+    <p>One equation on its own has endless (x, y) pairs that work. A second equation narrows that down — hard — to a single point, or sometimes none at all.</p>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <h2 class="slide-title">Why it matters</h2>
+    <div class="scenario">
+      <p><b>App A:</b> $3 pickup fee, then $2 per mile. &nbsp; <b>App B:</b> no pickup fee, $2.50 per mile.</p>
+      <p class="q">At exactly what distance do they cost the same?</p>
+    </div>
+    <div class="mini-visual" style="max-width:180px;">
+      <svg viewBox="0 0 140 100">
+        <line x1="10" y1="90" x2="130" y2="90" stroke="#ccc" stroke-width="1"/>
+        <line x1="10" y1="90" x2="10" y2="10" stroke="#ccc" stroke-width="1"/>
+        <line x1="10" y1="70" x2="130" y2="20" stroke="#3E6FD9" stroke-width="2.5"/>
+        <line x1="10" y1="90" x2="130" y2="15" stroke="#E0554F" stroke-width="2.5"/>
+        <circle cx="106" cy="30" r="4" fill="#C9A84C"/>
+      </svg>
+      <div class="cap">cost vs. distance, both apps</div>
+    </div>
+    <p>Short trip, B wins. Long trip, A wins. That crossover question — where two things become equal — is what a system solves.</p>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <h2 class="slide-title">Drag the lines — watch the solution move</h2>
+    <p>Line A always rises, Line B always falls. Drag either dot up or down to change that line's y-intercept.</p>
+    <div class="lab">
+      <div class="lab-head">
+        <p class="lab-title">Intersection Lab</p>
+        <p class="lab-hint">Drag the dots near the vertical line</p>
+      </div>
+      <div class="lab-grid">
+        <div class="lab-svg-wrap">
+          <svg viewBox="0 0 320 320" id="labSvg" style="width:100%;height:auto;">
+            <line x1="20" y1="160" x2="300" y2="160" stroke="#2a3f66" stroke-width="1"/>
+            <line x1="160" y1="20" x2="160" y2="300" stroke="#2a3f66" stroke-width="1"/>
+            <line id="lineA" x1="0" y1="0" x2="0" y2="0" stroke="#7fa4ff" stroke-width="2.5"/>
+            <line id="lineB" x1="0" y1="0" x2="0" y2="0" stroke="#ff9e97" stroke-width="2.5"/>
+            <circle id="intersectDot" cx="0" cy="0" r="5" fill="#C9A84C"/>
+            <circle id="targetDot" cx="0" cy="0" r="7" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="2,2"/>
+            <circle id="handleA" cx="0" cy="0" r="9" fill="#7fa4ff" class="drag-dot"/>
+            <circle id="handleB" cx="0" cy="0" r="9" fill="#ff9e97" class="drag-dot"/>
+          </svg>
+        </div>
+        <div>
+          <div class="lab-eq"><span class="swatchA">Line A:</span> <span id="eqA">y = x + 0</span></div>
+          <div class="lab-eq"><span class="swatchB">Line B:</span> <span id="eqB">y = &minus;x + 0</span></div>
+          <div class="lab-solution">Current solution<br><span class="val" id="solVal">(0, 0)</span></div>
+          <div class="lab-target" id="targetBox">Target: drag until the lines cross at <b>(2, 3)</b></div>
+        </div>
+      </div>
+    </div>
+    <p>Dragging either dot only moves that one line up and down — but the crossing point still slides. That point is the only spot on the grid where both equations are true at once.</p>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <h2 class="slide-title">Sometimes the lines never meet</h2>
+    <p>Slope alone tells you what kind of answer you're going to get, before you graph anything.</p>
+    <div class="cases">
+      <div class="case">
+        <svg viewBox="0 0 60 40"><line x1="6" y1="34" x2="54" y2="6" stroke="#3E6FD9" stroke-width="2"/><line x1="6" y1="6" x2="54" y2="34" stroke="#E0554F" stroke-width="2"/></svg>
+        <h3>One solution</h3>
+        <p>Different slopes force exactly one crossing.</p>
+      </div>
+      <div class="case">
+        <svg viewBox="0 0 60 40"><line x1="6" y1="30" x2="54" y2="10" stroke="#3E6FD9" stroke-width="2"/><line x1="6" y1="24" x2="54" y2="4" stroke="#E0554F" stroke-width="2"/></svg>
+        <h3>No solution</h3>
+        <p>Same slope, different intercept — parallel, never touch.</p>
+      </div>
+      <div class="case">
+        <svg viewBox="0 0 60 40"><line x1="6" y1="34" x2="54" y2="6" stroke="#3E6FD9" stroke-width="4"/></svg>
+        <h3>Infinite solutions</h3>
+        <p>Same slope and same intercept — one line, twice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <h2 class="slide-title">Reason it out first</h2>
+    <div class="ask">
+      <p class="ask-q">Line A: y = 3x + 2. Line B: y = 3x &minus; 5. How many solutions?</p>
+      <div class="ask-opts" data-q="gp1">
+        <button class="opt" data-correct="false">One</button>
+        <button class="opt" data-correct="true">None</button>
+        <button class="opt" data-correct="false">Infinite</button>
+      </div>
+      <p class="ask-fb" id="fb-gp1"></p>
+    </div>
+    <div class="ask">
+      <p class="ask-q">Line A: y = 2x + 1. Line B: y = &minus;x + 7. How many solutions?</p>
+      <div class="ask-opts" data-q="gp2">
+        <button class="opt" data-correct="true">One</button>
+        <button class="opt" data-correct="false">None</button>
+        <button class="opt" data-correct="false">Infinite</button>
+      </div>
+      <p class="ask-fb" id="fb-gp2"></p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <h2 class="slide-title">For an exact answer: substitution</h2>
+    <div class="visual-row">
+      <div class="def" style="margin-bottom:0;">
+        <p class="term">Substitution method</p>
+        <p class="body">Solve one equation for a variable, then substitute that expression into the other equation. Use it when the exact value matters and at least one equation is already solved for y.</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 150 90">
+          <rect x="8" y="30" width="55" height="30" rx="3" fill="none" stroke="#3E6FD9" stroke-width="2"/>
+          <text x="35" y="50" font-size="12" text-anchor="middle" fill="#3E6FD9" font-family="Georgia,serif">2x+1</text>
+          <text x="73" y="52" font-size="18" text-anchor="middle" fill="#0A1F3D">=</text>
+          <rect x="85" y="30" width="58" height="30" rx="3" fill="none" stroke="#E0554F" stroke-width="2"/>
+          <text x="114" y="50" font-size="12" text-anchor="middle" fill="#E0554F" font-family="Georgia,serif">&minus;x+7</text>
+        </svg>
+        <div class="cap">set the two y's equal</div>
+      </div>
+    </div>
+    <p>Here's the logic: at the crossing point, BOTH equations are describing the same y — same x, same y, at the same time. So whatever the first equation says y equals, the second equation has to say the exact same thing. That means you can set the two right-hand sides equal to each other and solve for x. Graphing shows you the shape; substitution gets you the exact number, every time.</p>
+  </section>
+
+  <section class="slide" data-slide="8">
+    <h2 class="slide-title">Solved, step by step</h2>
+    <div class="mini-visual" style="max-width:280px;margin:0 0 16px;">
+      <svg viewBox="0 0 150 130">
+        <line x1="20" y1="115" x2="140" y2="115" stroke="#ccc" stroke-width="1"/>
+        <line x1="20" y1="115" x2="20" y2="10" stroke="#ccc" stroke-width="1"/>
+        <line x1="20" y1="95" x2="130" y2="25" stroke="#3E6FD9" stroke-width="2.5"/>
+        <line x1="20" y1="25" x2="130" y2="95" stroke="#E0554F" stroke-width="2.5"/>
+        <circle cx="76" cy="60" r="6" fill="#C9A84C" stroke="#0A1F3D" stroke-width="1.5"/>
+        <text x="85" y="58" font-size="11" fill="#0A1F3D">(2, 5)</text>
+      </svg>
+      <div class="cap">both lines actually cross right here</div>
+    </div>
+    <div class="worked">
+      <div class="setup">System: y = 2x + 1 &nbsp;and&nbsp; y = &minus;x + 7</div>
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Set equal</div><div class="m">2x + 1 = &minus;x + 7</div></div>
+        <div class="wstep"><div class="l">Add x</div><div class="m">3x + 1 = 7</div></div>
+        <div class="wstep"><div class="l">Subtract 1</div><div class="m">3x = 6</div></div>
+        <div class="wstep"><div class="l">Divide by 3</div><div class="m">x = 2</div></div>
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Plug back in</div><div class="m">y = 2(2) + 1 = 5</div></div>
+      </div>
+      <div class="result">Solution: (2, 5). Setting the two equations equal worked because both were describing the same y at that point — their right sides HAD to match. Check it against the other original equation to be sure: &minus;(2) + 7 = 5. It matches.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="9">
+    <h2 class="slide-title">Grandma's seed suppliers</h2>
+    <div class="scenario">
+      <p><b>Supplier A:</b> $10 delivery fee + $3 per packet. &nbsp; <b>Supplier B:</b> no fee, $4 per packet.</p>
+      <p class="q">At how many packets do they cost the same?</p>
+    </div>
+    <div class="mini-visual" style="max-width:280px;margin:0 0 16px;">
+      <svg viewBox="0 0 150 110">
+        <line x1="10" y1="95" x2="140" y2="95" stroke="#ccc" stroke-width="1"/>
+        <line x1="10" y1="95" x2="10" y2="10" stroke="#ccc" stroke-width="1"/>
+        <line x1="10" y1="75" x2="130" y2="20" stroke="#3E6FD9" stroke-width="2.5"/>
+        <line x1="10" y1="95" x2="130" y2="16" stroke="#E0554F" stroke-width="2.5"/>
+        <circle cx="110" cy="29" r="5" fill="#C9A84C"/>
+      </svg>
+      <div class="cap">cost vs. packets — where they match</div>
+    </div>
+    <div class="worked">
+      <div class="setup">A: y = 3x + 10 &nbsp;&nbsp; B: y = 4x</div>
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Set equal</div><div class="m">3x + 10 = 4x</div></div>
+        <div class="wstep"><div class="l">Subtract 3x</div><div class="m">10 = x</div></div>
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Solve for y</div><div class="m">y = 4(10) = 40</div></div>
+      </div>
+      <div class="result">At 10 packets, both cost $40. Below 10, Supplier A wins; above 10, Supplier B wins.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="10">
+    <h2 class="slide-title">Your turn — type the answer</h2>
+    <p>System: y = 5x &minus; 3 and y = 2x + 9. What is x?</p>
+    <div class="entry">
+      <input type="text" id="entryInput" inputmode="numeric" placeholder="x =">
+      <button id="entryCheck">Check</button>
+    </div>
+    <p class="ask-fb" id="entryFb" style="margin-top:10px;"></p>
+  </section>
+
+  <section class="slide" data-slide="11">
+    <h2 class="slide-title">Every word from today</h2>
+    <dl class="glossary">
+      <div class="row"><dt>System of equations</dt><dd>Two or more equations, solved together for the point that satisfies all of them.</dd></div>
+      <div class="row"><dt>Solution (to a system)</dt><dd>The (x, y) point where every equation in the system agrees.</dd></div>
+      <div class="row"><dt>Substitution</dt><dd>Setting two expressions equal and solving for one variable first.</dd></div>
+      <div class="row"><dt>Parallel lines</dt><dd>Same slope, different y-intercept — never cross, so no solution.</dd></div>
+    </dl>
+  </section>
+
+  <section class="slide" data-slide="12">
+    <h2 class="slide-title">Quiz — show what you know</h2>
+
+    <div class="quiz-item" data-quiz="q1" data-answer="b">
+      <div class="qnum-inline">1 of 5</div>
+      <div class="qtext">What does the solution to a system of equations represent?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Any point on either line</button>
+        <button class="qopt" data-opt="b">The point that makes ALL the equations true at once</button>
+        <button class="qopt" data-opt="c">The y-intercept of the first equation</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">A solution must satisfy every equation in the system simultaneously, not just one.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q2" data-answer="c">
+      <div class="qnum-inline">2 of 5</div>
+      <div class="qtext">Two lines have the same slope but different y-intercepts. How many solutions?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">One</button>
+        <button class="qopt" data-opt="b">Infinite</button>
+        <button class="qopt" data-opt="c">None</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Same slope, different intercept means parallel lines — they never cross.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q3" data-answer="a">
+      <div class="qnum-inline">3 of 5</div>
+      <div class="qtext">Solve: y = 4x + 2 and y = x + 11. What is x?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">x = 3</button>
+        <button class="qopt" data-opt="b">x = 4</button>
+        <button class="qopt" data-opt="c">x = 9</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">4x + 2 = x + 11 &rarr; 3x + 2 = 11 &rarr; 3x = 9 &rarr; x = 3.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q4" data-answer="b">
+      <div class="qnum-inline">4 of 5</div>
+      <div class="qtext">Which method gives an exact answer rather than an estimate?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Graphing</button>
+        <button class="qopt" data-opt="b">Substitution</button>
+        <button class="qopt" data-opt="c">Neither is exact</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Graphing shows the shape; substitution gives you a precise numerical answer.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q5" data-answer="c">
+      <div class="qnum-inline">5 of 5</div>
+      <div class="qtext">Two lines have identical slope AND identical y-intercept. How many solutions?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">None</button>
+        <button class="qopt" data-opt="b">Exactly one</button>
+        <button class="qopt" data-opt="c">Infinite</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Identical slope and intercept means it's the same line twice — every point on it is a solution.</p>
+    </div>
+
+    <div class="quiz-final" id="quizFinal"><span class="score" id="scoreText">0 / 5</span></div>
+    <div class="submit-status" id="submitStatus"></div>
+  </section>
+
+  <section class="slide" data-slide="13">
+    <h2 class="slide-title">Nice work</h2>
+    <p>You can compare two options exactly now — not just guess. Lesson 4 will add a second algebraic method, elimination, for systems where substitution gets messy. It hasn't been built yet, so this lesson ends here for now. This lesson's topic was also a hypothesis based on your class's usual sequence, not confirmed homework — once your real assignment shows us where you actually are, we adjust.</p>
+    <div class="teaser">
+      <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="30" fill="none" stroke="#2E8B4F" stroke-width="3"/><path d="M 25 40 L 35 52 L 58 26" fill="none" stroke="#2E8B4F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="cap">Lessons 1&ndash;3 complete</div>
+    </div>
+  </section>
+
+</div></div>
+
+<div class="nav">
+  <button class="ghost" id="prevBtn">Back</button>
+  <span class="step-of" id="stepOf">1 / 13</span>
+  <button id="nextBtn">Continue</button>
+</div>
+
+<script>
+(function(){
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjgzkeb";
+
+  function fireConfetti(x, y){
+    var canvas = document.getElementById('confettiCanvas');
+    if (!canvas){
+      canvas = document.createElement('canvas');
+      canvas.id = 'confettiCanvas';
+      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:200;';
+      document.body.appendChild(canvas);
+    }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var ctx = canvas.getContext('2d');
+    var colors = ['#C9A84C','#3E6FD9','#2E8B4F','#E0554F','#ffffff'];
+    var particles = [];
+    for (var i=0;i<50;i++){
+      particles.push({
+        x:x, y:y,
+        vx:(Math.random()-0.5)*7,
+        vy:Math.random()*-7-3,
+        size:Math.random()*5+4,
+        color:colors[Math.floor(Math.random()*colors.length)],
+        rot:Math.random()*360,
+        vr:(Math.random()-0.5)*9,
+        life:1
+      });
+    }
+    var start = null;
+    function frame(ts){
+      if (!start) start = ts;
+      var elapsed = ts - start;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      var alive = false;
+      particles.forEach(function(p){
+        p.vy += 0.25;
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        p.life -= 0.014;
+        if (p.life > 0){
+          alive = true;
+          ctx.save();
+          ctx.globalAlpha = Math.max(p.life,0);
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.rot*Math.PI/180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+          ctx.restore();
+        }
+      });
+      if (alive && elapsed < 2600){ requestAnimationFrame(frame); }
+      else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var total = document.querySelectorAll('.slide').length;
+  var current = 1;
+  var appEl = document.querySelector('.app');
+  var nextBtn = document.getElementById('nextBtn');
+
+  function goTo(n){
+    if (n < 1 || n > total) return;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.remove('active');
+    current = n;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.add('active');
+    document.getElementById('fill').style.width = Math.round(current/total*100)+'%';
+    document.getElementById('stepOf').textContent = current + ' / ' + total;
+    document.getElementById('prevBtn').disabled = current === 1;
+    if (current === total){
+      nextBtn.textContent = 'Lesson 4 not built yet';
+      nextBtn.classList.add('pending');
+    } else {
+      nextBtn.textContent = 'Continue';
+      nextBtn.classList.remove('pending');
+    }
+    appEl.scrollTop = 0;
+  }
+  document.getElementById('prevBtn').disabled = true;
+  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current-1); });
+  nextBtn.addEventListener('click', function(){
+    if (current === total) return; // nothing to advance to yet
+    goTo(current+1);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') { if (current < total) goTo(current+1); }
+    else if (e.key === 'ArrowLeft') goTo(current-1);
+  });
+
+  document.querySelectorAll('.ask-opts').forEach(function(row){
+    var fb = document.getElementById('fb-' + row.dataset.q);
+    row.querySelectorAll('.opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        row.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('correct','incorrect'); b.disabled = true; });
+        if (btn.dataset.correct === 'true'){
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          if (fb){ fb.textContent = 'Correct.'; fb.className = 'ask-fb ok'; }
+        } else {
+          btn.classList.add('incorrect');
+          row.querySelectorAll('.opt').forEach(function(b){ if (b.dataset.correct === 'true') b.classList.add('correct'); });
+          if (fb){ fb.textContent = 'Not quite — correct answer highlighted.'; fb.className = 'ask-fb bad'; }
+        }
+      });
+    });
+  });
+
+  document.getElementById('entryCheck').addEventListener('click', function(){
+    var val = document.getElementById('entryInput').value.trim();
+    var fb = document.getElementById('entryFb');
+    if (val === '4'){
+      fb.textContent = 'Correct — x = 4. (5(4) \u2212 3 = 17, and 2(4) + 9 = 17. Checks out.)';
+      fb.className = 'ask-fb ok';
+      var btnRect = document.getElementById('entryCheck').getBoundingClientRect();
+      fireConfetti(btnRect.left + 20, btnRect.top + 10);
+    } else if (val === ''){
+      fb.textContent = 'Type a number first.';
+      fb.className = 'ask-fb bad';
+    } else {
+      fb.textContent = 'Not quite. Try setting 5x \u2212 3 = 2x + 9 and solving for x.';
+      fb.className = 'ask-fb bad';
+    }
+  });
+
+  var quizState = {};
+  var quizTotal = document.querySelectorAll('.quiz-item').length;
+  document.querySelectorAll('.quiz-item').forEach(function(q){
+    var qid = q.dataset.quiz, answer = q.dataset.answer;
+    quizState[qid] = { attempts:0, correct:false, done:false };
+    var tries = q.querySelector('.qtries');
+    q.querySelectorAll('.qopt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var st = quizState[qid];
+        if (st.done) return;
+        st.attempts++;
+        if (btn.dataset.opt === answer){
+          st.correct = true; st.done = true;
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; });
+          q.querySelector('.qnote').classList.add('show');
+          updateScore();
+        } else {
+          btn.classList.add('incorrect'); btn.disabled = true;
+          if (st.attempts >= 2){
+            st.done = true;
+            q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; if (b.dataset.opt === answer) b.classList.add('correct'); });
+            q.querySelector('.qnote').classList.add('show');
+            updateScore();
+          } else if (tries) { tries.textContent = 'One more try.'; }
+        }
+      });
+    });
+  });
+
+  function updateScore(){
+    var done = 0, score = 0;
+    for (var k in quizState){ if (quizState[k].done) done++; if (quizState[k].correct) score++; }
+    if (done < quizTotal) return;
+    document.getElementById('scoreText').textContent = score + ' / ' + quizTotal;
+    document.getElementById('quizFinal').classList.add('show');
+    submitScore(score);
+  }
+  function submitScore(score){
+    var statusEl = document.getElementById('submitStatus');
+    var payload = { student:"Nevaeh Arndts", program:"Nevaeh Algebra I", lesson:"Lesson 3: Systems of Equations", score: score+" / "+quizTotal, timestamp: new Date().toISOString() };
+    fetch(FORMSPREE_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload) })
+      .then(function(r){ statusEl.textContent = r.ok ? 'Score sent to your tutor.' : 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); })
+      .catch(function(){ statusEl.textContent = 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); });
+  }
+
+  var svg = document.getElementById('labSvg');
+  var W = 320, PAD = 20, RANGE = 6;
+  var scale = (W - PAD*2) / (RANGE*2);
+  function toPx(mathX){ return PAD + (mathX + RANGE) * scale; }
+  function toPxInv(mathY){ return PAD + (RANGE - mathY) * scale; }
+  function toMathY(px){ return RANGE - (px - PAD) / scale; }
+
+  var bA = -2, bB = 2;
+  var target = {x:2, y:3};
+  function clampB(v){ return Math.max(-RANGE+0.5, Math.min(RANGE-0.5, v)); }
+
+  function render(){
+    var ay1 = toPxInv(-RANGE + bA), ay2 = toPxInv(RANGE + bA);
+    var lineA = document.getElementById('lineA');
+    lineA.setAttribute('x1', toPx(-RANGE)); lineA.setAttribute('y1', ay1);
+    lineA.setAttribute('x2', toPx(RANGE)); lineA.setAttribute('y2', ay2);
+
+    var by1 = toPxInv(RANGE + bB), by2 = toPxInv(-RANGE + bB);
+    var lineB = document.getElementById('lineB');
+    lineB.setAttribute('x1', toPx(-RANGE)); lineB.setAttribute('y1', by1);
+    lineB.setAttribute('x2', toPx(RANGE)); lineB.setAttribute('y2', by2);
+
+    document.getElementById('handleA').setAttribute('cx', toPx(-0.5));
+    document.getElementById('handleA').setAttribute('cy', toPxInv(bA));
+    document.getElementById('handleB').setAttribute('cx', toPx(0.5));
+    document.getElementById('handleB').setAttribute('cy', toPxInv(bB));
+
+    var ix = (bB - bA) / 2;
+    var iy = ix + bA;
+    document.getElementById('intersectDot').setAttribute('cx', toPx(ix));
+    document.getElementById('intersectDot').setAttribute('cy', toPxInv(iy));
+
+    document.getElementById('eqA').textContent = 'y = x + ' + Math.round(bA*10)/10;
+    document.getElementById('eqB').textContent = 'y = \u2212x + ' + Math.round(bB*10)/10;
+    document.getElementById('solVal').textContent = '(' + (Math.round(ix*10)/10) + ', ' + (Math.round(iy*10)/10) + ')';
+
+    document.getElementById('targetDot').setAttribute('cx', toPx(target.x));
+    document.getElementById('targetDot').setAttribute('cy', toPxInv(target.y));
+
+    var hit = Math.abs(ix - target.x) < 0.35 && Math.abs(iy - target.y) < 0.35;
+    var box = document.getElementById('targetBox');
+    if (hit){ box.classList.add('hit'); box.innerHTML = 'Target matched \u2014 that\'s the solution (2, 3).'; }
+    else { box.classList.remove('hit'); box.innerHTML = 'Target: drag until the lines cross at <b>(2, 3)</b>'; }
+  }
+
+  function svgPoint(evt){
+    var pt = svg.createSVGPoint();
+    pt.x = evt.clientX; pt.y = evt.clientY;
+    var ctm = svg.getScreenCTM().inverse();
+    return pt.matrixTransform(ctm);
+  }
+  var dragging = null;
+  function startDrag(which){
+    return function(e){
+      e.preventDefault();
+      dragging = which;
+      e.target.setPointerCapture && e.target.setPointerCapture(e.pointerId);
+    };
+  }
+  function onMove(e){
+    if (!dragging) return;
+    var p = svgPoint(e);
+    var mathY = clampB(toMathY(p.y));
+    if (dragging === 'A') bA = mathY; else bB = mathY;
+    render();
+  }
+  function endDrag(){ dragging = null; }
+  document.getElementById('handleA').addEventListener('pointerdown', startDrag('A'));
+  document.getElementById('handleB').addEventListener('pointerdown', startDrag('B'));
+  svg.addEventListener('pointermove', onMove);
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
+  render();
+})();
+</script>
+</body>
+</html>
