@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nevaeh's English I — Annotated Bibliographies</title>
+<style>
+  :root{
+    --navy:#0A1F3D; --navy2:#0f2a52; --gold:#C9A84C; --blue:#3E6FD9; --red:#E0554F;
+    --cream:#FAF7EF; --ink:#1a1a1a; --green:#2E8B4F; --line:#E3DDC9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);background:var(--navy);font-size:16px;display:flex;flex-direction:column;}
+  h1,h2,h3,.serif{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;}
+
+  .masthead{background:var(--navy);color:#fff;padding:14px 6vw 12px;flex:none;}
+  .masthead .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;font-size:0.8125rem;color:#9fb3d6;}
+  .masthead h1{font-size:clamp(1.3rem,2.6vw,1.7rem);margin:6px 0 0;font-weight:400;color:#fff;}
+
+  .formula-bar{background:#0d2447;border-top:1px solid rgba(255,255,255,.1);border-bottom:2px solid var(--gold);padding:10px 6vw;display:flex;gap:8px 26px;flex-wrap:wrap;align-items:baseline;flex:none;}
+  .fb-item{color:#EFEAE0;font-size:0.84375rem;}
+  .fb-item b{color:#fff;}
+  .fb-item .arrow{color:var(--gold);}
+  .fb-when{color:#93a3c4;font-size:0.75rem;}
+
+  .progress-track{background:rgba(255,255,255,.1);height:3px;flex:none;}
+  .progress-fill{height:100%;background:var(--gold);width:8%;transition:width .3s ease;}
+
+  .app{flex:1;overflow-y:auto;background:var(--cream);}
+  .stage{max-width:900px;margin:0 auto;padding:36px 6vw 48px;}
+  .slide{display:none;}
+  .slide.active{display:block;animation:fadeIn .25s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  h2.slide-title{font-size:1.55rem;font-weight:400;color:var(--navy);margin:0 0 16px;}
+  .lede{font-size:1.09375rem;line-height:1.65;color:#333;margin:0 0 10px;}
+  p{font-size:1.03125rem;line-height:1.7;margin:0 0 16px;color:#2a2a2a;}
+
+  .def{border-left:2px solid var(--gold);padding:2px 0 2px 18px;margin:0 0 18px;}
+  .def .term{font-family:Georgia,serif;font-size:1.15rem;margin:0 0 4px;color:var(--navy);}
+  .def .body{font-size:0.96875rem;color:#444;margin:0;line-height:1.55;}
+
+  .scenario{background:var(--navy2);color:#EFEAE0;border-radius:2px;padding:24px 28px;margin:0 0 16px;}
+  .scenario p{color:#D7DEEA;margin:0 0 6px;font-size:0.96875rem;}
+  .scenario p:last-child{margin-bottom:0;}
+  .scenario .q{color:#fff;font-family:Georgia,serif;font-size:1.0625rem;}
+
+  .worked{border:1px solid var(--line);border-radius:2px;padding:22px 26px;margin:0 0 14px;background:#fff;}
+  .worked .setup{font-family:Georgia,serif;font-size:1rem;color:var(--navy);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;}
+  @media(max-width:480px){.wgrid{grid-template-columns:1fr;}}
+  .wstep{padding:5px 0;}
+  .wstep .l{color:var(--blue);font-weight:600;font-size:0.8125rem;}
+  .wstep .m{font-size:0.9375rem;color:var(--ink);line-height:1.5;}
+  .result{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:0.96875rem;color:var(--green);font-weight:600;line-height:1.5;}
+
+  .alert-card{border:1px solid var(--line);border-left:3px solid var(--red);border-radius:2px;padding:16px 20px;margin:0 0 12px;background:#fff;}
+  .alert-card b{color:var(--navy);}
+  .alert-card p{margin:0;font-size:0.9375rem;color:#333;}
+
+  .cases{display:grid;grid-template-columns:1fr;border:1px solid var(--line);border-radius:2px;overflow:hidden;margin:0 0 14px;background:#fff;}
+  @media(min-width:520px){.cases{grid-template-columns:repeat(2,1fr);}}
+  .cases.three{grid-template-columns:1fr;}
+  @media(min-width:520px){.cases.three{grid-template-columns:repeat(3,1fr);}}
+  .case{padding:18px 18px;border-bottom:1px solid var(--line);}
+  @media(min-width:520px){.case{border-right:1px solid var(--line);border-bottom:none;} .case:last-child{border-right:none;}}
+  .case h3{font-size:0.9375rem;margin:0 0 8px;font-weight:600;color:var(--navy);}
+  .case p{font-size:0.84375rem;margin:0;color:#555;line-height:1.5;}
+
+  .ask{margin:0 0 16px;}
+  .ask-q{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .ask-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .opt{background:transparent;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;padding:9px 15px;font-size:0.875rem;font-family:inherit;cursor:pointer;min-height:42px;color:var(--ink);}
+  .opt:hover{border-color:var(--navy);}
+  .opt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .opt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .ask-fb{font-size:0.8125rem;font-weight:600;min-height:16px;margin-top:8px;}
+  .ask-fb.ok{color:var(--green);} .ask-fb.bad{color:var(--red);}
+
+  .glossary{border:1px solid var(--line);border-radius:2px;background:#fff;padding:4px 20px;}
+  .glossary .row{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--line);}
+  .glossary .row:first-child{border-top:none;}
+  @media(max-width:480px){.glossary .row{grid-template-columns:1fr;gap:2px;}}
+  .glossary dt{font-family:Georgia,serif;font-size:0.9375rem;color:var(--navy);}
+  .glossary dd{margin:0;font-size:0.84375rem;color:#444;}
+
+  .icon-row{display:flex;gap:28px;flex-wrap:wrap;margin:10px 0 6px;}
+  .icon-item{text-align:center;width:150px;}
+  .icon-item svg{width:96px;height:96px;display:block;margin:0 auto 10px;}
+  .icon-item .cap{font-size:0.84375rem;color:#444;line-height:1.35;}
+
+  .visual-row{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;margin-bottom:10px;}
+  @media(min-width:560px){.visual-row{grid-template-columns:1.05fr 1fr;}}
+  .mini-visual{background:#fff;border:1px solid var(--line);border-radius:2px;padding:22px;text-align:center;}
+  .mini-visual svg{width:100%;max-width:200px;height:auto;display:block;margin:0 auto;}
+  .mini-visual .cap{font-size:0.8125rem;color:#666;margin-top:10px;}
+
+  .teaser{text-align:center;margin-top:10px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:2px;max-width:340px;margin-left:auto;margin-right:auto;}
+  .teaser svg{width:100%;max-width:200px;height:auto;display:block;margin:0 auto;}
+  .teaser .cap{font-size:0.90625rem;color:var(--navy);margin-top:10px;font-family:Georgia,serif;}
+
+  .quiz-item{border-top:1px solid var(--line);padding:16px 0;}
+  .quiz-item:last-of-type{border-bottom:1px solid var(--line);}
+  .qnum-inline{font-size:0.75rem;color:var(--blue);font-weight:600;margin-bottom:5px;}
+  .qtext{font-size:0.9375rem;margin-bottom:10px;font-weight:600;color:var(--navy);}
+  .qopts{display:flex;flex-direction:column;gap:6px;max-width:460px;}
+  .qopt{text-align:left;background:transparent;border:1.5px solid rgba(10,31,61,.22);border-radius:2px;padding:10px 14px;font-size:0.875rem;cursor:pointer;font-family:inherit;min-height:42px;}
+  .qopt:hover:not(:disabled){border-color:var(--navy);}
+  .qopt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .qopt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .qnote{font-size:0.8125rem;color:#444;margin-top:8px;padding-left:12px;border-left:2px solid var(--blue);display:none;}
+  .qnote.show{display:block;}
+  .qtries{font-size:0.71875rem;color:#999;margin-top:5px;}
+  .quiz-final{margin-top:18px;padding:16px 0;border-top:2px solid var(--gold);display:none;}
+  .quiz-final.show{display:block;}
+  .quiz-final .score{font-family:Georgia,serif;font-size:1.4rem;color:var(--navy);}
+  .submit-status{font-size:0.75rem;color:#888;margin-top:6px;display:none;}
+  .submit-status.show{display:block;}
+
+  .nav{flex:none;display:flex;align-items:center;justify-content:space-between;padding:12px 6vw;background:#fff;border-top:1px solid var(--line);}
+  .nav button{font-family:inherit;font-size:0.875rem;font-weight:700;padding:11px 22px;border-radius:2px;border:none;background:var(--navy);color:#fff;cursor:pointer;min-height:44px;}
+  .nav button:hover{background:var(--navy2);}
+  .nav button.ghost{background:transparent;color:var(--navy);border:1.5px solid rgba(10,31,61,.25);}
+  .nav button:disabled{opacity:.3;cursor:default;}
+  .nav .step-of{font-size:0.75rem;color:#999;}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="top"><span>Nevaeh's English I</span><span>Lesson 1</span></div>
+  <h1>Annotated Bibliographies</h1>
+</div>
+
+<div class="formula-bar">
+  <div class="fb-item"><b>MLA citation</b> <span class="arrow">&rarr;</span> Author Last, First. "Title." <i>Container</i>, Date. <span class="fb-when">(every source, every time)</span></div>
+  <div class="fb-item"><b>Every annotation</b> <span class="arrow">&rarr;</span> Summarize it + Evaluate it <span class="fb-when">(both halves, always)</span></div>
+</div>
+
+<div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+
+<div class="app"><div class="stage">
+
+  <section class="slide active" data-slide="1">
+    <h2 class="slide-title">Proving you actually read it</h2>
+    <p class="lede">Anyone can drop a link in a Works Cited list. An <b>annotated bibliography</b> is the assignment where you have to prove you actually engaged with what you found — not just that you found it. Today we're building that skill from the ground up. The bar above stays pinned the whole lesson.</p>
+    <div class="icon-row">
+      <div class="icon-item">
+        <svg viewBox="0 0 60 60"><rect x="16" y="8" width="28" height="44" rx="2" fill="none" stroke="#0A1F3D" stroke-width="2"/><line x1="21" y1="18" x2="39" y2="18" stroke="#3E6FD9" stroke-width="2"/><line x1="21" y1="26" x2="39" y2="26" stroke="#3E6FD9" stroke-width="2"/><line x1="21" y1="34" x2="33" y2="34" stroke="#3E6FD9" stroke-width="2"/></svg>
+        <div class="cap">Find a source</div>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 60 60"><circle cx="25" cy="25" r="14" fill="none" stroke="#0A1F3D" stroke-width="2.5"/><line x1="35" y1="35" x2="48" y2="48" stroke="#0A1F3D" stroke-width="3" stroke-linecap="round"/></svg>
+        <div class="cap">Evaluate it</div>
+      </div>
+      <div class="icon-item">
+        <svg viewBox="0 0 60 60"><path d="M 14 46 L 38 14 L 46 22 L 22 54 Z" fill="none" stroke="#C9A84C" stroke-width="2.5" stroke-linejoin="round"/><line x1="32" y1="20" x2="40" y2="28" stroke="#C9A84C" stroke-width="2"/></svg>
+        <div class="cap">Write the annotation</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <h2 class="slide-title">What even counts as a "source"?</h2>
+    <div class="visual-row">
+      <div style="margin-bottom:0;">
+        <div class="def">
+          <p class="term">Source</p>
+          <p class="body">Anywhere information comes from that you use as evidence — a book, an article, a website, an interview. If you learned something from it and you're using that in your work, it's a source.</p>
+        </div>
+        <div class="def" style="margin-bottom:0;">
+          <p class="term">Citation</p>
+          <p class="body">A short, exact-format note telling a reader precisely where information came from — so they could go find it themselves.</p>
+        </div>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 100 110"><rect x="20" y="10" width="60" height="90" rx="2" fill="none" stroke="#0A1F3D" stroke-width="2"/><line x1="30" y1="30" x2="70" y2="30" stroke="#3E6FD9" stroke-width="2"/><line x1="30" y1="42" x2="70" y2="42" stroke="#3E6FD9" stroke-width="2"/><line x1="30" y1="54" x2="70" y2="54" stroke="#3E6FD9" stroke-width="2"/><line x1="30" y1="80" x2="60" y2="80" stroke="#C9A84C" stroke-width="2.5" stroke-dasharray="3,2"/></svg>
+        <div class="cap">a citation is like a receipt</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <h2 class="slide-title">MLA citation format, piece by piece</h2>
+    <div class="def">
+      <p class="term">Author Last, First. "Title of Source." <i>Container/Publisher</i>, Date.</p>
+      <p class="body">This is the exact skeleton your teacher is grading against. Every piece is doing a job.</p>
+    </div>
+    <div class="worked">
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Author</div><div class="m">Who's responsible for the information — a person, or an organization if no person is named.</div></div>
+        <div class="wstep"><div class="l">Title</div><div class="m">The exact name of the thing you read, in quotation marks.</div></div>
+        <div class="wstep"><div class="l">Container</div><div class="m">The larger thing it lives inside — a website, a magazine, a publisher.</div></div>
+        <div class="wstep"><div class="l">Date</div><div class="m">When it was published, so a reader knows how current it is.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <h2 class="slide-title">A real citation, broken into its parts</h2>
+    <div class="worked">
+      <div class="setup">Reyes, Marco. "Five Things Every New Driver Should Know Before a Long Road Trip." <i>Family Travel Weekly</i>, 14 Mar. 2025.</div>
+      <div class="wgrid">
+        <div class="wstep"><div class="l">Author</div><div class="m">Reyes, Marco.</div></div>
+        <div class="wstep"><div class="l">Title</div><div class="m">"Five Things Every New Driver Should Know..."</div></div>
+        <div class="wstep"><div class="l">Container</div><div class="m"><i>Family Travel Weekly</i></div></div>
+        <div class="wstep"><div class="l">Date</div><div class="m">14 Mar. 2025</div></div>
+      </div>
+      <div class="result">This is a made-up example — but built exactly like a real one. If you were researching road trip safety for a project, this is precisely how you'd cite it.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <h2 class="slide-title">A citation alone isn't an annotated bibliography</h2>
+    <div class="visual-row">
+      <div class="def" style="margin-bottom:0;">
+        <p class="term">Annotation</p>
+        <p class="body">A short paragraph, written by YOU, right after the citation — explaining what the source says and whether it's actually worth trusting or using. This is the part that proves you read it.</p>
+      </div>
+      <div class="mini-visual">
+        <svg viewBox="0 0 100 100"><path d="M 20 70 L 60 30 L 72 42 L 32 82 Z" fill="none" stroke="#0A1F3D" stroke-width="2.5" stroke-linejoin="round"/><line x1="54" y1="36" x2="66" y2="48" stroke="#C9A84C" stroke-width="2.5"/><line x1="18" y1="85" x2="30" y2="85" stroke="#0A1F3D" stroke-width="2"/></svg>
+        <div class="cap">anyone can copy a format — an annotation can't be faked</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <h2 class="slide-title">Every annotation has two jobs</h2>
+    <div class="def">
+      <p class="term">SUMMARIZE it &nbsp;+&nbsp; EVALUATE it</p>
+      <p class="body">Skip either half and the annotation is incomplete, even if the citation itself is perfect.</p>
+    </div>
+    <div class="worked">
+      <div class="wgrid">
+        <div class="wstep"><div class="l">1. Summarize</div><div class="m">In 2–3 sentences: what does this source actually say? What's its main point?</div></div>
+        <div class="wstep"><div class="l">2. Evaluate</div><div class="m">In 1–2 sentences: is it reliable? Who wrote it, and are they credible? Is it useful or biased or outdated?</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <h2 class="slide-title">Putting the whole entry together</h2>
+    <div class="worked">
+      <div class="setup">Reyes, Marco. "Five Things Every New Driver Should Know Before a Long Road Trip." <i>Family Travel Weekly</i>, 14 Mar. 2025.</div>
+      <div class="wgrid">
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Summary</div><div class="m">Lists five practical tips for teen and new drivers on long family trips, including checking tire pressure, planning rest stops every two hours, and keeping an emergency kit in the trunk.</div></div>
+        <div class="wstep" style="grid-column:1/-1;"><div class="l">Evaluation</div><div class="m">Reyes is a certified driving instructor, which makes the advice credible, and the tips are specific enough to actually use. Published in 2025, so the information is current.</div></div>
+      </div>
+      <div class="result">That's a complete entry: citation, summary, evaluation. Nothing extra, nothing missing.</div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="8">
+    <h2 class="slide-title">The question every evaluation is really asking</h2>
+    <div class="cases">
+      <div class="case">
+        <h3>Signs it's reliable</h3>
+        <p>Author is named and has real expertise. Published by a known outlet. Recent, or clearly still accurate. Backed by evidence, not just opinion.</p>
+      </div>
+      <div class="case">
+        <h3>Signs to be cautious</h3>
+        <p>No author listed, no credentials given. Trying to sell you something. Very outdated for a fast-changing topic. Only one side of a debate, presented as fact.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="9">
+    <h2 class="slide-title">Try it yourself</h2>
+    <div class="ask">
+      <p class="ask-q">Which part of an entry proves you actually read the source, not just found it?</p>
+      <div class="ask-opts" data-q="gp1">
+        <button class="opt" data-correct="false">The citation</button>
+        <button class="opt" data-correct="true">The annotation</button>
+        <button class="opt" data-correct="false">The date</button>
+      </div>
+      <p class="ask-fb" id="fb-gp1"></p>
+    </div>
+    <div class="ask">
+      <p class="ask-q">A source has no author listed and is trying to sell a product. What should that make you?</p>
+      <div class="ask-opts" data-q="gp2">
+        <button class="opt" data-correct="false">More confident it's reliable</button>
+        <button class="opt" data-correct="true">Cautious about how reliable it is</button>
+        <button class="opt" data-correct="false">It doesn't affect reliability at all</button>
+      </div>
+      <p class="ask-fb" id="fb-gp2"></p>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="10">
+    <h2 class="slide-title">What loses points on this assignment</h2>
+    <div class="alert-card"><p><b>Summarizing without evaluating.</b> Restating what the source says isn't enough — you still have to say whether it's trustworthy and useful.</p></div>
+    <div class="alert-card"><p><b>Evaluating without summarizing.</b> Saying "this source is reliable" means nothing if the reader has no idea what it's actually about.</p></div>
+    <div class="alert-card"><p><b>Listing sources you didn't really read.</b> A vague, generic summary is usually the giveaway — annotations should sound specific to that one source.</p></div>
+  </section>
+
+  <section class="slide" data-slide="11">
+    <h2 class="slide-title">This connects straight to Animal Farm</h2>
+    <div class="scenario">
+      <p>Animal Farm is an allegory for the Russian Revolution — and at some point, your class work is going to ask you to bring in outside historical background to support that reading.</p>
+      <p class="q">The moment you cite a source about Stalin, the Russian Revolution, or propaganda, you'll need exactly this same skill: a correct citation, plus a summary and evaluation of whether it's trustworthy.</p>
+    </div>
+    <p>Next lesson, we start building the actual literary analysis side of Animal Farm — allegory, character parallels, and using textual evidence.</p>
+  </section>
+
+  <section class="slide" data-slide="12">
+    <h2 class="slide-title">Every word from today</h2>
+    <dl class="glossary">
+      <div class="row"><dt>Source</dt><dd>Anywhere information comes from that you use as evidence.</dd></div>
+      <div class="row"><dt>Citation</dt><dd>An exact-format note showing where information came from.</dd></div>
+      <div class="row"><dt>Annotation</dt><dd>A short paragraph after a citation that summarizes and evaluates the source.</dd></div>
+      <div class="row"><dt>Summary</dt><dd>What the source actually says, in your own words.</dd></div>
+      <div class="row"><dt>Evaluation</dt><dd>Whether the source is reliable and useful, and why.</dd></div>
+    </dl>
+  </section>
+
+  <section class="slide" data-slide="13">
+    <h2 class="slide-title">Quiz — show what you know</h2>
+
+    <div class="quiz-item" data-quiz="q1" data-answer="b">
+      <div class="qnum-inline">1 of 5</div>
+      <div class="qtext">Which of these is a citation's main job?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">To convince the reader the source is interesting</button>
+        <button class="qopt" data-opt="b">To show exactly where information came from</button>
+        <button class="qopt" data-opt="c">To summarize the entire source in detail</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">A citation is like a receipt — it proves exactly where something came from, so a reader could go find it themselves.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q2" data-answer="c">
+      <div class="qnum-inline">2 of 5</div>
+      <div class="qtext">In MLA format, what typically comes right after the author's name?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">The date</button>
+        <button class="qopt" data-opt="b">Your evaluation</button>
+        <button class="qopt" data-opt="c">The title, in quotation marks</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">The skeleton is: Author. "Title." Container, Date. Title comes right after the author.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q3" data-answer="a">
+      <div class="qnum-inline">3 of 5</div>
+      <div class="qtext">An annotation that only summarizes the source, with no comment on reliability, is...</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Incomplete — missing the evaluation half</button>
+        <button class="qopt" data-opt="b">Complete — that's all an annotation needs</button>
+        <button class="qopt" data-opt="c">Too long and should be cut</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Every annotation needs BOTH halves: summarize it, then evaluate it. Summary alone is incomplete.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q4" data-answer="b">
+      <div class="qnum-inline">4 of 5</div>
+      <div class="qtext">A source has no author listed and is clearly trying to sell a product. This is a sign to...</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">Trust it completely</button>
+        <button class="qopt" data-opt="b">Be cautious about its reliability</button>
+        <button class="qopt" data-opt="c">Skip the evaluation section entirely</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">No named author plus a sales motive are both red flags worth naming directly in your evaluation.</p>
+    </div>
+
+    <div class="quiz-item" data-quiz="q5" data-answer="c">
+      <div class="qnum-inline">5 of 5</div>
+      <div class="qtext">Why will this skill matter for your work on Animal Farm?</div>
+      <div class="qopts">
+        <button class="qopt" data-opt="a">It won't — Animal Farm doesn't use outside sources</button>
+        <button class="qopt" data-opt="b">Only if you're writing a separate research paper</button>
+        <button class="qopt" data-opt="c">Citing historical background on the Russian Revolution needs this same citation + evaluation skill</button>
+      </div>
+      <p class="qtries"></p>
+      <p class="qnote">Animal Farm is an allegory for the Russian Revolution — bringing in real historical sources to support that reading requires exactly this skill.</p>
+    </div>
+
+    <div class="quiz-final" id="quizFinal"><span class="score" id="scoreText">0 / 5</span></div>
+    <div class="submit-status" id="submitStatus"></div>
+  </section>
+
+</div></div>
+
+<div class="nav">
+  <button class="ghost" id="prevBtn">Back</button>
+  <span class="step-of" id="stepOf">1 / 13</span>
+  <button id="nextBtn">Continue</button>
+</div>
+
+<script>
+(function(){
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/mvkgqdyq";
+  var NEXT_LESSON_URL = "KCE_Nevaeh_ELA_Lesson2.html";
+  var NEXT_LESSON_LABEL = "Next Lesson: Animal Farm, Chapter 1 \u2192";
+
+  function fireConfetti(x, y){
+    var canvas = document.getElementById('confettiCanvas');
+    if (!canvas){
+      canvas = document.createElement('canvas');
+      canvas.id = 'confettiCanvas';
+      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:200;';
+      document.body.appendChild(canvas);
+    }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var ctx = canvas.getContext('2d');
+    var colors = ['#C9A84C','#3E6FD9','#2E8B4F','#E0554F','#ffffff'];
+    var particles = [];
+    for (var i=0;i<50;i++){
+      particles.push({
+        x:x, y:y,
+        vx:(Math.random()-0.5)*7,
+        vy:Math.random()*-7-3,
+        size:Math.random()*5+4,
+        color:colors[Math.floor(Math.random()*colors.length)],
+        rot:Math.random()*360,
+        vr:(Math.random()-0.5)*9,
+        life:1
+      });
+    }
+    var start = null;
+    function frame(ts){
+      if (!start) start = ts;
+      var elapsed = ts - start;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      var alive = false;
+      particles.forEach(function(p){
+        p.vy += 0.25;
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        p.life -= 0.014;
+        if (p.life > 0){
+          alive = true;
+          ctx.save();
+          ctx.globalAlpha = Math.max(p.life,0);
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.rot*Math.PI/180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+          ctx.restore();
+        }
+      });
+      if (alive && elapsed < 2600){ requestAnimationFrame(frame); }
+      else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var total = document.querySelectorAll('.slide').length;
+  var current = 1;
+  var appEl = document.querySelector('.app');
+  var nextBtn = document.getElementById('nextBtn');
+
+  function goTo(n){
+    if (n < 1 || n > total) return;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.remove('active');
+    current = n;
+    document.querySelector('.slide[data-slide="'+current+'"]').classList.add('active');
+    document.getElementById('fill').style.width = Math.round(current/total*100)+'%';
+    document.getElementById('stepOf').textContent = current + ' / ' + total;
+    document.getElementById('prevBtn').disabled = current === 1;
+    if (current === total){
+      nextBtn.textContent = NEXT_LESSON_LABEL;
+    } else {
+      nextBtn.textContent = 'Continue';
+    }
+    appEl.scrollTop = 0;
+  }
+  document.getElementById('prevBtn').disabled = true;
+  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current-1); });
+  nextBtn.addEventListener('click', function(){
+    if (current === total){
+      window.location.href = NEXT_LESSON_URL;
+    } else {
+      goTo(current+1);
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') nextBtn.click();
+    else if (e.key === 'ArrowLeft') goTo(current-1);
+  });
+
+  document.querySelectorAll('.ask-opts').forEach(function(row){
+    var fb = document.getElementById('fb-' + row.dataset.q);
+    row.querySelectorAll('.opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        row.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('correct','incorrect'); b.disabled = true; });
+        if (btn.dataset.correct === 'true'){
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          if (fb){ fb.textContent = 'Correct.'; fb.className = 'ask-fb ok'; }
+        } else {
+          btn.classList.add('incorrect');
+          row.querySelectorAll('.opt').forEach(function(b){ if (b.dataset.correct === 'true') b.classList.add('correct'); });
+          if (fb){ fb.textContent = 'Not quite — correct answer highlighted.'; fb.className = 'ask-fb bad'; }
+        }
+      });
+    });
+  });
+
+  var quizState = {};
+  var quizTotal = document.querySelectorAll('.quiz-item').length;
+  document.querySelectorAll('.quiz-item').forEach(function(q){
+    var qid = q.dataset.quiz, answer = q.dataset.answer;
+    quizState[qid] = { attempts:0, correct:false, done:false };
+    var tries = q.querySelector('.qtries');
+    q.querySelectorAll('.qopt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var st = quizState[qid];
+        if (st.done) return;
+        st.attempts++;
+        if (btn.dataset.opt === answer){
+          st.correct = true; st.done = true;
+          btn.classList.add('correct');
+          fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
+          q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; });
+          q.querySelector('.qnote').classList.add('show');
+          updateScore();
+        } else {
+          btn.classList.add('incorrect'); btn.disabled = true;
+          if (st.attempts >= 2){
+            st.done = true;
+            q.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; if (b.dataset.opt === answer) b.classList.add('correct'); });
+            q.querySelector('.qnote').classList.add('show');
+            updateScore();
+          } else if (tries) { tries.textContent = 'One more try.'; }
+        }
+      });
+    });
+  });
+
+  function updateScore(){
+    var done = 0, score = 0;
+    for (var k in quizState){ if (quizState[k].done) done++; if (quizState[k].correct) score++; }
+    if (done < quizTotal) return;
+    document.getElementById('scoreText').textContent = score + ' / ' + quizTotal;
+    document.getElementById('quizFinal').classList.add('show');
+    submitScore(score);
+  }
+  function submitScore(score){
+    var statusEl = document.getElementById('submitStatus');
+    var payload = { student:"Nevaeh Arndts", program:"Nevaeh English I", lesson:"Lesson 1: Annotated Bibliographies", score: score+" / "+quizTotal, timestamp: new Date().toISOString() };
+    fetch(FORMSPREE_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload) })
+      .then(function(r){ statusEl.textContent = r.ok ? 'Score sent to your tutor.' : 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); })
+      .catch(function(){ statusEl.textContent = 'Could not send score — let your tutor know.'; statusEl.classList.add('show'); });
+  }
+})();
+</script>
+</body>
+</html>
