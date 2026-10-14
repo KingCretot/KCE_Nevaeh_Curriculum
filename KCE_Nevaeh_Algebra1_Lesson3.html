@@ -575,7 +575,8 @@
   document.getElementById('entryCheck').addEventListener('click', function(){
     var val = document.getElementById('entryInput').value.trim();
     var fb = document.getElementById('entryFb');
-    if (val === '4'){
+    var norm = val.replace(/\s+/g, '').replace(/^x=/i, '');
+    if (norm === '4' || norm === '4.0'){
       fb.textContent = 'Correct — x = 4. (5(4) \u2212 3 = 17, and 2(4) + 9 = 17. Checks out.)';
       fb.className = 'ask-fb ok';
       var btnRect = document.getElementById('entryCheck').getBoundingClientRect();
