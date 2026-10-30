@@ -460,8 +460,8 @@
     document.getElementById('stepOf').textContent = current + ' / ' + total;
     document.getElementById('prevBtn').disabled = current === 1;
     if (current === total){
-      nextBtn.textContent = 'Lesson 3 not built yet';
-      nextBtn.classList.add('pending');
+      nextBtn.textContent = 'Next Lesson: A Modest Proposal \u2192';
+      nextBtn.classList.remove('pending');
     } else {
       nextBtn.textContent = 'Continue';
       nextBtn.classList.remove('pending');
@@ -471,7 +471,7 @@
   document.getElementById('prevBtn').disabled = true;
   document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current-1); });
   nextBtn.addEventListener('click', function(){
-    if (current === total) return;
+    if (current === total){ window.location.href = 'KCE_Nevaeh_ELA_Lesson3.html'; return; }
     goTo(current+1);
   });
   document.addEventListener('keydown', function(e){
