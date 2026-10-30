@@ -107,284 +107,276 @@
   .nav button.pending:hover{background:#8a95a8;}
   .nav .step-of{font-size:0.75rem;color:#999;}
 
-  .quote{font-family:Georgia,serif;font-size:1rem;line-height:1.6;color:#2a2a2a;background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);padding:12px 16px;margin:0 0 6px;}
+  .says{border:1px solid var(--line);border-left:4px solid var(--red);background:#fff;padding:12px 16px;border-radius:2px;margin:0 0 12px;}
+  .says h3{margin:0 0 6px;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);}
+  .says p{font-size:.98rem;margin:0;line-height:1.6;}
+  .big-reveal{margin:0 0 14px;}
+  .rv-btn,.rv-mini{font-family:inherit;font-weight:700;cursor:pointer;border-radius:2px;}
+  .rv-btn{display:block;width:100%;text-align:left;background:var(--navy);color:#fff;border:none;padding:13px 16px;font-size:.95rem;min-height:46px;}
+  .rv-btn.open{background:var(--green);}
+  .rv{display:none;background:#EAF5EE;border-left:4px solid var(--green);padding:12px 16px;font-size:.98rem;line-height:1.6;margin-top:6px;}
+  .rv.show{display:block;animation:fadeIn .25s ease;}
+  .rv.small{font-size:.92rem;margin-top:8px;}
+  .quote{font-family:Georgia,serif;font-size:1rem;line-height:1.6;color:#2a2a2a;background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);padding:12px 16px;margin:0 0 12px;}
   .quote .pn{font-family:Arial,sans-serif;font-size:.72rem;font-weight:700;color:var(--blue);display:block;margin-bottom:3px;letter-spacing:.5px;}
-  .means{font-size:.94rem;color:#2a2a2a;margin:0 0 16px;padding-left:16px;}
-  .means b{color:var(--green);}
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px;}
-  @media(max-width:560px){.two-col{grid-template-columns:1fr;}}
-  .says,.real{border:1px solid var(--line);background:#fff;padding:12px 14px;border-radius:2px;}
-  .says h3,.real h3{margin:0 0 6px;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;}
-  .says h3{color:var(--red);} .real h3{color:var(--green);}
-  .says p,.real p{font-size:.9rem;margin:0;line-height:1.55;}
-  table.map{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);font-size:.88rem;margin:0 0 14px;}
-  table.map th{background:var(--navy);color:var(--gold);text-align:left;padding:8px 10px;font-weight:600;}
-  table.map td{border-top:1px solid var(--line);padding:8px 10px;vertical-align:top;line-height:1.5;}
-  .frame{background:#fff;border:1px dashed var(--blue);padding:12px 14px;margin:0 0 12px;font-size:.92rem;line-height:1.6;}
-  .frame b{color:var(--navy);}
-  .warn{background:#FDF0F0;border-left:4px solid var(--red);padding:12px 16px;margin:0 0 16px;font-size:.95rem;line-height:1.6;}
+  .rv-mini{display:block;margin-top:8px;background:transparent;border:1.5px solid var(--green);color:var(--green);padding:6px 12px;font-size:.8rem;font-family:Arial,sans-serif;}
+  .tapcards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 16px;}
+  .tapcards.three{grid-template-columns:repeat(3,1fr);}
+  @media(max-width:620px){.tapcards.three{grid-template-columns:1fr 1fr;}}
+  @media(max-width:400px){.tapcards,.tapcards.three{grid-template-columns:1fr;}}
+  .tc{background:#fff;border:1.5px solid rgba(10,31,61,.18);border-radius:6px;min-height:108px;padding:14px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;transition:transform .15s;}
+  .tc:hover{transform:translateY(-2px);border-color:var(--navy);}
+  .tc-front{display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
+  .tc-k{font-family:Georgia,serif;font-size:1.1rem;color:var(--navy);}
+  .tc-sub{font-size:.8rem;color:#666;}
+  .tc-hint{font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+  .tc-back{display:none;font-size:.9rem;line-height:1.5;color:#1a1a1a;}
+  .tc.flipped{background:var(--navy);border-color:var(--navy);}
+  .tc.flipped .tc-front{display:none;} .tc.flipped .tc-back{display:block;color:#fff;animation:fadeIn .25s ease;}
+  .vcards{display:grid;grid-template-columns:1fr;gap:10px;margin:0 0 16px;}
+  @media(min-width:700px){.vcards{grid-template-columns:1fr 1fr;}}
+  .vc{background:#fff;border:1.5px solid rgba(10,31,61,.18);border-radius:6px;padding:14px 16px;cursor:pointer;min-height:112px;}
+  .vc:hover{border-color:var(--navy);}
+  .vc-w{font-family:Georgia,serif;font-size:1.2rem;color:var(--navy);margin-bottom:6px;}
+  .vc-w span{font-family:Arial,sans-serif;font-size:.72rem;color:var(--blue);font-weight:700;margin-left:6px;}
+  .vc-s{font-family:Georgia,serif;font-size:.95rem;line-height:1.55;color:#333;}
+  .vc-s b{background:#FFF1C2;padding:0 2px;}
+  .vc-hint{font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-top:8px;}
+  .vc-back{display:none;}
+  .vc.flipped{background:var(--navy);border-color:var(--navy);}
+  .vc.flipped .vc-front{display:none;}
+  .vc.flipped .vc-back{display:block;animation:fadeIn .25s ease;}
+  .vc.flipped .vc-w{color:var(--gold);}
+  .vc-m{color:#fff;font-size:1.05rem;line-height:1.5;}
+  .chk{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);padding:14px 16px;margin:6px 0 10px;border-radius:2px;}
+  .chk.w{border:none;padding:0;margin:0;background:transparent;}
+  .chk .ask-q{margin:0 0 10px;}
+  .chk .ask-q:before{content:"Quick check  ";font-size:.7rem;letter-spacing:1px;color:var(--gold);font-weight:700;text-transform:uppercase;display:block;margin-bottom:2px;}
+  .copts{display:flex;flex-direction:column;gap:8px;}
+  .copt{text-align:left;background:#fff;border:1.5px solid rgba(10,31,61,.22);border-radius:2px;padding:11px 14px;font-size:.92rem;font-family:inherit;cursor:pointer;min-height:44px;line-height:1.4;color:var(--ink);}
+  .copt:hover:not(:disabled){border-color:var(--navy);}
+  .copt.correct{background:var(--green);border-color:var(--green);color:#fff;}
+  .copt.incorrect{background:var(--red);border-color:var(--red);color:#fff;}
+  .cfb{font-size:.85rem;font-weight:700;min-height:18px;margin:8px 0 0;}
+  .cfb.ok{color:var(--green);} .cfb.bad{color:var(--red);}
+  .cwhy{display:none;font-size:.88rem;color:#444;border-left:2px solid var(--blue);padding-left:10px;margin:6px 0 0;}
+  .cwhy.show{display:block;}
+  .rows{display:flex;flex-direction:column;gap:8px;margin:0 0 14px;}
+  .trow{background:#fff;border:1.5px solid rgba(10,31,61,.18);border-radius:4px;padding:12px 14px;cursor:pointer;}
+  .trow:hover{border-color:var(--navy);}
+  .tr-l{font-size:.95rem;line-height:1.5;}
+  .tr-l:after{content:"  tap";font-size:.68rem;font-weight:700;letter-spacing:1px;color:var(--gold);text-transform:uppercase;}
+  .trow.open .tr-l:after{content:"";}
+  .tr-r{display:none;margin-top:8px;color:var(--green);font-weight:700;font-size:.92rem;}
+  .trow.open{border-color:var(--green);background:#F3FAF5;}
+  .trow.open .tr-r{display:block;animation:fadeIn .25s ease;}
+  .wprompt{font-family:Georgia,serif;font-size:1.1rem;color:var(--navy);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);padding:12px 16px;margin:0 0 14px;line-height:1.5;}
+  .wstep2{margin:0 0 14px;}
+  .wn{font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+  .wta{width:100%;min-height:90px;font:inherit;font-size:.95rem;padding:10px 12px;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;resize:vertical;}
+  .wbuild{font-family:inherit;font-weight:700;background:var(--gold);color:var(--navy);border:none;padding:12px 20px;border-radius:2px;cursor:pointer;min-height:44px;font-size:.95rem;}
+  .wout{display:none;background:#fff;border:2px solid var(--green);padding:14px 16px;margin-top:12px;font-size:.98rem;line-height:1.65;border-radius:2px;}
+  .wout.show{display:block;animation:fadeIn .25s ease;}
+  .wout .wl{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:6px;}
   .qinput{font:inherit;font-size:.95rem;padding:9px 12px;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;width:220px;max-width:100%;}
   .qcheck{font-family:inherit;font-size:.85rem;font-weight:700;padding:9px 16px;border:none;border-radius:2px;background:var(--navy);color:#fff;cursor:pointer;margin-left:6px;min-height:40px;}
   .qcheck:disabled{opacity:.4;cursor:default;}
-  .nameRow{background:#fff;border:1px solid var(--line);padding:12px 14px;margin:0 0 14px;}
-  .nameRow input{font:inherit;padding:8px 10px;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;width:260px;max-width:100%;}
+  .quiz-item{background:#fff;border:1px solid var(--line);border-radius:2px;padding:16px;margin:0 0 14px;}
+  .quiz-item:last-of-type{border-bottom:1px solid var(--line);}
+  .nameRow{background:#fff;border:1px solid var(--line);padding:14px 16px;margin:0 0 14px;}
+  .nameRow input{font:inherit;padding:10px 12px;border:1.5px solid rgba(10,31,61,.25);border-radius:2px;width:280px;max-width:100%;margin-top:8px;}
+  .navmsg{font-size:.78rem;color:var(--red);font-weight:700;}
   .btnlink{display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;text-decoration:none;padding:11px 20px;border-radius:2px;font-size:.9rem;}
-</style>
-</head>
-<body>
+</style></head><body>
 <div class="masthead"><div class="top"><span>Nevaeh's English I</span><span>Lesson 3</span></div><h1>&ldquo;A Modest Proposal&rdquo; by Jonathan Swift (1729)</h1></div>
-<div class="formula-bar">
-<div class="fb-item"><b>Satire</b> <span class="arrow">&rarr;</span> pretending to support something outrageous to attack a real problem <span class="fb-when">(nothing in this essay is meant literally)</span></div>
-<div class="fb-item"><b>Ask every paragraph</b> <span class="arrow">&rarr;</span> What does he SAY? What does Swift MEAN? Who is he really attacking?</div>
-</div>
+<div class="formula-bar"><div class="fb-item"><b>Satire</b> <span class="arrow">&rarr;</span> pretending to support something outrageous to attack a real problem</div><div class="fb-item"><b>Ask</b> <span class="arrow">&rarr;</span> What does he SAY? What does Swift MEAN? Who is he attacking?</div></div>
 <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
 <div class="app"><div class="stage">
-<section class="slide active" data-slide="1"><h2 class="slide-title">Before you read: this is a joke with a serious point</h2>
-<p class="lede">In 1729, Jonathan Swift published a pamphlet suggesting that poor Irish families sell their babies to rich people as food. <b>He did not mean it.</b> The whole essay is <b>satire</b>: it pretends to be a serious, sensible plan so readers feel shocked, and then realize the real horror is how the poor in Ireland were actually being treated.</p>
-<div class="warn">The narrator, the "I" in the essay, is a character Swift invented: a calm, polite, numbers-loving "expert." Swift is mocking that kind of person. Every time the narrator sounds reasonable, Swift wants you to feel how unreasonable it is.</div>
-<p>In this lesson you will learn the background, every hard word, what each section really means, the satire tools Swift uses, and how to answer the questions in your packet. The bar at the top stays with you the whole time.</p></section>
-<section class="slide" data-slide="2"><h2 class="slide-title">Background: Ireland in 1729</h2>
-<div class="cases">
-<div class="case"><h3>Who ruled</h3><p>England controlled Ireland. A small group of Protestant landowners, many living in England, owned most of the land. The English government also limited what Ireland could sell to other countries.</p></div>
-<div class="case"><h3>Who suffered</h3><p>Most Irish people were poor Catholic farmers who rented land. Rents were high, crops had failed for several years, and many families were starving and begging in the streets.</p></div>
-<div class="case"><h3>Who wrote it</h3><p>Jonathan Swift was an Irish-born Protestant priest, the head of St. Patrick's Cathedral in Dublin, and the author of <i>Gulliver's Travels</i>. He was angry at how England and the landlords treated the Irish poor.</p></div>
-</div>
-<div class="def" style="margin-bottom:0"><p class="term">Why this matters</p><p class="body">Once you know the landlords were taking everything from poor families, a line like "landlords... have already devoured most of the parents" (paragraph 12) stops being about eating and starts being about money and power.</p></div></section>
-<section class="slide" data-slide="3"><h2 class="slide-title">The satire toolkit</h2>
-<div class="def"><p class="term">Satire</p><p class="body">Writing that uses humor, exaggeration and irony to attack a real problem or people in power. The goal is change, not just laughs.</p></div>
-<div class="def"><p class="term">Verbal irony</p><p class="body">Saying the opposite of what you mean. The narrator calls his plan "modest" and "humble." It is the least modest idea imaginable.</p></div>
-<div class="def"><p class="term">Persona</p><p class="body">A made-up speaker. The narrator is not Swift; he is the kind of cold, greedy planner Swift wants to expose.</p></div>
-<div class="def"><p class="term">Understatement</p><p class="body">Describing something terrible as if it were small or normal, like poor people dying "as fast as can be reasonably expected" (paragraph 19).</p></div>
-<div class="def"><p class="term">Hyperbole</p><p class="body">Extreme exaggeration. The whole proposal is hyperbole: it takes the way the rich already "use up" the poor and pushes it to the most extreme version.</p></div>
-<div class="def" style="margin-bottom:0"><p class="term">Dehumanizing language</p><p class="body">Words for animals or meat used for people: "breeders," "dam," "carcass," "stock." Swift uses them to show how the powerful see the poor.</p></div></section>
-<section class="slide" data-slide="4"><h2 class="slide-title">Logos, ethos and pathos, twisted</h2>
-<p>Your packet asks about rhetorical appeals. Swift uses all three, but he flips each one so it backfires on the narrator.</p>
-<table class="map"><tr><th style="width:20%">Appeal</th><th>What it normally does</th><th>How Swift twists it</th></tr>
-<tr><td><b>Logos</b><br>logic</td><td>Facts, numbers and reasoning make an argument convincing.</td><td>The narrator does careful math about babies, pounds and shillings (paragraphs 6, 10, 14, 23, 28). The more logical it sounds, the more monstrous it feels.</td></tr>
-<tr><td><b>Ethos</b><br>credibility</td><td>The speaker shows he is trustworthy and fair.</td><td>He says he has studied the problem "for many years," quotes "experts," and swears he gains nothing (paragraphs 4, 29, 33). A trustworthy-sounding man is proposing cannibalism.</td></tr>
-<tr><td><b>Pathos</b><br>emotion</td><td>The writer makes you feel pity or anger.</td><td>The narrator shows almost <b>no</b> feeling while describing horror. That cold tone is what makes the reader feel the emotion he is missing.</td></tr></table>
-<div class="result" style="border:none;padding:0">So the answer to "how does Swift use appeals to build irony?" includes all three working together.</div></section>
-<section class="slide" data-slide="5"><h2 class="slide-title">Vocabulary, part 1 (paragraphs 1–13)</h2>
-<dl class="glossary">
-<div class="row"><dt>melancholy (¶1)</dt><dd>very sad, depressing</dd></div>
-<div class="row"><dt>importuning (¶1)</dt><dd>begging over and over, pestering</dd></div>
-<div class="row"><dt>alms (¶1)</dt><dd>money or food given to the poor</dd></div>
-<div class="row"><dt>the Pretender (¶1)</dt><dd>James Stuart, a Catholic who claimed the English throne; poor Irish men sometimes left to fight for him</dd></div>
-<div class="row"><dt>prodigious (¶2)</dt><dd>enormous, huge in amount</dd></div>
-<div class="row"><dt>grievance (¶2)</dt><dd>a problem or cause for complaint</dd></div>
-<div class="row"><dt>commonwealth (¶2)</dt><dd>the nation and its people as a whole</dd></div>
-<div class="row"><dt>computation (¶4)</dt><dd>calculation, math</dd></div>
-<div class="row"><dt>dam (¶4)</dt><dd>a mother animal; using it for a woman is dehumanizing</dd></div>
-<div class="row"><dt>raiment (¶4)</dt><dd>clothing</dd></div>
-<div class="row"><dt>breeders (¶6)</dt><dd>animals kept to have babies; again, women treated like livestock</dd></div>
-<div class="row"><dt>rudiments (¶6)</dt><dd>the basics of a skill (here, stealing)</dd></div>
-<div class="row"><dt>probationers (¶6)</dt><dd>beginners on trial</dd></div>
-<div class="row"><dt>nutriment (¶7)</dt><dd>food, nourishment</dd></div>
-<div class="row"><dt>fricassee, ragout (¶9)</dt><dd>fancy French stews</dd></div>
-<div class="row"><dt>dear (¶12)</dt><dd>expensive</dd></div>
-<div class="row"><dt>Papists (¶13)</dt><dd>an insulting word for Roman Catholics</dd></div>
-</dl></section>
-<section class="slide" data-slide="6"><h2 class="slide-title">Vocabulary, part 2 (paragraphs 14–33)</h2>
-<dl class="glossary">
-<div class="row"><dt>repine (¶14)</dt><dd>complain, be unhappy about</dd></div>
-<div class="row"><dt>carcass (¶14)</dt><dd>a dead animal's body used for meat</dd></div>
-<div class="row"><dt>flea (¶15)</dt><dd>old spelling of "flay": to strip off the skin</dd></div>
-<div class="row"><dt>shambles (¶16)</dt><dd>butcher shops, slaughterhouses</dd></div>
-<div class="row"><dt>venison (¶17)</dt><dd>deer meat</dd></div>
-<div class="row"><dt>gibbet (¶18)</dt><dd>a gallows where executed bodies were hung</dd></div>
-<div class="row"><dt>incumbrance (¶19)</dt><dd>a burden</dd></div>
-<div class="row"><dt>tithes (¶21)</dt><dd>a tenth of income paid to the church</dd></div>
-<div class="row"><dt>distress (¶22)</dt><dd>legal seizure of a tenant's property to pay rent</dd></div>
-<div class="row"><dt>emulation (¶26)</dt><dd>competition, trying to outdo others</dd></div>
-<div class="row"><dt>farrow (¶26)</dt><dd>to give birth to piglets</dd></div>
-<div class="row"><dt>expedients (¶29)</dt><dd>practical solutions</dd></div>
-<div class="row"><dt>absentees (¶29)</dt><dd>landlords who live in England and never see their Irish land</dd></div>
-<div class="row"><dt>parsimony (¶29)</dt><dd>being very careful with money, thrift</dd></div>
-<div class="row"><dt>temperance (¶29)</dt><dd>self-control, not overdoing things</dd></div>
-<div class="row"><dt>overture (¶32)</dt><dd>a proposal or offer</dd></div>
-<div class="row"><dt>inclemencies (¶32)</dt><dd>harsh, stormy weather</dd></div>
-</dl></section>
-<section class="slide" data-slide="7"><h2 class="slide-title">Paragraphs 1–7: the problem</h2><div class="two-col"><div class="says"><h3>What the narrator says</h3><p>Ireland is full of poor mothers begging with three to six children. Whoever finds a cheap, easy way to make these children useful deserves a statue. He has done the math: about 120,000 poor babies are born each year, and there are no jobs, no land and no way to raise them.</p></div><div class="real"><h3>What Swift means</h3><p>The suffering is real, and Swift describes it honestly at first. Calling hungry children a "prodigious number" and a "grievance" already shows the narrator thinks of people as a problem to solve, not as human beings.</p></div></div><div class="quote"><span class="pn">PARAGRAPH 1</span>“It is a melancholy object to those, who walk through this great town...”</div><p class="means"><b>What it really means:</b> The narrator starts with sadness, so he seems caring. Watch how quickly that care turns into math.</p><div class="quote"><span class="pn">PARAGRAPH 6</span>“...two hundred thousand couple whose wives are breeders...”</div><p class="means"><b>What it really means:</b> The numbers make him sound researched (logos), but "breeders" shows he sees poor women as livestock.</p></section>
-<section class="slide" data-slide="8"><h2 class="slide-title">Paragraphs 8–13: the “modest” proposal</h2><div class="two-col"><div class="says"><h3>What the narrator says</h3><p>He "humbly" proposes that at one year old, poor children be sold as food to the rich. Keep 20,000 for breeding and sell the other 100,000. A child makes two dishes for a party. Babies are "dear" (expensive), so they are perfect for landlords.</p></div><div class="real"><h3>What Swift means</h3><p>This is the shock moment. The real target appears in paragraph 12: the landlords have already "devoured" the parents by taking their rent, food and land. Swift is saying the rich are already eating the poor alive, just slowly and legally.</p></div></div><div class="quote"><span class="pn">PARAGRAPH 8</span>“I shall now therefore humbly propose my own thoughts, which I hope will not be liable to the least objection.”</div><p class="means"><b>What it really means:</b> Verbal irony: the most outrageous idea in the essay is called humble and impossible to object to.</p><div class="quote"><span class="pn">PARAGRAPH 12</span>“...very proper for landlords, who, as they have already devoured most of the parents, seem to have the best title to the children.”</div><p class="means"><b>What it really means:</b> "Devoured" is a metaphor for exploiting tenants. This line tells you who Swift is really angry at.</p></section>
-<section class="slide" data-slide="9"><h2 class="slide-title">Paragraphs 14–17: profits, recipes and “advice”</h2><div class="two-col"><div class="says"><h3>What the narrator says</h3><p>A beggar's child costs two shillings a year to keep but sells for ten. The squire becomes a popular landlord, the mother earns eight shillings, the skin makes gloves and boots, and Dublin can open special butcher shops. A friend suggested eating 12- to 14-year-olds too, but the narrator rejects it because the meat would be tough and some people might call it "a little bordering upon cruelty."</p></div><div class="real"><h3>What Swift means</h3><p>Swift piles up business language, profit and recipes to show how the rich see the poor: as products. The joke about "a little bordering upon cruelty" is understatement: eating children is far beyond "a little" cruel.</p></div></div><div class="quote"><span class="pn">PARAGRAPH 14</span>“...the mother will have eight shillings neat profit, and be fit for work till she produces another child.”</div><p class="means"><b>What it really means:</b> A mother is described like a farm animal producing income. That is the exaggerated (hyperbole) logos Swift is mocking.</p><div class="quote"><span class="pn">PARAGRAPH 17</span>“...some scrupulous people might be apt to censure such a practice... as a little bordering upon cruelty...”</div><p class="means"><b>What it really means:</b> Understatement on purpose: Swift wants you to say out loud, "a LITTLE cruel?"</p></section>
-<section class="slide" data-slide="10"><h2 class="slide-title">Paragraphs 18–20: understatement</h2><div class="two-col"><div class="says"><h3>What the narrator says</h3><p>He tells a story about a man from Formosa who sold executed bodies as delicacies. He adds that he is not worried about the old, sick and disabled poor, because they are dying of cold, hunger and disease "as fast as can be reasonably expected."</p></div><div class="real"><h3>What Swift means</h3><p>Swift attacks people who were truly that indifferent to the dying poor. Treating mass death as calm good news is the clearest example of understatement in the essay.</p></div></div><div class="quote"><span class="pn">PARAGRAPH 19</span>“...they are every day dying, and rotting, by cold and famine, and filth, and vermin, as fast as can be reasonably expected.”</div><p class="means"><b>What it really means:</b> Horrible suffering is described like an on-schedule delivery. That cold tone is the satire.</p></section>
-<section class="slide" data-slide="11"><h2 class="slide-title">Paragraphs 21–26: the six “advantages”</h2>
-<p>The narrator lists six benefits, like a business plan. Each one quietly accuses a real group.</p>
-<table class="map"><tr><th style="width:8%">#</th><th>What the narrator says</th><th>Who Swift is really criticizing</th></tr>
-<tr><td>1 (¶21)</td><td>There will be fewer Catholics.</td><td>Protestant leaders who hated Irish Catholics.</td></tr>
-<tr><td>2 (¶22)</td><td>Poor tenants will finally own something valuable to pay rent with.</td><td>Landlords who had already taken their crops and cattle.</td></tr>
-<tr><td>3 (¶23)</td><td>The nation earns money and gets a new dish for rich tables.</td><td>An economy that only counts the wealthy.</td></tr>
-<tr><td>4 (¶24)</td><td>Parents make money and no longer pay to raise kids.</td><td>A system that makes children a cost instead of a future.</td></tr>
-<tr><td>5 (¶25)</td><td>Taverns get new customers and cooks can charge more.</td><td>Greedy businesses that profit from anything.</td></tr>
-<tr><td>6 (¶26)</td><td>Husbands will treat pregnant wives better, like a farmer treats a pregnant cow.</td><td>Men who abused their wives, and treating people like livestock.</td></tr></table>
-<div class="def" style="margin-bottom:0"><p class="term">The theme this builds</p><p class="body">Greed and exploitation of the poor have become so normal that a plan to eat children can be listed like ordinary profits.</p></div></section>
-<section class="slide" data-slide="12"><h2 class="slide-title">Paragraphs 27–30: the twist hiding in the list</h2>
-<p>In paragraph 29 the narrator says, “let no man talk to me of other expedients,” and then lists the ideas he refuses to hear. <b>Those “other expedients” are Swift's real solutions.</b> This is the most important paragraph in the essay.</p>
-<table class="map"><tr><th>What he lists (¶29)</th><th>In plain English: what Swift actually wants</th></tr>
-<tr><td>Taxing absentees at five shillings a pound</td><td>Tax the landlords who live in England and drain Ireland's money.</td></tr>
-<tr><td>Using only clothes and furniture made in Ireland</td><td>Buy Irish products to help Irish workers.</td></tr>
-<tr><td>Rejecting foreign luxury</td><td>Stop wasting money on expensive imports.</td></tr>
-<tr><td>Curing pride, vanity, idleness and gambling</td><td>The wealthy should stop wasting money on themselves.</td></tr>
-<tr><td>Learning to love our country; quitting animosities and factions</td><td>Irish people should unite instead of fighting each other.</td></tr>
-<tr><td>Teaching landlords one degree of mercy</td><td>Landlords should treat tenants humanely.</td></tr>
-<tr><td>Honest shopkeepers</td><td>Merchants should stop cheating customers.</td></tr></table>
-<div class="def" style="margin-bottom:0"><p class="term">Why it matters</p><p class="body">Paragraph 30 adds that these ideas will never happen until someone sincerely tries them. Swift is saying the sensible solutions were ignored for years, so he wrote something shocking to make people pay attention.</p></div></section>
-<section class="slide" data-slide="13"><h2 class="slide-title">Paragraphs 31–33: the ending</h2><div class="two-col"><div class="says"><h3>What the narrator says</h3><p>He is tired of offering useless ideas. His plan costs nothing and won't upset England. If anyone has a better plan, they should first ask poor parents whether they would rather have been eaten at age one than suffer their whole lives. He swears he has no personal interest: his youngest child is nine and his wife is too old to have more.</p></div><div class="real"><h3>What Swift means</h3><p>The final lines use ethos ("I gain nothing, I only want the public good"), but they are ironic: he is safe because none of his own family could ever be sold. The question about the parents forces readers to face how miserable the poor's lives already are, which is Swift's real purpose.</p></div></div><div class="quote"><span class="pn">PARAGRAPH 31</span>“...although perhaps I could name a country, which would be glad to eat up our whole nation without it.”</div><p class="means"><b>What it really means:</b> The "country" is England. Swift is saying England is already consuming Ireland.</p><div class="quote"><span class="pn">PARAGRAPH 33</span>“I have no children, by which I can propose to get a single penny...”</div><p class="means"><b>What it really means:</b> He claims to be unselfish, but he risks nothing. The plan only ever hurts the poor, never people like him.</p></section>
-<section class="slide" data-slide="14"><h2 class="slide-title">Big ideas (themes) to know</h2>
-<div class="def"><p class="term">Greed and exploitation</p><p class="body">The rich and the landlords profit from the poor until there is nothing left. Swift shows this by making the exploitation literal.</p></div>
-<div class="def"><p class="term">Dehumanization</p><p class="body">When people are talked about as numbers, "breeders" and "carcasses," it becomes easy to ignore their suffering.</p></div>
-<div class="def"><p class="term">Cold logic without morality</p><p class="body">An argument can sound logical and still be evil. Numbers alone don't make something right.</p></div>
-<div class="def"><p class="term">Indifference of the powerful</p><p class="body">Leaders and landlords ignored real solutions for years. Swift attacks that indifference.</p></div>
-<div class="def" style="margin-bottom:0"><p class="term">Satire as a call to action</p><p class="body">Shock is the tool. Swift wants readers so disturbed that they finally accept the real reforms in paragraph 29.</p></div></section>
-<section class="slide" data-slide="15"><h2 class="slide-title">Answering the “Write” questions in your packet</h2>
-<p>Use this pattern for every written answer: <b>claim → evidence (a short quote with the paragraph number) → explain what Swift really means</b>. Here are starters. Finish them in your own words.</p>
-<div class="frame"><b>Theme in the opening:</b> In paragraphs 1–2, Swift shows that ______. The narrator calls the children a “prodigious number” and a “grievance,” which shows ______.</div>
-<div class="frame"><b>Why “humble” is ironic:</b> It is ironic that the narrator calls his plan humble and “not liable to the least objection” (¶8) because ______.</div>
-<div class="frame"><b>Which appeal / what effect:</b> Swift exaggerates <u>logos / ethos</u> when the narrator ______ (¶__). The effect is that the reader ______.</div>
-<div class="frame"><b>Why the list sounds “reasonable”:</b> Numbering the advantages (¶21–26) makes the plan sound like ______, which makes the reader realize ______.</div>
-<div class="frame" style="margin-bottom:0"><b>The final lines:</b> When the narrator says he has no children who could be sold (¶33), he seems ______, but really this shows ______. This supports Swift's purpose, which is to ______.</div></section>
-<section class="slide" data-slide="16"><h2 class="slide-title">Quick check</h2>
-<div class="ask"><p class="ask-q">Who is the "I" in A Modest Proposal?</p><div class="ask-opts" data-q="c1">
-<button class="opt" data-correct="false">Jonathan Swift speaking honestly</button>
-<button class="opt" data-correct="true">A made-up narrator whose cold thinking Swift is mocking</button>
-<button class="opt" data-correct="false">An Irish mother</button></div><p class="ask-fb" id="fb-c1"></p></div>
-<div class="ask"><p class="ask-q">In paragraph 12, landlords "have already devoured most of the parents." What does "devoured" really mean here?</p><div class="ask-opts" data-q="c2">
-<button class="opt" data-correct="false">The landlords actually ate them</button>
-<button class="opt" data-correct="true">The landlords took everything the parents had through rent</button>
-<button class="opt" data-correct="false">The landlords hired them to work</button></div><p class="ask-fb" id="fb-c2"></p></div></section>
-<section class="slide" data-slide="17"><h2 class="slide-title">Quiz: show what you know</h2><div class="nameRow"><label for="sname"><b>Your first and last name</b> (so your score reaches Mr. Jonathan)</label><br><input id="sname" placeholder="First and last name"></div>
-<p style="font-size:.9rem;color:#555">You get three tries on each question. Only your first try counts toward your score. After three misses, the answer and explanation appear.</p><div class="quiz-item" data-i="0"><div class="qnum-inline">1 of 12</div><div class="qtext">What does the narrator actually propose?</div><div class="qopts"><button class="qopt" data-o="0">That poor children go to free schools</button><button class="qopt" data-o="1">That poor Irish families sell their one-year-old children to the rich as food</button><button class="qopt" data-o="2">That landlords lower rents</button><button class="qopt" data-o="3">That the poor leave Ireland</button></div><p class="qtries"></p><p class="qnote">This is the shocking "modest proposal" (paragraphs 9–10). Swift does not mean it; it is satire.</p></div><div class="quiz-item" data-i="1"><div class="qnum-inline">2 of 12</div><div class="qtext">What is Swift's real purpose?</div><div class="qopts"><button class="qopt" data-o="0">To suggest a new food source for Ireland</button><button class="qopt" data-o="1">To shock readers into seeing how cruelly England and the landlords treated the Irish poor</button><button class="qopt" data-o="2">To praise the landlords</button><button class="qopt" data-o="3">To make fun of Irish mothers</button></div><p class="qtries"></p><p class="qnote">Satire attacks a real problem. The cruelty of the "plan" mirrors the real cruelty of the system.</p></div><div class="quiz-item" data-i="2"><div class="qnum-inline">3 of 12</div><div class="qtext">Type the one word: writing that uses irony and exaggeration to attack a real problem is called ______.</div><div><input class="qinput" autocomplete="off" placeholder="Type your answer"><button class="qcheck">Check</button></div><p class="qtries"></p><p class="qnote">Satire: humor, exaggeration and irony used to expose and criticize a real problem.</p></div><div class="quiz-item" data-i="3"><div class="qnum-inline">4 of 12</div><div class="qtext">The narrator does careful math with pounds, shillings and numbers of babies. Which appeal is that: logos, ethos or pathos?</div><div><input class="qinput" autocomplete="off" placeholder="Type your answer"><button class="qcheck">Check</button></div><p class="qtries"></p><p class="qnote">Logos is logic and numbers. Swift exaggerates it so the "reasonable" math makes the idea more horrifying.</p></div><div class="quiz-item" data-i="4"><div class="qnum-inline">5 of 12</div><div class="qtext">Poor people dying "as fast as can be reasonably expected" (paragraph 19) is an example of...</div><div class="qopts"><button class="qopt" data-o="0">Understatement</button><button class="qopt" data-o="1">A simile</button><button class="qopt" data-o="2">Foreshadowing</button><button class="qopt" data-o="3">Alliteration</button></div><p class="qtries"></p><p class="qnote">Understatement treats something terrible as normal or small, which makes the horror stand out.</p></div><div class="quiz-item" data-i="5"><div class="qnum-inline">6 of 12</div><div class="qtext">Calling poor women "breeders" and a child a "carcass" mainly shows...</div><div class="qopts"><button class="qopt" data-o="0">That the narrator is a farmer</button><button class="qopt" data-o="1">How the powerful see the poor as animals or products, not people</button><button class="qopt" data-o="2">That the women are unhealthy</button><button class="qopt" data-o="3">That Swift loves animals</button></div><p class="qtries"></p><p class="qnote">This is dehumanizing language. Swift uses it to expose that attitude.</p></div><div class="quiz-item" data-i="6"><div class="qnum-inline">7 of 12</div><div class="qtext">The "other expedients" in paragraph 29 (taxing absentee landlords, buying Irish goods, teaching landlords mercy) are...</div><div class="qopts"><button class="qopt" data-o="0">Ideas the narrator agrees with</button><button class="qopt" data-o="1">Swift's real, serious solutions that leaders kept ignoring</button><button class="qopt" data-o="2">Jokes with no meaning</button><button class="qopt" data-o="3">Rules the Pope made</button></div><p class="qtries"></p><p class="qnote">This is the twist: the ideas the narrator refuses to hear are exactly what Swift wants done.</p></div><div class="quiz-item" data-i="7"><div class="qnum-inline">8 of 12</div><div class="qtext">Why does the narrator say his youngest child is nine and his wife is past child-bearing (paragraph 33)?</div><div class="qopts"><button class="qopt" data-o="0">To show he is lonely</button><button class="qopt" data-o="1">To seem unselfish and believable, while revealing that he risks nothing himself</button><button class="qopt" data-o="2">To ask readers for help</button><button class="qopt" data-o="3">To prove he is poor</button></div><p class="qtries"></p><p class="qnote">It's ironic ethos: he sounds trustworthy, but the plan never touches his own family.</p></div><div class="quiz-item" data-i="8"><div class="qnum-inline">9 of 12</div><div class="qtext">In paragraph 2, "prodigious" means...</div><div class="qopts"><button class="qopt" data-o="0">Very small</button><button class="qopt" data-o="1">Enormous</button><button class="qopt" data-o="2">Talented</button><button class="qopt" data-o="3">Hungry</button></div><p class="qtries"></p><p class="qnote">Prodigious means huge. Calling children a "prodigious number" turns people into a statistic.</p></div><div class="quiz-item" data-i="9"><div class="qnum-inline">10 of 12</div><div class="qtext">"Papists" (paragraphs 13 and 21) is an insulting word for...</div><div class="qopts"><button class="qopt" data-o="0">Landlords</button><button class="qopt" data-o="1">Roman Catholics</button><button class="qopt" data-o="2">Butchers</button><button class="qopt" data-o="3">Protestant priests</button></div><p class="qtries"></p><p class="qnote">Swift mocks the Protestant leaders who saw Irish Catholics as enemies.</p></div><div class="quiz-item" data-i="10"><div class="qnum-inline">11 of 12</div><div class="qtext">Listing six numbered "advantages" (paragraphs 21–26) makes the proposal sound like...</div><div class="qopts"><button class="qopt" data-o="0">A love letter</button><button class="qopt" data-o="1">A sensible business or government plan</button><button class="qopt" data-o="2">A religious sermon</button><button class="qopt" data-o="3">A recipe book</button></div><p class="qtries"></p><p class="qnote">The calm, organized list makes a monstrous idea sound official, so the reader feels the contrast.</p></div><div class="quiz-item" data-i="11"><div class="qnum-inline">12 of 12</div><div class="qtext">Which theme does Swift build about greed?</div><div class="qopts"><button class="qopt" data-o="0">Wealth is shared fairly in Ireland</button><button class="qopt" data-o="1">Exploiting the poor has become normal and even profitable</button><button class="qopt" data-o="2">Hard work always pays off</button><button class="qopt" data-o="3">Taverns should help the poor</button></div><p class="qtries"></p><p class="qnote">Every "benefit" profits someone powerful at the cost of the poor.</p></div><div class="quiz-final" id="quizFinal"><span class="score" id="scoreText"></span></div><div class="submit-status" id="submitStatus"></div></section>
-<section class="slide" data-slide="18"><h2 class="slide-title">You're ready</h2>
-<p>You now know the background, every hard word, what each section really means, how Swift uses satire, irony, understatement and the three appeals, and how to answer your packet's writing questions. When a line confuses you, ask the three questions in the bar above.</p>
-<p><a class="btnlink" href="KCE_Nevaeh_ELA_Lesson3_StudyGuide.html" target="_blank">Open the printable study guide</a></p>
-<div class="teaser"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="30" fill="none" stroke="#2E8B4F" stroke-width="3"/><path d="M 25 40 L 35 52 L 58 26" fill="none" stroke="#2E8B4F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="cap">A Modest Proposal complete</div></div></section>
-</div></div>
-<div class="nav"><button class="ghost" id="prevBtn">Back</button><span class="step-of" id="stepOf">1 / 18</span><button id="nextBtn">Continue</button></div>
+<section class="slide active" data-slide="1" data-kind=""><h2 class="slide-title">Before you read: a joke with a serious point</h2>
+<p class="lede">In 1729, Jonathan Swift published an essay suggesting that poor Irish families sell their babies to rich people as food.</p>
+<div class="big-reveal"><button class="rv-btn" data-rv="r-intro">Did Swift really mean it? Tap to find out</button><div class="rv" id="r-intro"><b>No.</b> The whole essay is <b>satire</b>. The narrator, the "I," is a calm, polite "expert" Swift invented so he could mock people who treated the poor like numbers. The more reasonable the narrator sounds, the more horrible the idea should feel.</div></div>
+<p>As you go, tap to reveal answers, flip vocabulary cards, and answer quick checks. Your quiz and your written answers go to Mr. Jonathan at the end.</p><div class="chk" data-c="0"><p class="ask-q">So, when the narrator sounds calm and sensible, Swift wants you to feel...</p><div class="copts"><button class="copt" data-o="0">Convinced the plan is a good idea</button><button class="copt" data-o="1">Shocked at how cruel the “sensible” idea is</button><button class="copt" data-o="2">Bored</button></div><p class="cfb"></p><p class="cwhy">The calm tone makes the cruelty stand out. That contrast is the heart of satire.</p></div></section>
+<section class="slide" data-slide="2" data-kind=""><h2 class="slide-title">Ireland in 1729</h2>
+<div class="tapcards three">
+<div class="tc"><div class="tc-front"><span class="tc-k">Who ruled?</span><span class="tc-hint">tap</span></div><div class="tc-back">England. A small group of Protestant landlords, many living in England, owned most of the land.</div></div>
+<div class="tc"><div class="tc-front"><span class="tc-k">Who suffered?</span><span class="tc-hint">tap</span></div><div class="tc-back">Poor Catholic farmers who rented land. Rents were high, crops failed, and families begged in the streets.</div></div>
+<div class="tc"><div class="tc-front"><span class="tc-k">Who was Swift?</span><span class="tc-hint">tap</span></div><div class="tc-back">An Irish-born priest in Dublin and author of <i>Gulliver's Travels</i>, angry at how the poor were treated.</div></div>
+</div><div class="chk" data-c="1"><p class="ask-q">Who is Swift really angry at?</p><div class="copts"><button class="copt" data-o="0">The starving Irish families</button><button class="copt" data-o="1">The landlords and the English government</button><button class="copt" data-o="2">Irish children</button></div><p class="cfb"></p><p class="cwhy">The poor are the victims. Swift's target is the people with power over them.</p></div></section>
+<section class="slide" data-slide="3" data-kind=""><h2 class="slide-title">Swift's satire toolkit</h2><p>Tap each tool to see what it means.</p><div class="tapcards three"><div class="tc"><div class="tc-front"><span class="tc-k">Satire</span><span class="tc-hint">tap</span></div><div class="tc-back">Humor, exaggeration and irony used to attack a real problem.</div></div><div class="tc"><div class="tc-front"><span class="tc-k">Verbal irony</span><span class="tc-hint">tap</span></div><div class="tc-back">Saying the opposite of what you mean, like calling this plan “modest.”</div></div><div class="tc"><div class="tc-front"><span class="tc-k">Persona</span><span class="tc-hint">tap</span></div><div class="tc-back">A made-up speaker. The narrator is not Swift.</div></div><div class="tc"><div class="tc-front"><span class="tc-k">Understatement</span><span class="tc-hint">tap</span></div><div class="tc-back">Making something terrible sound small or normal.</div></div><div class="tc"><div class="tc-front"><span class="tc-k">Hyperbole</span><span class="tc-hint">tap</span></div><div class="tc-back">Extreme exaggeration. The whole plan is one.</div></div><div class="tc"><div class="tc-front"><span class="tc-k">Dehumanizing words</span><span class="tc-hint">tap</span></div><div class="tc-back">Animal or meat words for people: “breeders,” “carcass.”</div></div></div><div class="chk" data-c="2"><p class="ask-q">Calling women “breeders” is an example of...</p><div class="copts"><button class="copt" data-o="0">Dehumanizing words</button><button class="copt" data-o="1">A simile</button><button class="copt" data-o="2">Understatement</button></div><p class="cfb"></p><p class="cwhy">Using a word for farm animals shows how the powerful see the poor.</p></div></section>
+<section class="slide" data-slide="4" data-kind=""><h2 class="slide-title">The three appeals, twisted</h2>
+<p>Tap each appeal to see how Swift flips it against the narrator.</p>
+<div class="tapcards three">
+<div class="tc"><div class="tc-front"><span class="tc-k">Logos</span><span class="tc-sub">logic and numbers</span><span class="tc-hint">tap</span></div><div class="tc-back">Careful math about babies and shillings (¶6, 14, 23, 28). The more logical it sounds, the more monstrous it feels.</div></div>
+<div class="tc"><div class="tc-front"><span class="tc-k">Ethos</span><span class="tc-sub">trust</span><span class="tc-hint">tap</span></div><div class="tc-back">He says he studied for years and gains nothing (¶4, 33). A “trustworthy” man proposes something horrifying.</div></div>
+<div class="tc"><div class="tc-front"><span class="tc-k">Pathos</span><span class="tc-sub">emotion</span><span class="tc-hint">tap</span></div><div class="tc-back">He shows almost no feeling about suffering. His coldness makes the reader feel what he doesn't.</div></div>
+</div><div class="chk" data-c="3"><p class="ask-q">The narrator computes that a child costs 2 shillings and sells for 10. Which appeal is he exaggerating?</p><div class="copts"><button class="copt" data-o="0">Ethos</button><button class="copt" data-o="1">Pathos</button><button class="copt" data-o="2">Logos</button></div><p class="cfb"></p><p class="cwhy">Numbers and calculations are logos.</p></div></section>
+<section class="slide" data-slide="5" data-kind=""><h2 class="slide-title">Vocabulary 1 of 4</h2><p>Read the sentence from the essay, guess the meaning, then tap to check.</p><div class="vcards"><div class="vc"><div class="vc-front"><div class="vc-w">melancholy <span>¶1</span></div><div class="vc-s">“It is a <b>melancholy</b> object to those, who walk through this great town...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">melancholy</div><div class="vc-m">very sad, depressing</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">importuning <span>¶1</span></div><div class="vc-s">“...all in rags, and <b>importuning</b> every passenger for an alms.”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">importuning</div><div class="vc-m">begging again and again, pestering</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">alms <span>¶1</span></div><div class="vc-s">“...importuning every passenger for an <b>alms</b>.”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">alms</div><div class="vc-m">money or food given to the poor</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">prodigious <span>¶2</span></div><div class="vc-s">“...this <b>prodigious</b> number of children in the arms, or on the backs... of their mothers”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">prodigious</div><div class="vc-m">enormous, huge</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">grievance <span>¶2</span></div><div class="vc-s">“...in the present deplorable state of the kingdom, a very great additional <b>grievance</b>”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">grievance</div><div class="vc-m">a problem, a cause for complaint</div></div></div></div><div class="chk" data-c="4"><p class="ask-q">“...importuning every passenger for an alms.” Importuning means...</p><div class="copts"><button class="copt" data-o="0">Thanking</button><button class="copt" data-o="1">Begging over and over</button><button class="copt" data-o="2">Robbing</button></div><p class="cfb"></p><p class="cwhy">Use the words around it as your clue.</p></div></section>
+<section class="slide" data-slide="6" data-kind=""><h2 class="slide-title">Vocabulary 2 of 4</h2><p>Read the sentence from the essay, guess the meaning, then tap to check.</p><div class="vcards"><div class="vc"><div class="vc-front"><div class="vc-w">raiment <span>¶4</span></div><div class="vc-s">“...or wanting food and <b>raiment</b> for the rest of their lives...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">raiment</div><div class="vc-m">clothing</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">computation <span>¶4</span></div><div class="vc-s">“I have always found them grossly mistaken in their <b>computation</b>.”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">computation</div><div class="vc-m">calculation, math</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">breeders <span>¶6</span></div><div class="vc-s">“...two hundred thousand couple whose wives are <b>breeders</b>...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">breeders</div><div class="vc-m">animals kept to have babies (said about women, it's dehumanizing)</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">dear <span>¶12</span></div><div class="vc-s">“I grant this food will be somewhat <b>dear</b>, and therefore very proper for landlords...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">dear</div><div class="vc-m">expensive</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">Papists <span>¶13</span></div><div class="vc-s">“...by lessening the number of <b>Papists</b> among us.”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">Papists</div><div class="vc-m">an insulting word for Roman Catholics</div></div></div></div><div class="chk" data-c="5"><p class="ask-q">“I grant this food will be somewhat dear...” Here, dear means...</p><div class="copts"><button class="copt" data-o="0">Loved</button><button class="copt" data-o="1">Expensive</button><button class="copt" data-o="2">Delicious</button></div><p class="cfb"></p><p class="cwhy">Use the words around it as your clue.</p></div></section>
+<section class="slide" data-slide="7" data-kind=""><h2 class="slide-title">Vocabulary 3 of 4</h2><p>Read the sentence from the essay, guess the meaning, then tap to check.</p><div class="vcards"><div class="vc"><div class="vc-front"><div class="vc-w">repine <span>¶14</span></div><div class="vc-s">“...no gentleman would <b>repine</b> to give ten shillings for the carcass of a good fat child...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">repine</div><div class="vc-m">complain, be unhappy about</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">carcass <span>¶14</span></div><div class="vc-s">“...ten shillings for the <b>carcass</b> of a good fat child...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">carcass</div><div class="vc-m">a dead animal's body, used for meat</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">shambles <span>¶16</span></div><div class="vc-s">“...<b>shambles</b> may be appointed for this purpose, in the most convenient parts of it...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">shambles</div><div class="vc-m">butcher shops, slaughterhouses</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">incumbrance <span>¶19</span></div><div class="vc-s">“...to ease the nation of so grievous an <b>incumbrance</b>.”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">incumbrance</div><div class="vc-m">a burden</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">distress <span>¶22</span></div><div class="vc-s">“...which by law may be made liable to a <b>distress</b>, and help to pay their landlord's rent...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">distress</div><div class="vc-m">legal seizure of a tenant's belongings to pay rent</div></div></div></div><div class="chk" data-c="6"><p class="ask-q">“...shambles may be appointed for this purpose...” Shambles are...</p><div class="copts"><button class="copt" data-o="0">Messy rooms</button><button class="copt" data-o="1">Butcher shops</button><button class="copt" data-o="2">Schools</button></div><p class="cfb"></p><p class="cwhy">Use the words around it as your clue.</p></div></section>
+<section class="slide" data-slide="8" data-kind=""><h2 class="slide-title">Vocabulary 4 of 4</h2><p>Read the sentence from the essay, guess the meaning, then tap to check.</p><div class="vcards"><div class="vc"><div class="vc-front"><div class="vc-w">emulation <span>¶26</span></div><div class="vc-s">“We should soon see an honest <b>emulation</b> among the married women...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">emulation</div><div class="vc-m">competition, trying to outdo each other</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">absentees <span>¶29</span></div><div class="vc-s">“Of taxing our <b>absentees</b> at five shillings a pound...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">absentees</div><div class="vc-m">landlords who live in England, away from their Irish land</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">expedients <span>¶29</span></div><div class="vc-s">“...let no man talk to me of other <b>expedients</b>...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">expedients</div><div class="vc-m">practical solutions</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">parsimony <span>¶29</span></div><div class="vc-s">“Of introducing a vein of <b>parsimony</b>, prudence and temperance...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">parsimony</div><div class="vc-m">being careful with money, thrift</div></div></div><div class="vc"><div class="vc-front"><div class="vc-w">inclemencies <span>¶32</span></div><div class="vc-s">“...neither house nor clothes to cover them from the <b>inclemencies</b> of the weather...”</div><div class="vc-hint">Tap for the meaning</div></div><div class="vc-back"><div class="vc-w">inclemencies</div><div class="vc-m">harsh, stormy conditions</div></div></div></div><div class="chk" data-c="7"><p class="ask-q">“Of taxing our absentees...” Absentees are...</p><div class="copts"><button class="copt" data-o="0">Students who skip school</button><button class="copt" data-o="1">Landlords living in England, away from their land</button><button class="copt" data-o="2">Soldiers</button></div><p class="cfb"></p><p class="cwhy">Use the words around it as your clue.</p></div></section>
+<section class="slide" data-slide="9" data-kind=""><h2 class="slide-title">¶1–7: the problem</h2><div class="says"><h3>What the narrator says</h3><p>Ireland's streets are full of mothers begging with several children. Whoever finds a cheap way to make these children “useful” deserves a statue. His math says 120,000 poor babies are born each year, with no jobs or land for them.</p></div><div class="big-reveal"><button class="rv-btn" data-rv="rv8">Tap: what does Swift really mean?</button><div class="rv" id="rv8">The suffering is real. But calling hungry children a “prodigious number” and a “grievance” shows the narrator sees people as a problem to solve, not as human beings.</div></div><div class="quote"><span class="pn">¶6</span>“...two hundred thousand couple whose wives are breeders...”<button class="rv-mini" data-rv="q8_0">What it means</button><div class="rv small" id="q8_0">The numbers sound researched (logos), but “breeders” treats poor women like livestock.</div></div><div class="chk" data-c="8"><p class="ask-q">What does the narrator's math in ¶6 do?</p><div class="copts"><button class="copt" data-o="0">Proves he cares deeply</button><button class="copt" data-o="1">Makes a cruel idea sound researched and reasonable</button><button class="copt" data-o="2">Shows he can't count</button></div><p class="cfb"></p><p class="cwhy">Statistics make the plan sound believable. That's the trick Swift is exposing.</p></div></section>
+<section class="slide" data-slide="10" data-kind=""><h2 class="slide-title">¶8–13: the “modest” proposal</h2><div class="says"><h3>What the narrator says</h3><p>He “humbly” proposes selling poor one-year-olds as food for the rich. Keep 20,000 for breeding and sell 100,000. Babies are “dear” (expensive), so they suit landlords.</p></div><div class="big-reveal"><button class="rv-btn" data-rv="rv9">Tap: what does Swift really mean?</button><div class="rv" id="rv9">This is the shock moment, and ¶12 reveals the real target: the landlords have already “devoured” the parents by taking their rent, food and land. The rich are already eating the poor alive, just slowly and legally.</div></div><div class="quote"><span class="pn">¶8</span>“I shall now therefore humbly propose my own thoughts, which I hope will not be liable to the least objection.”<button class="rv-mini" data-rv="q9_0">What it means</button><div class="rv small" id="q9_0">Verbal irony: the most outrageous idea is called humble and impossible to object to.</div></div><div class="quote"><span class="pn">¶12</span>“...very proper for landlords, who, as they have already devoured most of the parents, seem to have the best title to the children.”<button class="rv-mini" data-rv="q9_1">What it means</button><div class="rv small" id="q9_1">“Devoured” is a metaphor for taking everything from tenants.</div></div><div class="chk" data-c="9"><p class="ask-q">In ¶12, “devoured” really means the landlords...</p><div class="copts"><button class="copt" data-o="0">Ate the parents</button><button class="copt" data-o="1">Took everything the parents had through rent</button><button class="copt" data-o="2">Gave the parents jobs</button></div><p class="cfb"></p><p class="cwhy">It's a metaphor. Swift is accusing the landlords of exploitation.</p></div></section>
+<section class="slide" data-slide="11" data-kind=""><h2 class="slide-title">¶14–17: profits, recipes and “advice”</h2><div class="says"><h3>What the narrator says</h3><p>A beggar's child costs 2 shillings a year and sells for 10. The mother earns 8 shillings, the skin makes gloves, and Dublin can open butcher shops. He rejects eating older kids because the meat is tough and some might call it “a little bordering upon cruelty.”</p></div><div class="big-reveal"><button class="rv-btn" data-rv="rv10">Tap: what does Swift really mean?</button><div class="rv" id="rv10">Business words, profit and recipes show how the rich see the poor: as products. “A little bordering upon cruelty” is understatement. Eating children is far beyond “a little” cruel.</div></div><div class="quote"><span class="pn">¶17</span>“...some scrupulous people might be apt to censure such a practice... as a little bordering upon cruelty...”<button class="rv-mini" data-rv="q10_0">What it means</button><div class="rv small" id="q10_0">Swift wants you to react: “a LITTLE cruel?!”</div></div><div class="chk" data-c="10"><p class="ask-q">“A little bordering upon cruelty” is an example of...</p><div class="copts"><button class="copt" data-o="0">Understatement</button><button class="copt" data-o="1">Hyperbole</button><button class="copt" data-o="2">Alliteration</button></div><p class="cfb"></p><p class="cwhy">It makes something horrifying sound minor.</p></div></section>
+<section class="slide" data-slide="12" data-kind=""><h2 class="slide-title">¶18–20: understatement</h2><div class="says"><h3>What the narrator says</h3><p>He tells a story of executed bodies sold as delicacies. He isn't worried about the old and sick poor, because they are dying of cold and hunger “as fast as can be reasonably expected.”</p></div><div class="big-reveal"><button class="rv-btn" data-rv="rv11">Tap: what does Swift really mean?</button><div class="rv" id="rv11">Swift attacks people who were truly that indifferent to the dying poor. Treating mass death as calm good news is the strongest understatement in the essay.</div></div><div class="quote"><span class="pn">¶19</span>“...they are every day dying, and rotting, by cold and famine, and filth, and vermin, as fast as can be reasonably expected.”<button class="rv-mini" data-rv="q11_0">What it means</button><div class="rv small" id="q11_0">Horrible suffering described like a delivery that's on schedule.</div></div><div class="chk" data-c="11"><p class="ask-q">Why does the narrator say this so calmly?</p><div class="copts"><button class="copt" data-o="0">He is a doctor</button><button class="copt" data-o="1">Swift wants readers horrified by how calmly the powerful accept the poor dying</button><button class="copt" data-o="2">He is trying to be funny on purpose</button></div><p class="cfb"></p><p class="cwhy">The cold tone exposes the indifference of the powerful.</p></div></section>
+<section class="slide" data-slide="13" data-kind=""><h2 class="slide-title">¶21–26: the six “advantages”</h2><p>Each “benefit” secretly accuses someone. Tap a row to see who.</p><div class="rows"><div class="trow"><div class="tr-l"><b>¶21</b> There will be fewer Catholics.</div><div class="tr-r">Really criticizing: Protestant leaders who hated Irish Catholics.</div></div><div class="trow"><div class="tr-l"><b>¶22</b> Poor tenants will finally own something valuable to pay rent.</div><div class="tr-r">Really criticizing: Landlords who already took their crops and cattle.</div></div><div class="trow"><div class="tr-l"><b>¶23</b> The nation earns money and gets a new dish.</div><div class="tr-r">Really criticizing: An economy that only counts the wealthy.</div></div><div class="trow"><div class="tr-l"><b>¶24</b> Parents earn money and stop paying to raise kids.</div><div class="tr-r">Really criticizing: A system that treats children as a cost.</div></div><div class="trow"><div class="tr-l"><b>¶25</b> Taverns get customers and cooks charge more.</div><div class="tr-r">Really criticizing: Greedy businesses that profit from anything.</div></div><div class="trow"><div class="tr-l"><b>¶26</b> Husbands will treat pregnant wives better, like pregnant cows.</div><div class="tr-r">Really criticizing: Men who abused their wives, and seeing people as livestock.</div></div></div><div class="chk" data-c="12"><p class="ask-q">Listing the benefits like a business plan makes the essay...</p><div class="copts"><button class="copt" data-o="0">Sound official, so the cruelty is more shocking</button><button class="copt" data-o="1">Easier to cook from</button><button class="copt" data-o="2">Less serious</button></div><p class="cfb"></p><p class="cwhy">The organized list makes a monstrous idea look like normal policy.</p></div></section>
+<section class="slide" data-slide="14" data-kind=""><h2 class="slide-title">¶27–30: the twist hiding in the list</h2><p>In ¶29 the narrator says “let no man talk to me of other expedients” and lists ideas he refuses to hear. Tap each one: what does Swift actually want?</p><div class="rows"><div class="trow"><div class="tr-l">Taxing absentees at five shillings a pound</div><div class="tr-r">Tax landlords who live in England.</div></div><div class="trow"><div class="tr-l">Using only clothes and furniture made in Ireland</div><div class="tr-r">Buy Irish to support Irish workers.</div></div><div class="trow"><div class="tr-l">Curing pride, vanity, idleness and gambling</div><div class="tr-r">The rich should stop wasting money.</div></div><div class="trow"><div class="tr-l">Quitting animosities and factions</div><div class="tr-r">The Irish should unite instead of fighting.</div></div><div class="trow"><div class="tr-l">Teaching landlords one degree of mercy</div><div class="tr-r">Landlords should treat tenants humanely.</div></div><div class="trow"><div class="tr-l">Honest shopkeepers</div><div class="tr-r">Merchants should stop cheating.</div></div></div><div class="chk" data-c="13"><p class="ask-q">So the “other expedients” in ¶29 are...</p><div class="copts"><button class="copt" data-o="0">Jokes</button><button class="copt" data-o="1">Swift's real solutions that leaders ignored</button><button class="copt" data-o="2">The narrator's favorite recipes</button></div><p class="cfb"></p><p class="cwhy">This is the most important paragraph: the ideas he rejects are exactly what Swift wants.</p></div></section>
+<section class="slide" data-slide="15" data-kind=""><h2 class="slide-title">¶31–33: the ending</h2><div class="says"><h3>What the narrator says</h3><p>His plan costs nothing and won't upset England. Critics should ask poor parents whether they'd rather have been eaten at age one than suffer for life. He swears he gains nothing: his youngest child is nine and his wife can't have more.</p></div><div class="big-reveal"><button class="rv-btn" data-rv="rv14">Tap: what does Swift really mean?</button><div class="rv" id="rv14">The ending sounds unselfish (ethos) but it's ironic: he is safe because his own family can never be sold. The question about the parents forces readers to face how miserable the poor's lives already are.</div></div><div class="quote"><span class="pn">¶31</span>“...although perhaps I could name a country, which would be glad to eat up our whole nation without it.”<button class="rv-mini" data-rv="q14_0">What it means</button><div class="rv small" id="q14_0">The country is England, already consuming Ireland.</div></div><div class="quote"><span class="pn">¶33</span>“I have no children, by which I can propose to get a single penny...”<button class="rv-mini" data-rv="q14_1">What it means</button><div class="rv small" id="q14_1">He claims to be selfless, but he risks nothing.</div></div><div class="chk" data-c="14"><p class="ask-q">Why does he mention his own children are too old?</p><div class="copts"><button class="copt" data-o="0">To prove he is poor</button><button class="copt" data-o="1">To seem unselfish, while showing the plan never touches people like him</button><button class="copt" data-o="2">Because he misses them</button></div><p class="cfb"></p><p class="cwhy">Ironic ethos: he sounds trustworthy only because he has nothing at stake.</p></div></section>
+<section class="slide" data-slide="16" data-kind=""><h2 class="slide-title">Big ideas (themes)</h2><p>Tap each theme.</p><div class="tapcards">
+<div class="tc"><div class="tc-front"><span class="tc-k">Greed and exploitation</span><span class="tc-hint">tap</span></div><div class="tc-back">The rich profit from the poor until nothing is left. Swift makes it literal.</div></div>
+<div class="tc"><div class="tc-front"><span class="tc-k">Dehumanization</span><span class="tc-hint">tap</span></div><div class="tc-back">Talk about people as numbers and meat, and it's easy to ignore them.</div></div>
+<div class="tc"><div class="tc-front"><span class="tc-k">Cold logic</span><span class="tc-hint">tap</span></div><div class="tc-back">An argument can sound logical and still be evil.</div></div>
+<div class="tc"><div class="tc-front"><span class="tc-k">Satire as action</span><span class="tc-hint">tap</span></div><div class="tc-back">Shock readers so they'll finally accept real reforms.</div></div>
+</div><div class="chk" data-c="15"><p class="ask-q">Which theme do the six “advantages” build most?</p><div class="copts"><button class="copt" data-o="0">Wealth is shared fairly</button><button class="copt" data-o="1">Exploiting the poor has become normal and profitable</button><button class="copt" data-o="2">Hard work always pays off</button></div><p class="cfb"></p><p class="cwhy">Every benefit profits the powerful at the cost of the poor.</p></div></section>
+<section class="slide" data-slide="17" data-kind="write"><h2 class="slide-title">Write 1 of 3: the “humble” irony</h2><div class="wprompt">Why is it ironic that the narrator calls his proposal “humble” and “not liable to the least objection”?</div><div class="wstep2"><div class="wn">Step 1 · Pick the strongest claim</div><div class="chk w" data-c="16"><div class="copts col"><button class="copt" data-o="0">It is ironic because the plan is the most outrageous, objectionable idea possible.</button><button class="copt" data-o="1">It is ironic because the narrator is a humble farmer.</button><button class="copt" data-o="2">It is ironic because nobody read the essay.</button></div><p class="cfb"></p></div></div><div class="wstep2"><div class="wn">Step 2 · Pick the best evidence</div><div class="chk w" data-c="17"><div class="copts col"><button class="copt" data-o="0">“I shall now therefore humbly propose my own thoughts, which I hope will not be liable to the least objection.” (¶8)</button><button class="copt" data-o="1">“It is a melancholy object to those, who walk through this great town...” (¶1)</button><button class="copt" data-o="2">“Infant's flesh will be in season throughout the year...” (¶13)</button></div><p class="cfb"></p></div></div><div class="wstep2"><div class="wn">Step 3 · Explain it in your own words</div><textarea class="wta" id="w0t" placeholder="This shows that Swift... / The reader realizes..."></textarea></div><button class="wbuild" data-w="0">Build my answer</button><div class="wout" id="w0o"></div></section>
+<section class="slide" data-slide="18" data-kind="write"><h2 class="slide-title">Write 2 of 3: which appeal?</h2><div class="wprompt">Which rhetorical appeal is Swift exaggerating in ¶14–17, and what is the effect?</div><div class="wstep2"><div class="wn">Step 1 · Pick the strongest claim</div><div class="chk w" data-c="18"><div class="copts col"><button class="copt" data-o="0">Swift exaggerates logos by turning children into numbers, prices and profits.</button><button class="copt" data-o="1">Swift uses pathos by describing how much the narrator loves children.</button><button class="copt" data-o="2">Swift avoids all appeals in this section.</button></div><p class="cfb"></p></div></div><div class="wstep2"><div class="wn">Step 2 · Pick the best evidence</div><div class="chk w" data-c="19"><div class="copts col"><button class="copt" data-o="0">“...the mother will have eight shillings neat profit, and be fit for work till she produces another child.” (¶14)</button><button class="copt" data-o="1">“I have too long digressed...” (¶20)</button><button class="copt" data-o="2">“A very worthy person, a true lover of his country...” (¶17)</button></div><p class="cfb"></p></div></div><div class="wstep2"><div class="wn">Step 3 · Explain it in your own words</div><textarea class="wta" id="w1t" placeholder="The effect is that the reader... because..."></textarea></div><button class="wbuild" data-w="1">Build my answer</button><div class="wout" id="w1o"></div></section>
+<section class="slide" data-slide="19" data-kind="write"><h2 class="slide-title">Write 3 of 3: the final lines</h2><div class="wprompt">How does the narrator's perspective in the final lines reinforce Swift's purpose?</div><div class="wstep2"><div class="wn">Step 1 · Pick the strongest claim</div><div class="chk w" data-c="20"><div class="copts col"><button class="copt" data-o="0">The narrator claims he gains nothing, but he is safe because his own family can never be sold, which exposes how the powerful propose cruelty that never touches them.</button><button class="copt" data-o="1">The narrator proves he is a loving father.</button><button class="copt" data-o="2">The final lines show the plan was a real law.</button></div><p class="cfb"></p></div></div><div class="wstep2"><div class="wn">Step 2 · Pick the best evidence</div><div class="chk w" data-c="21"><div class="copts col"><button class="copt" data-o="0">“I have no children, by which I can propose to get a single penny; the youngest being nine years old, and my wife past child-bearing.” (¶33)</button><button class="copt" data-o="1">“Many other advantages might be enumerated.” (¶27)</button><button class="copt" data-o="2">“I have reckoned upon a medium, that a child just born will weigh 12 pounds...” (¶11)</button></div><p class="cfb"></p></div></div><div class="wstep2"><div class="wn">Step 3 · Explain it in your own words</div><textarea class="wta" id="w2t" placeholder="This supports Swift's purpose, which is to..."></textarea></div><button class="wbuild" data-w="2">Build my answer</button><div class="wout" id="w2o"></div></section>
+<section class="slide" data-slide="20" data-kind="name"><h2 class="slide-title">Quiz time</h2><p class="lede">12 questions, two at a time. You get three tries on each, and only your first try counts. After three misses, the answer appears.</p>
+<div class="nameRow"><label for="sname"><b>Type your first and last name</b> so your score and writing reach Mr. Jonathan.</label><br><input id="sname" placeholder="First and last name"></div></section>
+<section class="slide" data-slide="21" data-kind="quiz"><h2 class="slide-title">Quiz: questions 1–2</h2><div class="quiz-item" data-i="0"><div class="qnum-inline">Question 1 of 12</div><div class="qtext">What does the narrator actually propose?</div><div class="qopts"><button class="qopt" data-o="0">Free schools for poor children</button><button class="qopt" data-o="1">Selling poor one-year-olds to the rich as food</button><button class="qopt" data-o="2">Lowering rents</button><button class="qopt" data-o="3">Moving the poor to England</button></div><p class="qtries"></p><p class="qnote">This is the shocking “modest proposal” (¶9–10). It is satire.</p></div><div class="quiz-item" data-i="1"><div class="qnum-inline">Question 2 of 12</div><div class="qtext">What is Swift's real purpose?</div><div class="qopts"><button class="qopt" data-o="0">To suggest a new food</button><button class="qopt" data-o="1">To shock readers into seeing how cruelly the Irish poor were treated</button><button class="qopt" data-o="2">To praise landlords</button><button class="qopt" data-o="3">To mock Irish mothers</button></div><p class="qtries"></p><p class="qnote">The cruelty of the plan mirrors the cruelty of the real system.</p></div></section>
+<section class="slide" data-slide="22" data-kind="quiz"><h2 class="slide-title">Quiz: questions 3–4</h2><div class="quiz-item" data-i="2"><div class="qnum-inline">Question 3 of 12</div><div class="qtext">Type one word: writing that uses irony and exaggeration to attack a real problem is called ______.</div><div><input class="qinput" autocomplete="off" placeholder="Type your answer"><button class="qcheck">Check</button></div><p class="qtries"></p><p class="qnote">Satire.</p></div><div class="quiz-item" data-i="3"><div class="qnum-inline">Question 4 of 12</div><div class="qtext">Careful math with shillings and babies is which appeal: logos, ethos or pathos?</div><div><input class="qinput" autocomplete="off" placeholder="Type your answer"><button class="qcheck">Check</button></div><p class="qtries"></p><p class="qnote">Logos: logic and numbers.</p></div></section>
+<section class="slide" data-slide="23" data-kind="quiz"><h2 class="slide-title">Quiz: questions 5–6</h2><div class="quiz-item" data-i="4"><div class="qnum-inline">Question 5 of 12</div><div class="qtext">Poor people dying “as fast as can be reasonably expected” (¶19) is...</div><div class="qopts"><button class="qopt" data-o="0">Understatement</button><button class="qopt" data-o="1">A simile</button><button class="qopt" data-o="2">Foreshadowing</button></div><p class="qtries"></p><p class="qnote">Something terrible made to sound normal.</p></div><div class="quiz-item" data-i="5"><div class="qnum-inline">Question 6 of 12</div><div class="qtext">Calling women “breeders” and a child a “carcass” shows...</div><div class="qopts"><button class="qopt" data-o="0">The narrator is a farmer</button><button class="qopt" data-o="1">The powerful see the poor as animals or products</button><button class="qopt" data-o="2">The women are sick</button></div><p class="qtries"></p><p class="qnote">Dehumanizing language.</p></div></section>
+<section class="slide" data-slide="24" data-kind="quiz"><h2 class="slide-title">Quiz: questions 7–8</h2><div class="quiz-item" data-i="6"><div class="qnum-inline">Question 7 of 12</div><div class="qtext">The “other expedients” in ¶29 are...</div><div class="qopts"><button class="qopt" data-o="0">Ideas the narrator loves</button><button class="qopt" data-o="1">Swift's real solutions that leaders ignored</button><button class="qopt" data-o="2">Recipes</button></div><p class="qtries"></p><p class="qnote">The twist: the rejected ideas are what Swift wants.</p></div><div class="quiz-item" data-i="7"><div class="qnum-inline">Question 8 of 12</div><div class="qtext">Why does the narrator mention his youngest child is nine (¶33)?</div><div class="qopts"><button class="qopt" data-o="0">He is lonely</button><button class="qopt" data-o="1">To seem unselfish while risking nothing himself</button><button class="qopt" data-o="2">To ask for help</button></div><p class="qtries"></p><p class="qnote">Ironic ethos.</p></div></section>
+<section class="slide" data-slide="25" data-kind="quiz"><h2 class="slide-title">Quiz: questions 9–10</h2><div class="quiz-item" data-i="8"><div class="qnum-inline">Question 9 of 12</div><div class="qtext">In ¶2, “prodigious” means...</div><div class="qopts"><button class="qopt" data-o="0">Very small</button><button class="qopt" data-o="1">Enormous</button><button class="qopt" data-o="2">Talented</button></div><p class="qtries"></p><p class="qnote">Prodigious means huge.</p></div><div class="quiz-item" data-i="9"><div class="qnum-inline">Question 10 of 12</div><div class="qtext">“Papists” (¶13, ¶21) is an insulting word for...</div><div class="qopts"><button class="qopt" data-o="0">Landlords</button><button class="qopt" data-o="1">Roman Catholics</button><button class="qopt" data-o="2">Butchers</button></div><p class="qtries"></p><p class="qnote">Swift mocks Protestant leaders who saw Catholics as enemies.</p></div></section>
+<section class="slide" data-slide="26" data-kind="quiz"><h2 class="slide-title">Quiz: questions 11–12</h2><div class="quiz-item" data-i="10"><div class="qnum-inline">Question 11 of 12</div><div class="qtext">The numbered “advantages” (¶21–26) make the plan sound like...</div><div class="qopts"><button class="qopt" data-o="0">A love letter</button><button class="qopt" data-o="1">A sensible business or government plan</button><button class="qopt" data-o="2">A sermon</button></div><p class="qtries"></p><p class="qnote">Official-sounding lists make the cruelty more shocking.</p></div><div class="quiz-item" data-i="11"><div class="qnum-inline">Question 12 of 12</div><div class="qtext">Which theme does Swift build about greed?</div><div class="qopts"><button class="qopt" data-o="0">Wealth is shared fairly</button><button class="qopt" data-o="1">Exploiting the poor has become normal and profitable</button><button class="qopt" data-o="2">Taverns should feed the poor</button></div><p class="qtries"></p><p class="qnote">Every benefit profits the powerful.</p></div></section>
+<section class="slide" data-slide="27" data-kind="end"><h2 class="slide-title">Your results</h2><div class="quiz-final show"><span class="score" id="scoreText">Finish the quiz to see your score.</span></div><div class="submit-status" id="submitStatus"></div>
+<p style="margin-top:14px">Great work. You learned the background, the vocabulary, every section, Swift's satire tools, and you built three written answers.</p>
+<p><a class="btnlink" href="KCE_Nevaeh_ELA_Lesson3_StudyGuide.html" target="_blank">Open the printable study guide</a></p></section>
+</div></div><div class="nav"><button class="ghost" id="prevBtn">Back</button><span class="step-of" id="stepOf">1 / 27</span><button id="nextBtn">Continue</button></div>
 <script>
 (function(){
   var FORMSPREE_ENDPOINT = "https://formspree.io/f/mvkgqdyq";
-  var QUIZ = [{"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "text", "a": ["satire"]}, {"t": "text", "a": ["logos"]}, {"t": "mc", "a": 0}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}];
+  var QUIZ = [{"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "text", "a": ["satire"]}, {"t": "text", "a": ["logos"]}, {"t": "mc", "a": 0}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}, {"t": "mc", "a": 1}], CHECKS = [{"a": 1}, {"a": 1}, {"a": 0}, {"a": 2}, {"a": 1}, {"a": 1}, {"a": 1}, {"a": 1}, {"a": 1}, {"a": 1}, {"a": 0}, {"a": 1}, {"a": 0}, {"a": 1}, {"a": 1}, {"a": 1}, {"a": 0, "key": "w0c"}, {"a": 0, "key": "w0e"}, {"a": 0, "key": "w1c"}, {"a": 0, "key": "w1e"}, {"a": 0, "key": "w2c"}, {"a": 0, "key": "w2e"}], WR = [{"prompt": "Why is it ironic that the narrator calls his proposal \u201chumble\u201d and \u201cnot liable to the least objection\u201d?"}, {"prompt": "Which rhetorical appeal is Swift exaggerating in \u00b614\u201317, and what is the effect?"}, {"prompt": "How does the narrator's perspective in the final lines reinforce Swift's purpose?"}];
 
   function fireConfetti(x, y){
     var canvas = document.getElementById('confettiCanvas');
-    if (!canvas){
-      canvas = document.createElement('canvas');
-      canvas.id = 'confettiCanvas';
-      canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:200;';
-      document.body.appendChild(canvas);
-    }
+    if (!canvas){ canvas = document.createElement('canvas'); canvas.id = 'confettiCanvas'; canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:200;'; document.body.appendChild(canvas); }
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    var ctx = canvas.getContext('2d');
-    var colors = ['#C9A84C','#3E6FD9','#2E8B4F','#E0554F','#ffffff'];
-    var particles = [];
-    for (var i=0;i<50;i++){ particles.push({x:x,y:y,vx:(Math.random()-0.5)*7,vy:Math.random()*-7-3,size:Math.random()*5+4,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,vr:(Math.random()-0.5)*9,life:1}); }
-    var start = null;
-    function frame(ts){
-      if (!start) start = ts;
-      var elapsed = ts - start, alive = false;
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach(function(p){
-        p.vy += 0.25; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.014;
-        if (p.life > 0){ alive = true; ctx.save(); ctx.globalAlpha = Math.max(p.life,0); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle = p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6); ctx.restore(); }
-      });
-      if (alive && elapsed < 2600) requestAnimationFrame(frame); else ctx.clearRect(0,0,canvas.width,canvas.height);
-    }
-    requestAnimationFrame(frame);
+    var ctx = canvas.getContext('2d'), colors = ['#C9A84C','#3E6FD9','#2E8B4F','#E0554F','#ffffff'], ps = [];
+    for (var i=0;i<50;i++) ps.push({x:x,y:y,vx:(Math.random()-0.5)*7,vy:Math.random()*-7-3,s:Math.random()*5+4,c:colors[Math.floor(Math.random()*5)],r:Math.random()*360,vr:(Math.random()-0.5)*9,l:1});
+    var t0 = null;
+    (function frame(ts){ if (!t0) t0 = ts; var alive = false; ctx.clearRect(0,0,canvas.width,canvas.height);
+      ps.forEach(function(p){ p.vy += .25; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.l -= .014; if (p.l > 0){ alive = true; ctx.save(); ctx.globalAlpha = p.l; ctx.translate(p.x,p.y); ctx.rotate(p.r*Math.PI/180); ctx.fillStyle = p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6); ctx.restore(); } });
+      if (alive && ts - t0 < 2600) requestAnimationFrame(frame); else ctx.clearRect(0,0,canvas.width,canvas.height); })(performance.now());
   }
+  function burst(el){ var r = el.getBoundingClientRect(); fireConfetti(r.left + Math.min(60, r.width/2), r.top + 12); }
 
-  var total = document.querySelectorAll('.slide').length, current = 1;
+  /* ---------- navigation (quiz slides lock until answered) ---------- */
+  var slides = document.querySelectorAll('.slide'), total = slides.length, current = 1;
   var appEl = document.querySelector('.app'), nextBtn = document.getElementById('nextBtn');
+  function slideEl(n){ return document.querySelector('.slide[data-slide="'+n+'"]'); }
+  function locked(){
+    var s = slideEl(current);
+    if (s.dataset.kind === 'quiz') return Array.prototype.some.call(s.querySelectorAll('.quiz-item'), function(q){ return !state[+q.dataset.i].done; });
+    return false;
+  }
+  function refreshNext(){
+    if (current === total){ nextBtn.textContent = 'Lesson 4 not built yet'; nextBtn.classList.add('pending'); return; }
+    if (locked()){ nextBtn.textContent = 'Answer both to continue'; nextBtn.classList.add('pending'); }
+    else { nextBtn.textContent = 'Continue'; nextBtn.classList.remove('pending'); }
+  }
   function goTo(n){
     if (n < 1 || n > total) return;
-    document.querySelector('.slide[data-slide="'+current+'"]').classList.remove('active');
-    current = n;
-    document.querySelector('.slide[data-slide="'+current+'"]').classList.add('active');
+    slideEl(current).classList.remove('active'); current = n; slideEl(current).classList.add('active');
     document.getElementById('fill').style.width = Math.round(current/total*100)+'%';
     document.getElementById('stepOf').textContent = current + ' / ' + total;
     document.getElementById('prevBtn').disabled = current === 1;
-    if (current === total){ nextBtn.textContent = 'Lesson 4 not built yet'; nextBtn.classList.add('pending'); }
-    else { nextBtn.textContent = 'Continue'; nextBtn.classList.remove('pending'); }
-    appEl.scrollTop = 0;
+    refreshNext(); appEl.scrollTop = 0;
   }
-  document.getElementById('prevBtn').disabled = true;
   document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current-1); });
-  nextBtn.addEventListener('click', function(){ if (current < total) goTo(current+1); });
+  nextBtn.addEventListener('click', function(){ if (current < total && !locked()) goTo(current+1); });
   document.addEventListener('keydown', function(e){
-    if (e.target && e.target.tagName === 'INPUT') return;
-    if (e.key === 'ArrowRight') goTo(current+1); else if (e.key === 'ArrowLeft') goTo(current-1);
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' && !locked()) goTo(current+1); else if (e.key === 'ArrowLeft') goTo(current-1);
   });
 
-  document.querySelectorAll('.ask-opts').forEach(function(row){
-    var fb = document.getElementById('fb-' + row.dataset.q);
-    row.querySelectorAll('.opt').forEach(function(btn){
+  /* ---------- reveals, tap cards, rows ---------- */
+  document.querySelectorAll('[data-rv]').forEach(function(b){
+    b.addEventListener('click', function(){ var t = document.getElementById(b.dataset.rv); var open = t.classList.toggle('show'); b.classList.toggle('open', open); });
+  });
+  document.querySelectorAll('.tc,.vc').forEach(function(c){ c.addEventListener('click', function(){ c.classList.toggle('flipped'); }); });
+  document.querySelectorAll('.trow').forEach(function(r){ r.addEventListener('click', function(){ r.classList.toggle('open'); }); });
+
+  /* ---------- quick checks (practice, retry until right) ---------- */
+  var picked = {};
+  document.querySelectorAll('.chk').forEach(function(box){
+    var c = CHECKS[+box.dataset.c], fb = box.querySelector('.cfb'), why = box.querySelector('.cwhy'), done = false;
+    box.querySelectorAll('.copt').forEach(function(btn){
       btn.addEventListener('click', function(){
-        row.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('correct','incorrect'); b.disabled = true; });
-        if (btn.dataset.correct === 'true'){
-          btn.classList.add('correct'); fireConfetti(btn.getBoundingClientRect().left + 20, btn.getBoundingClientRect().top + 10);
-          if (fb){ fb.textContent = 'Correct.'; fb.className = 'ask-fb ok'; }
+        if (done) return;
+        if (+btn.dataset.o === c.a){
+          done = true; btn.classList.add('correct'); burst(btn);
+          box.querySelectorAll('.copt').forEach(function(b){ b.disabled = true; });
+          fb.textContent = 'Yes!'; fb.className = 'cfb ok'; if (why) why.classList.add('show');
+          if (c.key) picked[c.key] = btn.textContent;
         } else {
-          btn.classList.add('incorrect');
-          row.querySelectorAll('.opt').forEach(function(b){ if (b.dataset.correct === 'true') b.classList.add('correct'); });
-          if (fb){ fb.textContent = 'Not quite. The correct answer is highlighted.'; fb.className = 'ask-fb bad'; }
+          btn.classList.add('incorrect'); fb.textContent = 'Not quite. Try again.'; fb.className = 'cfb bad';
+          setTimeout(function(){ btn.classList.remove('incorrect'); }, 700);
         }
       });
     });
   });
 
-  // Quiz: 3 tries, a wrong try resets the choices, explanation after the 3rd miss, only the first try counts.
+  /* ---------- writing builders ---------- */
+  var writing = {};
+  document.querySelectorAll('.wbuild').forEach(function(b){
+    b.addEventListener('click', function(){
+      var i = b.dataset.w, out = document.getElementById('w'+i+'o'), t = document.getElementById('w'+i+'t').value.trim();
+      var claim = picked['w'+i+'c'], ev = picked['w'+i+'e'];
+      if (!claim || !ev || !t){ out.innerHTML = '<span class="wl" style="color:#E0554F">Almost</span>Finish all three steps first: pick the claim, pick the evidence, and type your explanation.'; out.classList.add('show'); return; }
+      var para = claim + ' For example, the narrator says, ' + ev + ' ' + t;
+      writing[i] = para;
+      out.innerHTML = '<span class="wl">Your answer</span>' + para.replace(/</g,'&lt;');
+      out.classList.add('show'); burst(b);
+    });
+  });
+
+  /* ---------- quiz: 3 tries, wrong resets, only first try counts ---------- */
   var state = QUIZ.map(function(){ return {tries:0, first:false, done:false, firstAns:''}; });
   function norm(s){ return String(s).toLowerCase().replace(/[^a-z]/g,''); }
-  function finishItem(i, el, correct){
-    var st = state[i]; st.done = true;
-    el.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; b.classList.remove('incorrect'); if (QUIZ[i].t==='mc' && +b.dataset.o === QUIZ[i].a) b.classList.add('correct'); });
-    var inp = el.querySelector('.qinput'); if (inp){ inp.disabled = true; el.querySelector('.qcheck').disabled = true; if (!correct) inp.value = QUIZ[i].a[0]; }
+  function finish(i, el, ok){
+    state[i].done = true;
+    el.querySelectorAll('.qopt').forEach(function(b){ b.disabled = true; b.classList.remove('incorrect'); if (QUIZ[i].t === 'mc' && +b.dataset.o === QUIZ[i].a) b.classList.add('correct'); });
+    var inp = el.querySelector('.qinput'); if (inp){ inp.disabled = true; el.querySelector('.qcheck').disabled = true; if (!ok) inp.value = QUIZ[i].a[0]; }
     el.querySelector('.qnote').classList.add('show');
-    el.querySelector('.qtries').textContent = correct ? (st.first ? 'Right on the first try.' : 'Got it.') : 'Answer shown above.';
-    updateScore();
+    el.querySelector('.qtries').textContent = ok ? (state[i].first ? 'Right on the first try!' : 'Got it.') : 'Here is the answer.';
+    refreshNext(); maybeSubmit();
   }
   function attempt(i, el, ok, given){
     var st = state[i]; if (st.done) return;
     st.tries++; if (st.tries === 1){ st.first = ok; st.firstAns = given; }
-    var tr = el.querySelector('.qtries');
-    if (ok){ var r = el.getBoundingClientRect(); fireConfetti(r.left + 40, r.top + 20); finishItem(i, el, true); return; }
-    if (st.tries >= 3){ finishItem(i, el, false); return; }
-    tr.textContent = 'Not yet. ' + (3 - st.tries) + (3 - st.tries === 1 ? ' try' : ' tries') + ' left.';
-    var bad = el.querySelector('.qopt.incorrect');
+    if (ok){ burst(el); finish(i, el, true); return; }
+    if (st.tries >= 3){ finish(i, el, false); return; }
+    el.querySelector('.qtries').textContent = 'Not yet. ' + (3 - st.tries) + (3 - st.tries === 1 ? ' try' : ' tries') + ' left.';
     setTimeout(function(){ el.querySelectorAll('.qopt').forEach(function(b){ b.classList.remove('incorrect'); }); }, 700);
     var inp = el.querySelector('.qinput'); if (inp){ inp.value = ''; inp.focus(); }
   }
   document.querySelectorAll('.quiz-item').forEach(function(el){
     var i = +el.dataset.i, q = QUIZ[i];
     if (q.t === 'mc'){
-      el.querySelectorAll('.qopt').forEach(function(btn){
-        btn.addEventListener('click', function(){
-          if (state[i].done) return;
-          var ok = +btn.dataset.o === q.a;
-          if (!ok) btn.classList.add('incorrect');
-          attempt(i, el, ok, btn.textContent);
-        });
-      });
+      el.querySelectorAll('.qopt').forEach(function(btn){ btn.addEventListener('click', function(){ if (state[i].done) return; var ok = +btn.dataset.o === q.a; if (!ok) btn.classList.add('incorrect'); attempt(i, el, ok, btn.textContent); }); });
     } else {
       var inp = el.querySelector('.qinput'), chk = el.querySelector('.qcheck');
-      function go(){ var v = inp.value.trim(); if (!v) return; attempt(i, el, q.a.some(function(a){ return norm(a) === norm(v); }), v); }
-      chk.addEventListener('click', go);
-      inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') go(); });
+      var go = function(){ var v = inp.value.trim(); if (!v) return; attempt(i, el, q.a.some(function(a){ return norm(a) === norm(v); }), v); };
+      chk.addEventListener('click', go); inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') go(); });
     }
   });
-  function updateScore(){
-    if (!state.every(function(s){ return s.done; })) return;
+  var sent = false;
+  function maybeSubmit(){
+    if (sent || !state.every(function(s){ return s.done; })) return;
+    sent = true;
     var score = state.filter(function(s){ return s.first; }).length, n = QUIZ.length, pct = Math.round(score/n*100);
     document.getElementById('scoreText').textContent = score + ' / ' + n + ' right on the first try (' + pct + '%)';
-    document.getElementById('quizFinal').classList.add('show');
     var missed = [];
     document.querySelectorAll('.quiz-item').forEach(function(el){ var i = +el.dataset.i; if (!state[i].first) missed.push('Q' + (i+1) + ': ' + el.querySelector('.qtext').textContent + ' | first answer: ' + state[i].firstAns); });
     var name = (document.getElementById('sname').value || '').trim() || 'Nevaeh Arndts (name not typed)';
-    var statusEl = document.getElementById('submitStatus');
     var payload = { _subject: 'Nevaeh English I: Lesson 3 A Modest Proposal ' + pct + '%', student: name, program: 'Nevaeh English I', lesson: 'Lesson 3: A Modest Proposal (Jonathan Swift)', score: score + ' / ' + n + ' first try (' + pct + '%)', missed: missed.length ? missed.join('\n') : 'none', timestamp: new Date().toISOString() };
+    WR.forEach(function(w, i){ payload['writing_' + (i+1)] = w.prompt + '\n' + (writing[i] || '(not built)'); });
+    var statusEl = document.getElementById('submitStatus');
     fetch(FORMSPREE_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload) })
-      .then(function(r){ statusEl.textContent = r.ok ? 'Score sent to Mr. Jonathan.' : 'Could not send score. Tell Mr. Jonathan your score.'; statusEl.classList.add('show'); })
-      .catch(function(){ statusEl.textContent = 'Could not send score. Tell Mr. Jonathan your score.'; statusEl.classList.add('show'); });
+      .then(function(r){ statusEl.textContent = r.ok ? 'Your score and writing were sent to Mr. Jonathan.' : 'Could not send. Tell Mr. Jonathan your score.'; statusEl.classList.add('show'); })
+      .catch(function(){ statusEl.textContent = 'Could not send. Tell Mr. Jonathan your score.'; statusEl.classList.add('show'); });
   }
+  document.getElementById('prevBtn').disabled = true; refreshNext();
 })();
 
 </script>
